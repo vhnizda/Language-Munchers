@@ -10,3 +10,11 @@ test('disabled language X is centered over the flag button', async () => {
   assert.match(rule, /inset:\s*50%\s+auto\s+auto\s+50%/);
   assert.match(rule, /transform:\s*translate\(-50%,\s*-50%\)/);
 });
+
+test('frog animations advance one whole frame at a time', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  const animationRules = css.match(/\.frog--(?:eating|jump-up|jump-down|jump-left|jump-right) img \{[^}]+\}/g) ?? [];
+
+  assert.equal(animationRules.length, 5);
+  for (const rule of animationRules) assert.match(rule, /steps\(5, end\)/);
+});
