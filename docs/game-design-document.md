@@ -50,7 +50,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 7. Show a clear focus state for the tile under the frog.
 8. On an explicit **Munch** action, evaluate the focused tile.
 9. Resolve feedback immediately:
-   - **Correct:** remove only the word content from that board square, update board progress, and preserve the square as a traversable non-munchable location. Pronunciation is deferred until after the MVP.
+   - **Correct:** play the 540 ms eating animation, then remove only the word content from that board square, update board progress, and preserve the square as a traversable non-munchable location. Pronunciation is deferred until after the MVP.
    - **Incorrect:** show the English equivalent of the selected wrong word, then remove only that tile's word content, preserve its traversable non-munchable square, deduct one life, and record the mistake for potential review. Pronunciation is deferred until after the MVP.
 10. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
 11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
