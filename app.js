@@ -69,8 +69,8 @@ function resolveCorrectAnswer() {
   if (!timer || state.paused || state.board !== timer.board) return;
 
   timer.tile.cleared = true;
-  state.pendingTiles.delete(timer.tile.id);
   state.eatTimer = null;
+  state.frogAnimation = 'idle';
   renderGame();
   completeLevelWhenReady();
 }
@@ -358,7 +358,6 @@ function munch() {
   state.frogAnimation = FROG_EAT_ANIMATION;
 
   if (outcome.kind === 'correct') {
-    state.pendingTiles.add(tile.id);
     feedbackElement.textContent = 'CORRECT!';
     feedbackElement.className = 'feedback';
     renderGame();

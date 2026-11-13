@@ -24,5 +24,5 @@ test('frog sprite window offsets the sheet left to prevent adjacent-frame bleed'
   const rule = css.match(/\.frog img \{([\s\S]*?)\n\}/)?.[1];
 
   assert.ok(rule, 'frog image crop rule must exist');
-  assert.match(rule, /left:\s*-3px/);
+  assert.match(rule, /left:\s*-7px/);
 });
