@@ -1,13 +1,13 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.3 — research-informed planning baseline
+**Status:** Draft 0.4 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
 
 Language Munchers is a single-player vocabulary-recognition game inspired by the grid-and-munch loop of the classic *Number Munchers* and *Word Munchers* games.
 
-A frog occupies a grid of word tiles. Each round shows an English prompt at the top of the screen. The player moves the frog around the grid and deliberately eats every Czech, Standard German, or European Portuguese (`pt-PT`) tile that translates that English prompt. Tiles with other meanings are distractors.
+A frog occupies a grid of word tiles. Each round shows an English prompt at the top of the screen. Every tile displays exactly one target-language word or phrase—Czech, Standard German, or European Portuguese (`pt-PT`)—never a grouped multilingual answer. The player deliberately eats every tile whose single displayed value translates the English prompt. Tiles with other meanings are distractors.
 
 The game teaches recognition of one concept across three target languages while preserving a short, spatial action loop. It will use an original frog, art direction, sound, UI, names, and implementation. It must not copy protected assets, interface layouts, audio, characters, terminology, or code from the Munchers games.
 
@@ -45,8 +45,8 @@ Eat all and only the tiles that correctly translate the current English prompt.
 2. At the start of the run, create one randomized order containing every concept in that topic exactly once.
 3. Select the next unfinished concept in the run and display its English value as the prompt.
 4. Build a board with a mix of:
-   - correct translations of that concept in Czech, Standard German, and/or `pt-PT`; and
-   - distractor translations from other concepts in the selected topic.
+   - at least one correct single-language translation in each of Czech, Standard German, and `pt-PT`; and
+   - distractor tiles from other concepts in the selected topic, distributed evenly across the three languages.
 5. Let the player move the frog one grid square at a time without evaluating the tile.
 6. Show a clear focus state for the tile under the frog.
 7. On an explicit **Munch** action, evaluate the focused tile.
@@ -95,6 +95,7 @@ The corpus has 15 situational groups, from family and people through questions a
 ### Content fidelity
 
 - English is the prompt language for the initial game.
+- Every tile displays exactly one source field in exactly one target language; it must never group Czech, German, and Portuguese on one tile.
 - Tile languages are Czech, Standard German, and European Portuguese only.
 - Standard German must retain the corpus's Swiss-context spelling and vocabulary where provided.
 - Portuguese must remain `pt-PT`; Brazilian Portuguese must not be substituted.
@@ -121,7 +122,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile, at least one distractor, no malformed or empty display text, and no duplicate tile that creates avoidable ambiguity. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must guarantee at least one correct tile in **each** target language, an equal total count of Czech, German, and Portuguese tiles, at least one distractor, no malformed or empty display text, and no duplicate tile that creates avoidable ambiguity. Therefore, its total tile count must be divisible by three. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -131,7 +132,8 @@ The pre-game session setup should be deliberately small:
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
-| Correct-tile languages | Czech only, German only, Portuguese only, or mixed. |
+| Tile languages | Every board contains equal counts of Czech, German, and Portuguese tiles; every tile displays exactly one language. The language assignment and tile placement are randomized subject to that equal-count constraint. |
+| Correct answers | Every board contains at least one correct tile in each of Czech, German, and Portuguese. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
@@ -161,13 +163,13 @@ The game starts one topic run at a time: the player selects one CSV `group` and 
 
 This is a proposal to validate, not a locked requirement:
 
-- 4 × 4 grid;
+- 3 × 4 grid (12 tiles, divisible evenly across three languages);
 - one prompt concept;
-- three correct tiles: one each in Czech, German, and `pt-PT`;
-- 13 distractors drawn from the same study group;
+- three correct tiles: exactly one each in Czech, German, and `pt-PT`;
+- nine distractors drawn from the same study group: three tiles in each language;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
-A 4 × 4 board is a starting usability hypothesis. It must be tested against long strings and revised before implementation is treated as complete.
+A 3 × 4 board is a starting usability hypothesis. A 4 × 4 board cannot satisfy equal Czech/German/Portuguese tile counts because 16 is not divisible by three. The 3 × 4 proposal must be tested against long strings and revised before implementation is treated as complete.
 
 ## 7. Feedback, progression, and learning intent
 
@@ -248,23 +250,22 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 
 The research and current decisions define the base loop. The following still require direction before implementation:
 
-1. **Correct-tile languages:** Does each level require all three translations, one selected target language, or a selectable mixture?
-2. **Board size and tile count:** Does the proposed 4 × 4 grid fit the longest vocabulary entries at the intended viewport?
-3. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
-4. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
-5. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
-6. **Audio:** Is on-demand pronunciation needed after the first text-only vertical slice? If yes, what licensed source and which languages/forms are authoritative?
-7. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
-8. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
-9. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
-10. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
+1. **Board size and tile count:** Does the proposed 3 × 4 grid fit the longest vocabulary entries at the intended viewport?
+2. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
+3. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
+4. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
+5. **Audio:** Is on-demand pronunciation needed after the first text-only vertical slice? If yes, what licensed source and which languages/forms are authoritative?
+6. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
+7. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
+8. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
+9. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
 
 ## 12. Next planning milestone
 
 Resolve the decisions that change the core loop, then approve one vertical slice:
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
-- a validated 4 × 4 (or revised) board layout;
+- a validated 3 × 4 (or revised, but three-language-divisible) board layout;
 - the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
 - calm mode with no hazards;
