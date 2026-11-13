@@ -1,0 +1,2402 @@
+[
+  {
+    "id": "001",
+    "group": "Family and people",
+    "english": "family",
+    "czech": "rodina",
+    "german_standard": "die Familie",
+    "portuguese_pt": "a família"
+  },
+  {
+    "id": "002",
+    "group": "Family and people",
+    "english": "mother",
+    "czech": "máma / matka",
+    "german_standard": "die Mutter",
+    "portuguese_pt": "a mãe"
+  },
+  {
+    "id": "003",
+    "group": "Family and people",
+    "english": "father",
+    "czech": "táta / otec",
+    "german_standard": "der Vater",
+    "portuguese_pt": "o pai"
+  },
+  {
+    "id": "004",
+    "group": "Family and people",
+    "english": "parents",
+    "czech": "rodiče",
+    "german_standard": "die Eltern",
+    "portuguese_pt": "os pais"
+  },
+  {
+    "id": "005",
+    "group": "Family and people",
+    "english": "baby",
+    "czech": "miminko",
+    "german_standard": "das Baby",
+    "portuguese_pt": "o bebé"
+  },
+  {
+    "id": "006",
+    "group": "Family and people",
+    "english": "child",
+    "czech": "dítě",
+    "german_standard": "das Kind",
+    "portuguese_pt": "a criança"
+  },
+  {
+    "id": "007",
+    "group": "Family and people",
+    "english": "grandmother",
+    "czech": "babička",
+    "german_standard": "die Grossmutter",
+    "portuguese_pt": "a avó"
+  },
+  {
+    "id": "008",
+    "group": "Family and people",
+    "english": "grandfather",
+    "czech": "dědeček",
+    "german_standard": "der Grossvater",
+    "portuguese_pt": "o avô"
+  },
+  {
+    "id": "009",
+    "group": "Family and people",
+    "english": "grandparents",
+    "czech": "prarodiče",
+    "german_standard": "die Grosseltern",
+    "portuguese_pt": "os avós"
+  },
+  {
+    "id": "010",
+    "group": "Family and people",
+    "english": "aunt",
+    "czech": "teta",
+    "german_standard": "die Tante",
+    "portuguese_pt": "a tia"
+  },
+  {
+    "id": "011",
+    "group": "Family and people",
+    "english": "uncle",
+    "czech": "strýc",
+    "german_standard": "der Onkel",
+    "portuguese_pt": "o tio"
+  },
+  {
+    "id": "012",
+    "group": "Family and people",
+    "english": "cousin",
+    "czech": "bratranec / sestřenice",
+    "german_standard": "der Cousin / die Cousine",
+    "portuguese_pt": "o primo / a prima"
+  },
+  {
+    "id": "013",
+    "group": "Family and people",
+    "english": "brother",
+    "czech": "bratr",
+    "german_standard": "der Bruder",
+    "portuguese_pt": "o irmão"
+  },
+  {
+    "id": "014",
+    "group": "Family and people",
+    "english": "sister",
+    "czech": "sestra",
+    "german_standard": "die Schwester",
+    "portuguese_pt": "a irmã"
+  },
+  {
+    "id": "015",
+    "group": "Family and people",
+    "english": "husband",
+    "czech": "manžel",
+    "german_standard": "der Ehemann",
+    "portuguese_pt": "o marido"
+  },
+  {
+    "id": "016",
+    "group": "Family and people",
+    "english": "wife",
+    "czech": "manželka",
+    "german_standard": "die Ehefrau",
+    "portuguese_pt": "a esposa"
+  },
+  {
+    "id": "017",
+    "group": "Family and people",
+    "english": "friend",
+    "czech": "kamarád / kamarádka",
+    "german_standard": "der Freund / die Freundin",
+    "portuguese_pt": "o amigo / a amiga"
+  },
+  {
+    "id": "018",
+    "group": "Family and people",
+    "english": "person",
+    "czech": "osoba",
+    "german_standard": "die Person",
+    "portuguese_pt": "a pessoa"
+  },
+  {
+    "id": "019",
+    "group": "Family and people",
+    "english": "man",
+    "czech": "muž",
+    "german_standard": "der Mann",
+    "portuguese_pt": "o homem"
+  },
+  {
+    "id": "020",
+    "group": "Family and people",
+    "english": "woman",
+    "czech": "žena",
+    "german_standard": "die Frau",
+    "portuguese_pt": "a mulher"
+  },
+  {
+    "id": "021",
+    "group": "Body and health",
+    "english": "head",
+    "czech": "hlava",
+    "german_standard": "der Kopf",
+    "portuguese_pt": "a cabeça"
+  },
+  {
+    "id": "022",
+    "group": "Body and health",
+    "english": "hair",
+    "czech": "vlasy",
+    "german_standard": "die Haare",
+    "portuguese_pt": "o cabelo"
+  },
+  {
+    "id": "023",
+    "group": "Body and health",
+    "english": "face",
+    "czech": "obličej",
+    "german_standard": "das Gesicht",
+    "portuguese_pt": "o rosto"
+  },
+  {
+    "id": "024",
+    "group": "Body and health",
+    "english": "eye",
+    "czech": "oko",
+    "german_standard": "das Auge",
+    "portuguese_pt": "o olho"
+  },
+  {
+    "id": "025",
+    "group": "Body and health",
+    "english": "ear",
+    "czech": "ucho",
+    "german_standard": "das Ohr",
+    "portuguese_pt": "o ouvido"
+  },
+  {
+    "id": "026",
+    "group": "Body and health",
+    "english": "nose",
+    "czech": "nos",
+    "german_standard": "die Nase",
+    "portuguese_pt": "o nariz"
+  },
+  {
+    "id": "027",
+    "group": "Body and health",
+    "english": "mouth",
+    "czech": "ústa",
+    "german_standard": "der Mund",
+    "portuguese_pt": "a boca"
+  },
+  {
+    "id": "028",
+    "group": "Body and health",
+    "english": "tooth",
+    "czech": "zub",
+    "german_standard": "der Zahn",
+    "portuguese_pt": "o dente"
+  },
+  {
+    "id": "029",
+    "group": "Body and health",
+    "english": "tongue",
+    "czech": "jazyk",
+    "german_standard": "die Zunge",
+    "portuguese_pt": "a língua"
+  },
+  {
+    "id": "030",
+    "group": "Body and health",
+    "english": "neck",
+    "czech": "krk",
+    "german_standard": "der Hals",
+    "portuguese_pt": "o pescoço"
+  },
+  {
+    "id": "031",
+    "group": "Body and health",
+    "english": "arm",
+    "czech": "paže",
+    "german_standard": "der Arm",
+    "portuguese_pt": "o braço"
+  },
+  {
+    "id": "032",
+    "group": "Body and health",
+    "english": "hand",
+    "czech": "ruka",
+    "german_standard": "die Hand",
+    "portuguese_pt": "a mão"
+  },
+  {
+    "id": "033",
+    "group": "Body and health",
+    "english": "finger",
+    "czech": "prst",
+    "german_standard": "der Finger",
+    "portuguese_pt": "o dedo"
+  },
+  {
+    "id": "034",
+    "group": "Body and health",
+    "english": "leg",
+    "czech": "noha",
+    "german_standard": "das Bein",
+    "portuguese_pt": "a perna"
+  },
+  {
+    "id": "035",
+    "group": "Body and health",
+    "english": "foot",
+    "czech": "chodidlo",
+    "german_standard": "der Fuss",
+    "portuguese_pt": "o pé"
+  },
+  {
+    "id": "036",
+    "group": "Body and health",
+    "english": "belly",
+    "czech": "břicho",
+    "german_standard": "der Bauch",
+    "portuguese_pt": "a barriga"
+  },
+  {
+    "id": "037",
+    "group": "Body and health",
+    "english": "back",
+    "czech": "záda",
+    "german_standard": "der Rücken",
+    "portuguese_pt": "as costas"
+  },
+  {
+    "id": "038",
+    "group": "Body and health",
+    "english": "heart",
+    "czech": "srdce",
+    "german_standard": "das Herz",
+    "portuguese_pt": "o coração"
+  },
+  {
+    "id": "039",
+    "group": "Body and health",
+    "english": "skin",
+    "czech": "kůže",
+    "german_standard": "die Haut",
+    "portuguese_pt": "a pele"
+  },
+  {
+    "id": "040",
+    "group": "Body and health",
+    "english": "pain",
+    "czech": "bolest",
+    "german_standard": "der Schmerz",
+    "portuguese_pt": "a dor"
+  },
+  {
+    "id": "041",
+    "group": "Baby care and routines",
+    "english": "nappy / diaper",
+    "czech": "plena",
+    "german_standard": "die Windel",
+    "portuguese_pt": "a fralda"
+  },
+  {
+    "id": "042",
+    "group": "Baby care and routines",
+    "english": "wipes",
+    "czech": "vlhčené ubrousky",
+    "german_standard": "die Feuchttücher",
+    "portuguese_pt": "as toalhitas"
+  },
+  {
+    "id": "043",
+    "group": "Baby care and routines",
+    "english": "bath",
+    "czech": "koupel",
+    "german_standard": "das Bad",
+    "portuguese_pt": "o banho"
+  },
+  {
+    "id": "044",
+    "group": "Baby care and routines",
+    "english": "soap",
+    "czech": "mýdlo",
+    "german_standard": "die Seife",
+    "portuguese_pt": "o sabonete"
+  },
+  {
+    "id": "045",
+    "group": "Baby care and routines",
+    "english": "towel",
+    "czech": "ručník",
+    "german_standard": "das Handtuch",
+    "portuguese_pt": "a toalha"
+  },
+  {
+    "id": "046",
+    "group": "Baby care and routines",
+    "english": "clothes",
+    "czech": "oblečení",
+    "german_standard": "die Kleidung",
+    "portuguese_pt": "a roupa"
+  },
+  {
+    "id": "047",
+    "group": "Baby care and routines",
+    "english": "high chair",
+    "czech": "jídelní židlička",
+    "german_standard": "der Hochstuhl",
+    "portuguese_pt": "a cadeira alta"
+  },
+  {
+    "id": "048",
+    "group": "Baby care and routines",
+    "english": "pushchair / stroller",
+    "czech": "kočárek",
+    "german_standard": "der Kinderwagen",
+    "portuguese_pt": "o carrinho de bebé"
+  },
+  {
+    "id": "049",
+    "group": "Baby care and routines",
+    "english": "cot / crib",
+    "czech": "dětská postýlka",
+    "german_standard": "das Kinderbett",
+    "portuguese_pt": "o berço"
+  },
+  {
+    "id": "050",
+    "group": "Baby care and routines",
+    "english": "blanket",
+    "czech": "deka",
+    "german_standard": "die Decke",
+    "portuguese_pt": "a manta"
+  },
+  {
+    "id": "051",
+    "group": "Baby care and routines",
+    "english": "pacifier",
+    "czech": "dudlík",
+    "german_standard": "der Schnuller",
+    "portuguese_pt": "a chucha"
+  },
+  {
+    "id": "052",
+    "group": "Baby care and routines",
+    "english": "bottle (feeding)",
+    "czech": "kojenecká láhev",
+    "german_standard": "die Babyflasche",
+    "portuguese_pt": "o biberão"
+  },
+  {
+    "id": "053",
+    "group": "Baby care and routines",
+    "english": "spoon",
+    "czech": "lžíce",
+    "german_standard": "der Löffel",
+    "portuguese_pt": "a colher"
+  },
+  {
+    "id": "054",
+    "group": "Baby care and routines",
+    "english": "bib",
+    "czech": "bryndák",
+    "german_standard": "das Lätzchen",
+    "portuguese_pt": "o babete"
+  },
+  {
+    "id": "055",
+    "group": "Baby care and routines",
+    "english": "potty",
+    "czech": "nočník",
+    "german_standard": "das Töpfchen",
+    "portuguese_pt": "o bacio"
+  },
+  {
+    "id": "056",
+    "group": "Baby care and routines",
+    "english": "sleep",
+    "czech": "spát",
+    "german_standard": "schlafen",
+    "portuguese_pt": "dormir"
+  },
+  {
+    "id": "057",
+    "group": "Baby care and routines",
+    "english": "wake up",
+    "czech": "vzbudit se",
+    "german_standard": "aufwachen",
+    "portuguese_pt": "acordar"
+  },
+  {
+    "id": "058",
+    "group": "Baby care and routines",
+    "english": "change",
+    "czech": "měnit",
+    "german_standard": "wechseln",
+    "portuguese_pt": "mudar"
+  },
+  {
+    "id": "059",
+    "group": "Baby care and routines",
+    "english": "sing",
+    "czech": "zpívat",
+    "german_standard": "singen",
+    "portuguese_pt": "cantar"
+  },
+  {
+    "id": "060",
+    "group": "Baby care and routines",
+    "english": "read",
+    "czech": "číst",
+    "german_standard": "lesen",
+    "portuguese_pt": "ler"
+  },
+  {
+    "id": "061",
+    "group": "Food and drink",
+    "english": "food",
+    "czech": "jídlo",
+    "german_standard": "das Essen",
+    "portuguese_pt": "a comida"
+  },
+  {
+    "id": "062",
+    "group": "Food and drink",
+    "english": "meal",
+    "czech": "jídlo / chod",
+    "german_standard": "die Mahlzeit",
+    "portuguese_pt": "a refeição"
+  },
+  {
+    "id": "063",
+    "group": "Food and drink",
+    "english": "water",
+    "czech": "voda",
+    "german_standard": "das Wasser",
+    "portuguese_pt": "a água"
+  },
+  {
+    "id": "064",
+    "group": "Food and drink",
+    "english": "milk",
+    "czech": "mléko",
+    "german_standard": "die Milch",
+    "portuguese_pt": "o leite"
+  },
+  {
+    "id": "065",
+    "group": "Food and drink",
+    "english": "bread",
+    "czech": "chléb",
+    "german_standard": "das Brot",
+    "portuguese_pt": "o pão"
+  },
+  {
+    "id": "066",
+    "group": "Food and drink",
+    "english": "fruit",
+    "czech": "ovoce",
+    "german_standard": "das Obst",
+    "portuguese_pt": "a fruta"
+  },
+  {
+    "id": "067",
+    "group": "Food and drink",
+    "english": "vegetable",
+    "czech": "zelenina",
+    "german_standard": "das Gemüse",
+    "portuguese_pt": "o legume"
+  },
+  {
+    "id": "068",
+    "group": "Food and drink",
+    "english": "soup",
+    "czech": "polévka",
+    "german_standard": "die Suppe",
+    "portuguese_pt": "a sopa"
+  },
+  {
+    "id": "069",
+    "group": "Food and drink",
+    "english": "meat",
+    "czech": "maso",
+    "german_standard": "das Fleisch",
+    "portuguese_pt": "a carne"
+  },
+  {
+    "id": "070",
+    "group": "Food and drink",
+    "english": "fish",
+    "czech": "ryba",
+    "german_standard": "der Fisch",
+    "portuguese_pt": "o peixe"
+  },
+  {
+    "id": "071",
+    "group": "Food and drink",
+    "english": "egg",
+    "czech": "vejce",
+    "german_standard": "das Ei",
+    "portuguese_pt": "o ovo"
+  },
+  {
+    "id": "072",
+    "group": "Food and drink",
+    "english": "cheese",
+    "czech": "sýr",
+    "german_standard": "der Käse",
+    "portuguese_pt": "o queijo"
+  },
+  {
+    "id": "073",
+    "group": "Food and drink",
+    "english": "yoghurt",
+    "czech": "jogurt",
+    "german_standard": "der Joghurt",
+    "portuguese_pt": "o iogurte"
+  },
+  {
+    "id": "074",
+    "group": "Food and drink",
+    "english": "rice",
+    "czech": "rýže",
+    "german_standard": "der Reis",
+    "portuguese_pt": "o arroz"
+  },
+  {
+    "id": "075",
+    "group": "Food and drink",
+    "english": "pasta",
+    "czech": "těstoviny",
+    "german_standard": "die Teigwaren",
+    "portuguese_pt": "a massa"
+  },
+  {
+    "id": "076",
+    "group": "Food and drink",
+    "english": "potato",
+    "czech": "brambora",
+    "german_standard": "die Kartoffel",
+    "portuguese_pt": "a batata"
+  },
+  {
+    "id": "077",
+    "group": "Food and drink",
+    "english": "apple",
+    "czech": "jablko",
+    "german_standard": "der Apfel",
+    "portuguese_pt": "a maçã"
+  },
+  {
+    "id": "078",
+    "group": "Food and drink",
+    "english": "banana",
+    "czech": "banán",
+    "german_standard": "die Banane",
+    "portuguese_pt": "a banana"
+  },
+  {
+    "id": "079",
+    "group": "Food and drink",
+    "english": "biscuit / cookie",
+    "czech": "sušenka",
+    "german_standard": "der Keks",
+    "portuguese_pt": "a bolacha"
+  },
+  {
+    "id": "080",
+    "group": "Food and drink",
+    "english": "juice",
+    "czech": "džus",
+    "german_standard": "der Saft",
+    "portuguese_pt": "o sumo"
+  },
+  {
+    "id": "081",
+    "group": "Home and everyday objects",
+    "english": "house",
+    "czech": "dům",
+    "german_standard": "das Haus",
+    "portuguese_pt": "a casa"
+  },
+  {
+    "id": "082",
+    "group": "Home and everyday objects",
+    "english": "flat / apartment",
+    "czech": "byt",
+    "german_standard": "die Wohnung",
+    "portuguese_pt": "o apartamento"
+  },
+  {
+    "id": "083",
+    "group": "Home and everyday objects",
+    "english": "room",
+    "czech": "pokoj",
+    "german_standard": "das Zimmer",
+    "portuguese_pt": "o quarto"
+  },
+  {
+    "id": "084",
+    "group": "Home and everyday objects",
+    "english": "kitchen",
+    "czech": "kuchyně",
+    "german_standard": "die Küche",
+    "portuguese_pt": "a cozinha"
+  },
+  {
+    "id": "085",
+    "group": "Home and everyday objects",
+    "english": "bathroom",
+    "czech": "koupelna",
+    "german_standard": "das Badezimmer",
+    "portuguese_pt": "a casa de banho"
+  },
+  {
+    "id": "086",
+    "group": "Home and everyday objects",
+    "english": "table",
+    "czech": "stůl",
+    "german_standard": "der Tisch",
+    "portuguese_pt": "a mesa"
+  },
+  {
+    "id": "087",
+    "group": "Home and everyday objects",
+    "english": "chair",
+    "czech": "židle",
+    "german_standard": "der Stuhl",
+    "portuguese_pt": "a cadeira"
+  },
+  {
+    "id": "088",
+    "group": "Home and everyday objects",
+    "english": "bed",
+    "czech": "postel",
+    "german_standard": "das Bett",
+    "portuguese_pt": "a cama"
+  },
+  {
+    "id": "089",
+    "group": "Home and everyday objects",
+    "english": "door",
+    "czech": "dveře",
+    "german_standard": "die Tür",
+    "portuguese_pt": "a porta"
+  },
+  {
+    "id": "090",
+    "group": "Home and everyday objects",
+    "english": "window",
+    "czech": "okno",
+    "german_standard": "das Fenster",
+    "portuguese_pt": "a janela"
+  },
+  {
+    "id": "091",
+    "group": "Home and everyday objects",
+    "english": "light",
+    "czech": "světlo",
+    "german_standard": "das Licht",
+    "portuguese_pt": "a luz"
+  },
+  {
+    "id": "092",
+    "group": "Home and everyday objects",
+    "english": "key",
+    "czech": "klíč",
+    "german_standard": "der Schlüssel",
+    "portuguese_pt": "a chave"
+  },
+  {
+    "id": "093",
+    "group": "Home and everyday objects",
+    "english": "phone",
+    "czech": "telefon",
+    "german_standard": "das Telefon",
+    "portuguese_pt": "o telefone"
+  },
+  {
+    "id": "094",
+    "group": "Home and everyday objects",
+    "english": "book",
+    "czech": "kniha",
+    "german_standard": "das Buch",
+    "portuguese_pt": "o livro"
+  },
+  {
+    "id": "095",
+    "group": "Home and everyday objects",
+    "english": "cup / glass",
+    "czech": "sklenice",
+    "german_standard": "das Glas",
+    "portuguese_pt": "o copo"
+  },
+  {
+    "id": "096",
+    "group": "Home and everyday objects",
+    "english": "plate",
+    "czech": "talíř",
+    "german_standard": "der Teller",
+    "portuguese_pt": "o prato"
+  },
+  {
+    "id": "097",
+    "group": "Home and everyday objects",
+    "english": "fork",
+    "czech": "vidlička",
+    "german_standard": "die Gabel",
+    "portuguese_pt": "o garfo"
+  },
+  {
+    "id": "098",
+    "group": "Home and everyday objects",
+    "english": "knife",
+    "czech": "nůž",
+    "german_standard": "das Messer",
+    "portuguese_pt": "a faca"
+  },
+  {
+    "id": "099",
+    "group": "Home and everyday objects",
+    "english": "fridge",
+    "czech": "lednice",
+    "german_standard": "der Kühlschrank",
+    "portuguese_pt": "o frigorífico"
+  },
+  {
+    "id": "100",
+    "group": "Home and everyday objects",
+    "english": "rubbish / trash",
+    "czech": "odpad",
+    "german_standard": "der Abfall",
+    "portuguese_pt": "o lixo"
+  },
+  {
+    "id": "101",
+    "group": "Clothes and getting ready",
+    "english": "T-shirt",
+    "czech": "tričko",
+    "german_standard": "das T-Shirt",
+    "portuguese_pt": "a t-shirt"
+  },
+  {
+    "id": "102",
+    "group": "Clothes and getting ready",
+    "english": "trousers / pants",
+    "czech": "kalhoty",
+    "german_standard": "die Hose",
+    "portuguese_pt": "as calças"
+  },
+  {
+    "id": "103",
+    "group": "Clothes and getting ready",
+    "english": "jumper / sweater",
+    "czech": "svetr",
+    "german_standard": "der Pullover",
+    "portuguese_pt": "a camisola"
+  },
+  {
+    "id": "104",
+    "group": "Clothes and getting ready",
+    "english": "jacket",
+    "czech": "bunda",
+    "german_standard": "die Jacke",
+    "portuguese_pt": "o casaco"
+  },
+  {
+    "id": "105",
+    "group": "Clothes and getting ready",
+    "english": "coat",
+    "czech": "kabát",
+    "german_standard": "der Mantel",
+    "portuguese_pt": "o sobretudo"
+  },
+  {
+    "id": "106",
+    "group": "Clothes and getting ready",
+    "english": "shoes",
+    "czech": "boty",
+    "german_standard": "die Schuhe",
+    "portuguese_pt": "os sapatos"
+  },
+  {
+    "id": "107",
+    "group": "Clothes and getting ready",
+    "english": "socks",
+    "czech": "ponožky",
+    "german_standard": "die Socken",
+    "portuguese_pt": "as meias"
+  },
+  {
+    "id": "108",
+    "group": "Clothes and getting ready",
+    "english": "hat / beanie",
+    "czech": "čepice",
+    "german_standard": "die Mütze",
+    "portuguese_pt": "o gorro"
+  },
+  {
+    "id": "109",
+    "group": "Clothes and getting ready",
+    "english": "scarf",
+    "czech": "šála",
+    "german_standard": "der Schal",
+    "portuguese_pt": "o cachecol"
+  },
+  {
+    "id": "110",
+    "group": "Clothes and getting ready",
+    "english": "gloves",
+    "czech": "rukavice",
+    "german_standard": "die Handschuhe",
+    "portuguese_pt": "as luvas"
+  },
+  {
+    "id": "111",
+    "group": "Clothes and getting ready",
+    "english": "dress",
+    "czech": "šaty",
+    "german_standard": "das Kleid",
+    "portuguese_pt": "o vestido"
+  },
+  {
+    "id": "112",
+    "group": "Clothes and getting ready",
+    "english": "skirt",
+    "czech": "sukně",
+    "german_standard": "der Rock",
+    "portuguese_pt": "a saia"
+  },
+  {
+    "id": "113",
+    "group": "Clothes and getting ready",
+    "english": "pyjamas",
+    "czech": "pyžamo",
+    "german_standard": "der Pyjama",
+    "portuguese_pt": "o pijama"
+  },
+  {
+    "id": "114",
+    "group": "Clothes and getting ready",
+    "english": "boots",
+    "czech": "kozačky",
+    "german_standard": "die Stiefel",
+    "portuguese_pt": "as botas"
+  },
+  {
+    "id": "115",
+    "group": "Clothes and getting ready",
+    "english": "slippers",
+    "czech": "pantofle",
+    "german_standard": "die Hausschuhe",
+    "portuguese_pt": "os chinelos"
+  },
+  {
+    "id": "116",
+    "group": "Clothes and getting ready",
+    "english": "raincoat",
+    "czech": "pláštěnka",
+    "german_standard": "die Regenjacke",
+    "portuguese_pt": "a capa de chuva"
+  },
+  {
+    "id": "117",
+    "group": "Clothes and getting ready",
+    "english": "zip / zipper",
+    "czech": "zip",
+    "german_standard": "der Reissverschluss",
+    "portuguese_pt": "o fecho-éclair"
+  },
+  {
+    "id": "118",
+    "group": "Clothes and getting ready",
+    "english": "button",
+    "czech": "knoflík",
+    "german_standard": "der Knopf",
+    "portuguese_pt": "o botão"
+  },
+  {
+    "id": "119",
+    "group": "Clothes and getting ready",
+    "english": "bag",
+    "czech": "taška",
+    "german_standard": "die Tasche",
+    "portuguese_pt": "a mala"
+  },
+  {
+    "id": "120",
+    "group": "Clothes and getting ready",
+    "english": "backpack",
+    "czech": "batoh",
+    "german_standard": "der Rucksack",
+    "portuguese_pt": "a mochila"
+  },
+  {
+    "id": "121",
+    "group": "Daily actions",
+    "english": "eat",
+    "czech": "jíst",
+    "german_standard": "essen",
+    "portuguese_pt": "comer"
+  },
+  {
+    "id": "122",
+    "group": "Daily actions",
+    "english": "drink",
+    "czech": "pít",
+    "german_standard": "trinken",
+    "portuguese_pt": "beber"
+  },
+  {
+    "id": "123",
+    "group": "Daily actions",
+    "english": "wash",
+    "czech": "mýt",
+    "german_standard": "waschen",
+    "portuguese_pt": "lavar"
+  },
+  {
+    "id": "124",
+    "group": "Daily actions",
+    "english": "get dressed",
+    "czech": "oblékat se",
+    "german_standard": "sich anziehen",
+    "portuguese_pt": "vestir-se"
+  },
+  {
+    "id": "125",
+    "group": "Daily actions",
+    "english": "go",
+    "czech": "jít",
+    "german_standard": "gehen",
+    "portuguese_pt": "ir"
+  },
+  {
+    "id": "126",
+    "group": "Daily actions",
+    "english": "come",
+    "czech": "přijít",
+    "german_standard": "kommen",
+    "portuguese_pt": "vir"
+  },
+  {
+    "id": "127",
+    "group": "Daily actions",
+    "english": "sit",
+    "czech": "sedět",
+    "german_standard": "sitzen",
+    "portuguese_pt": "sentar-se"
+  },
+  {
+    "id": "128",
+    "group": "Daily actions",
+    "english": "stand",
+    "czech": "stát",
+    "german_standard": "stehen",
+    "portuguese_pt": "estar de pé"
+  },
+  {
+    "id": "129",
+    "group": "Daily actions",
+    "english": "walk",
+    "czech": "chůze / jít pěšky",
+    "german_standard": "zu Fuss gehen",
+    "portuguese_pt": "andar"
+  },
+  {
+    "id": "130",
+    "group": "Daily actions",
+    "english": "run",
+    "czech": "běhat",
+    "german_standard": "rennen",
+    "portuguese_pt": "correr"
+  },
+  {
+    "id": "131",
+    "group": "Daily actions",
+    "english": "play",
+    "czech": "hrát si",
+    "german_standard": "spielen",
+    "portuguese_pt": "brincar"
+  },
+  {
+    "id": "132",
+    "group": "Daily actions",
+    "english": "listen",
+    "czech": "poslouchat",
+    "german_standard": "zuhören",
+    "portuguese_pt": "ouvir"
+  },
+  {
+    "id": "133",
+    "group": "Daily actions",
+    "english": "speak",
+    "czech": "mluvit",
+    "german_standard": "sprechen",
+    "portuguese_pt": "falar"
+  },
+  {
+    "id": "134",
+    "group": "Daily actions",
+    "english": "look",
+    "czech": "dívat se",
+    "german_standard": "schauen",
+    "portuguese_pt": "olhar"
+  },
+  {
+    "id": "135",
+    "group": "Daily actions",
+    "english": "give",
+    "czech": "dát",
+    "german_standard": "geben",
+    "portuguese_pt": "dar"
+  },
+  {
+    "id": "136",
+    "group": "Daily actions",
+    "english": "take",
+    "czech": "vzít",
+    "german_standard": "nehmen",
+    "portuguese_pt": "levar"
+  },
+  {
+    "id": "137",
+    "group": "Daily actions",
+    "english": "open",
+    "czech": "otevřít",
+    "german_standard": "öffnen",
+    "portuguese_pt": "abrir"
+  },
+  {
+    "id": "138",
+    "group": "Daily actions",
+    "english": "close",
+    "czech": "zavřít",
+    "german_standard": "schliessen",
+    "portuguese_pt": "fechar"
+  },
+  {
+    "id": "139",
+    "group": "Daily actions",
+    "english": "wait",
+    "czech": "čekat",
+    "german_standard": "warten",
+    "portuguese_pt": "esperar"
+  },
+  {
+    "id": "140",
+    "group": "Daily actions",
+    "english": "help",
+    "czech": "pomoci",
+    "german_standard": "helfen",
+    "portuguese_pt": "ajudar"
+  },
+  {
+    "id": "141",
+    "group": "Feelings needs and descriptions",
+    "english": "good / okay",
+    "czech": "dobrý / v pořádku",
+    "german_standard": "gut / in Ordnung",
+    "portuguese_pt": "bem"
+  },
+  {
+    "id": "142",
+    "group": "Feelings needs and descriptions",
+    "english": "happy",
+    "czech": "šťastný",
+    "german_standard": "glücklich",
+    "portuguese_pt": "feliz"
+  },
+  {
+    "id": "143",
+    "group": "Feelings needs and descriptions",
+    "english": "sad",
+    "czech": "smutný",
+    "german_standard": "traurig",
+    "portuguese_pt": "triste"
+  },
+  {
+    "id": "144",
+    "group": "Feelings needs and descriptions",
+    "english": "tired",
+    "czech": "unavený",
+    "german_standard": "müde",
+    "portuguese_pt": "cansado / cansada"
+  },
+  {
+    "id": "145",
+    "group": "Feelings needs and descriptions",
+    "english": "hungry",
+    "czech": "hladový",
+    "german_standard": "hungrig",
+    "portuguese_pt": "com fome"
+  },
+  {
+    "id": "146",
+    "group": "Feelings needs and descriptions",
+    "english": "thirsty",
+    "czech": "žíznivý",
+    "german_standard": "durstig",
+    "portuguese_pt": "com sede"
+  },
+  {
+    "id": "147",
+    "group": "Feelings needs and descriptions",
+    "english": "hot",
+    "czech": "horký",
+    "german_standard": "heiss",
+    "portuguese_pt": "quente"
+  },
+  {
+    "id": "148",
+    "group": "Feelings needs and descriptions",
+    "english": "cold",
+    "czech": "studený",
+    "german_standard": "kalt",
+    "portuguese_pt": "frio / fria"
+  },
+  {
+    "id": "149",
+    "group": "Feelings needs and descriptions",
+    "english": "ill",
+    "czech": "nemocný",
+    "german_standard": "krank",
+    "portuguese_pt": "doente"
+  },
+  {
+    "id": "150",
+    "group": "Feelings needs and descriptions",
+    "english": "scared",
+    "czech": "vystrašený",
+    "german_standard": "ängstlich",
+    "portuguese_pt": "assustado / assustada"
+  },
+  {
+    "id": "151",
+    "group": "Feelings needs and descriptions",
+    "english": "calm",
+    "czech": "klidný",
+    "german_standard": "ruhig",
+    "portuguese_pt": "calmo / calma"
+  },
+  {
+    "id": "152",
+    "group": "Feelings needs and descriptions",
+    "english": "big",
+    "czech": "velký",
+    "german_standard": "gross",
+    "portuguese_pt": "grande"
+  },
+  {
+    "id": "153",
+    "group": "Feelings needs and descriptions",
+    "english": "small",
+    "czech": "malý",
+    "german_standard": "klein",
+    "portuguese_pt": "pequeno / pequena"
+  },
+  {
+    "id": "154",
+    "group": "Feelings needs and descriptions",
+    "english": "clean",
+    "czech": "čistý",
+    "german_standard": "sauber",
+    "portuguese_pt": "limpo / limpa"
+  },
+  {
+    "id": "155",
+    "group": "Feelings needs and descriptions",
+    "english": "dirty",
+    "czech": "špinavý",
+    "german_standard": "schmutzig",
+    "portuguese_pt": "sujo / suja"
+  },
+  {
+    "id": "156",
+    "group": "Feelings needs and descriptions",
+    "english": "full",
+    "czech": "plný",
+    "german_standard": "voll",
+    "portuguese_pt": "cheio / cheia"
+  },
+  {
+    "id": "157",
+    "group": "Feelings needs and descriptions",
+    "english": "empty",
+    "czech": "prázdný",
+    "german_standard": "leer",
+    "portuguese_pt": "vazio / vazia"
+  },
+  {
+    "id": "158",
+    "group": "Feelings needs and descriptions",
+    "english": "ready",
+    "czech": "připravený",
+    "german_standard": "bereit",
+    "portuguese_pt": "pronto / pronta"
+  },
+  {
+    "id": "159",
+    "group": "Feelings needs and descriptions",
+    "english": "careful",
+    "czech": "opatrně",
+    "german_standard": "vorsichtig",
+    "portuguese_pt": "com cuidado"
+  },
+  {
+    "id": "160",
+    "group": "Feelings needs and descriptions",
+    "english": "need",
+    "czech": "potřebovat",
+    "german_standard": "brauchen",
+    "portuguese_pt": "precisar"
+  },
+  {
+    "id": "161",
+    "group": "Social conversation",
+    "english": "hello",
+    "czech": "ahoj / dobrý den",
+    "german_standard": "hallo / guten Tag",
+    "portuguese_pt": "olá"
+  },
+  {
+    "id": "162",
+    "group": "Social conversation",
+    "english": "goodbye",
+    "czech": "nashledanou",
+    "german_standard": "auf Wiedersehen",
+    "portuguese_pt": "adeus"
+  },
+  {
+    "id": "163",
+    "group": "Social conversation",
+    "english": "thank you",
+    "czech": "děkuji",
+    "german_standard": "danke",
+    "portuguese_pt": "obrigado / obrigada"
+  },
+  {
+    "id": "164",
+    "group": "Social conversation",
+    "english": "please",
+    "czech": "prosím",
+    "german_standard": "bitte",
+    "portuguese_pt": "por favor"
+  },
+  {
+    "id": "165",
+    "group": "Social conversation",
+    "english": "sorry",
+    "czech": "promiň",
+    "german_standard": "entschuldigung",
+    "portuguese_pt": "desculpa"
+  },
+  {
+    "id": "166",
+    "group": "Social conversation",
+    "english": "excuse me",
+    "czech": "s dovolením",
+    "german_standard": "entschuldigen Sie",
+    "portuguese_pt": "com licença"
+  },
+  {
+    "id": "167",
+    "group": "Social conversation",
+    "english": "yes",
+    "czech": "ano",
+    "german_standard": "ja",
+    "portuguese_pt": "sim"
+  },
+  {
+    "id": "168",
+    "group": "Social conversation",
+    "english": "no",
+    "czech": "nein",
+    "german_standard": "nein",
+    "portuguese_pt": "não"
+  },
+  {
+    "id": "169",
+    "group": "Social conversation",
+    "english": "maybe",
+    "czech": "možná",
+    "german_standard": "vielleicht",
+    "portuguese_pt": "talvez"
+  },
+  {
+    "id": "170",
+    "group": "Social conversation",
+    "english": "name",
+    "czech": "jméno",
+    "german_standard": "der Name",
+    "portuguese_pt": "o nome"
+  },
+  {
+    "id": "171",
+    "group": "Social conversation",
+    "english": "visit",
+    "czech": "návštěva",
+    "german_standard": "der Besuch",
+    "portuguese_pt": "a visita"
+  },
+  {
+    "id": "172",
+    "group": "Social conversation",
+    "english": "welcome",
+    "czech": "vítejte",
+    "german_standard": "willkommen",
+    "portuguese_pt": "bem-vindo / bem-vinda"
+  },
+  {
+    "id": "173",
+    "group": "Social conversation",
+    "english": "again",
+    "czech": "znovu",
+    "german_standard": "wieder",
+    "portuguese_pt": "outra vez"
+  },
+  {
+    "id": "174",
+    "group": "Social conversation",
+    "english": "please repeat",
+    "czech": "zopakujte prosím",
+    "german_standard": "bitte wiederholen",
+    "portuguese_pt": "repita por favor"
+  },
+  {
+    "id": "175",
+    "group": "Social conversation",
+    "english": "slowly",
+    "czech": "pomalu",
+    "german_standard": "langsam",
+    "portuguese_pt": "devagar"
+  },
+  {
+    "id": "176",
+    "group": "Social conversation",
+    "english": "I",
+    "czech": " já",
+    "german_standard": "ich",
+    "portuguese_pt": "eu"
+  },
+  {
+    "id": "177",
+    "group": "Social conversation",
+    "english": "you",
+    "czech": "ty",
+    "german_standard": "du",
+    "portuguese_pt": "tu"
+  },
+  {
+    "id": "178",
+    "group": "Social conversation",
+    "english": "he",
+    "czech": "on",
+    "german_standard": "er",
+    "portuguese_pt": "ele"
+  },
+  {
+    "id": "179",
+    "group": "Social conversation",
+    "english": "she",
+    "czech": "ona",
+    "german_standard": "sie",
+    "portuguese_pt": "ela"
+  },
+  {
+    "id": "180",
+    "group": "Social conversation",
+    "english": "we",
+    "czech": "my",
+    "german_standard": "wir",
+    "portuguese_pt": "nós"
+  },
+  {
+    "id": "181",
+    "group": "Numbers and colours",
+    "english": "one",
+    "czech": "jeden",
+    "german_standard": "eins",
+    "portuguese_pt": "um"
+  },
+  {
+    "id": "182",
+    "group": "Numbers and colours",
+    "english": "two",
+    "czech": "dva",
+    "german_standard": "zwei",
+    "portuguese_pt": "dois"
+  },
+  {
+    "id": "183",
+    "group": "Numbers and colours",
+    "english": "three",
+    "czech": "tři",
+    "german_standard": "drei",
+    "portuguese_pt": "três"
+  },
+  {
+    "id": "184",
+    "group": "Numbers and colours",
+    "english": "four",
+    "czech": "čtyři",
+    "german_standard": "vier",
+    "portuguese_pt": "quatro"
+  },
+  {
+    "id": "185",
+    "group": "Numbers and colours",
+    "english": "five",
+    "czech": "pět",
+    "german_standard": "fünf",
+    "portuguese_pt": "cinco"
+  },
+  {
+    "id": "186",
+    "group": "Numbers and colours",
+    "english": "six",
+    "czech": "šest",
+    "german_standard": "sechs",
+    "portuguese_pt": "seis"
+  },
+  {
+    "id": "187",
+    "group": "Numbers and colours",
+    "english": "seven",
+    "czech": "sedm",
+    "german_standard": "sieben",
+    "portuguese_pt": "sete"
+  },
+  {
+    "id": "188",
+    "group": "Numbers and colours",
+    "english": "eight",
+    "czech": "osm",
+    "german_standard": "acht",
+    "portuguese_pt": "oito"
+  },
+  {
+    "id": "189",
+    "group": "Numbers and colours",
+    "english": "nine",
+    "czech": "devět",
+    "german_standard": "neun",
+    "portuguese_pt": "nove"
+  },
+  {
+    "id": "190",
+    "group": "Numbers and colours",
+    "english": "ten",
+    "czech": "deset",
+    "german_standard": "zehn",
+    "portuguese_pt": "dez"
+  },
+  {
+    "id": "191",
+    "group": "Numbers and colours",
+    "english": "red",
+    "czech": "červená",
+    "german_standard": "rot",
+    "portuguese_pt": "vermelho / vermelha"
+  },
+  {
+    "id": "192",
+    "group": "Numbers and colours",
+    "english": "blue",
+    "czech": "modrá",
+    "german_standard": "blau",
+    "portuguese_pt": "azul"
+  },
+  {
+    "id": "193",
+    "group": "Numbers and colours",
+    "english": "green",
+    "czech": "zelená",
+    "german_standard": "grün",
+    "portuguese_pt": "verde"
+  },
+  {
+    "id": "194",
+    "group": "Numbers and colours",
+    "english": "yellow",
+    "czech": "žlutá",
+    "german_standard": "gelb",
+    "portuguese_pt": "amarelo / amarela"
+  },
+  {
+    "id": "195",
+    "group": "Numbers and colours",
+    "english": "black",
+    "czech": "černá",
+    "german_standard": "schwarz",
+    "portuguese_pt": "preto / preta"
+  },
+  {
+    "id": "196",
+    "group": "Numbers and colours",
+    "english": "white",
+    "czech": "bílá",
+    "german_standard": "weiss",
+    "portuguese_pt": "branco / branca"
+  },
+  {
+    "id": "197",
+    "group": "Numbers and colours",
+    "english": "orange",
+    "czech": "oranžová",
+    "german_standard": "orange",
+    "portuguese_pt": "laranja"
+  },
+  {
+    "id": "198",
+    "group": "Numbers and colours",
+    "english": "pink",
+    "czech": "růžová",
+    "german_standard": "rosa",
+    "portuguese_pt": "cor-de-rosa"
+  },
+  {
+    "id": "199",
+    "group": "Numbers and colours",
+    "english": "purple",
+    "czech": "fialová",
+    "german_standard": "lila",
+    "portuguese_pt": "roxo / roxa"
+  },
+  {
+    "id": "200",
+    "group": "Numbers and colours",
+    "english": "brown",
+    "czech": "hnědá",
+    "german_standard": "braun",
+    "portuguese_pt": "castanho / castanha"
+  },
+  {
+    "id": "201",
+    "group": "Time and weather",
+    "english": "day",
+    "czech": "den",
+    "german_standard": "der Tag",
+    "portuguese_pt": "o dia"
+  },
+  {
+    "id": "202",
+    "group": "Time and weather",
+    "english": "night",
+    "czech": "noc",
+    "german_standard": "die Nacht",
+    "portuguese_pt": "a noite"
+  },
+  {
+    "id": "203",
+    "group": "Time and weather",
+    "english": "morning",
+    "czech": "ráno",
+    "german_standard": "der Morgen",
+    "portuguese_pt": "a manhã"
+  },
+  {
+    "id": "204",
+    "group": "Time and weather",
+    "english": "afternoon",
+    "czech": "odpoledne",
+    "german_standard": "der Nachmittag",
+    "portuguese_pt": "a tarde"
+  },
+  {
+    "id": "205",
+    "group": "Time and weather",
+    "english": "evening",
+    "czech": "večer",
+    "german_standard": "der Abend",
+    "portuguese_pt": "a noite"
+  },
+  {
+    "id": "206",
+    "group": "Time and weather",
+    "english": "today",
+    "czech": "dnes",
+    "german_standard": "heute",
+    "portuguese_pt": "hoje"
+  },
+  {
+    "id": "207",
+    "group": "Time and weather",
+    "english": "tomorrow",
+    "czech": "zítra",
+    "german_standard": "morgen",
+    "portuguese_pt": "amanhã"
+  },
+  {
+    "id": "208",
+    "group": "Time and weather",
+    "english": "yesterday",
+    "czech": "včera",
+    "german_standard": "gestern",
+    "portuguese_pt": "ontem"
+  },
+  {
+    "id": "209",
+    "group": "Time and weather",
+    "english": "now",
+    "czech": "teď",
+    "german_standard": "jetzt",
+    "portuguese_pt": "agora"
+  },
+  {
+    "id": "210",
+    "group": "Time and weather",
+    "english": "later",
+    "czech": "později",
+    "german_standard": "später",
+    "portuguese_pt": "mais tarde"
+  },
+  {
+    "id": "211",
+    "group": "Time and weather",
+    "english": "early",
+    "czech": "brzy",
+    "german_standard": "früh",
+    "portuguese_pt": "cedo"
+  },
+  {
+    "id": "212",
+    "group": "Time and weather",
+    "english": "late",
+    "czech": "pozdě",
+    "german_standard": "spät",
+    "portuguese_pt": "tarde"
+  },
+  {
+    "id": "213",
+    "group": "Time and weather",
+    "english": "sun",
+    "czech": "slunce",
+    "german_standard": "die Sonne",
+    "portuguese_pt": "o sol"
+  },
+  {
+    "id": "214",
+    "group": "Time and weather",
+    "english": "rain",
+    "czech": "déšť",
+    "german_standard": "der Regen",
+    "portuguese_pt": "a chuva"
+  },
+  {
+    "id": "215",
+    "group": "Time and weather",
+    "english": "wind",
+    "czech": "vítr",
+    "german_standard": "der Wind",
+    "portuguese_pt": "o vento"
+  },
+  {
+    "id": "216",
+    "group": "Time and weather",
+    "english": "cloud",
+    "czech": "mrak",
+    "german_standard": "die Wolke",
+    "portuguese_pt": "a nuvem"
+  },
+  {
+    "id": "217",
+    "group": "Time and weather",
+    "english": "warm",
+    "czech": "teplý",
+    "german_standard": "warm",
+    "portuguese_pt": "morno / morna"
+  },
+  {
+    "id": "218",
+    "group": "Time and weather",
+    "english": "weather",
+    "czech": "počasí",
+    "german_standard": "das Wetter",
+    "portuguese_pt": "o tempo"
+  },
+  {
+    "id": "219",
+    "group": "Time and weather",
+    "english": "inside",
+    "czech": "uvnitř",
+    "german_standard": "drinnen",
+    "portuguese_pt": "dentro"
+  },
+  {
+    "id": "220",
+    "group": "Time and weather",
+    "english": "outside",
+    "czech": "venku",
+    "german_standard": "draussen",
+    "portuguese_pt": "fora"
+  },
+  {
+    "id": "221",
+    "group": "Places movement and Swiss life",
+    "english": "here",
+    "czech": "tady",
+    "german_standard": "hier",
+    "portuguese_pt": "aqui"
+  },
+  {
+    "id": "222",
+    "group": "Places movement and Swiss life",
+    "english": "there",
+    "czech": "tam",
+    "german_standard": "dort",
+    "portuguese_pt": "ali"
+  },
+  {
+    "id": "223",
+    "group": "Places movement and Swiss life",
+    "english": "home",
+    "czech": "doma",
+    "german_standard": "zu Hause",
+    "portuguese_pt": "em casa"
+  },
+  {
+    "id": "224",
+    "group": "Places movement and Swiss life",
+    "english": "park",
+    "czech": "park",
+    "german_standard": "der Park",
+    "portuguese_pt": "o parque"
+  },
+  {
+    "id": "225",
+    "group": "Places movement and Swiss life",
+    "english": "shop",
+    "czech": "obchod",
+    "german_standard": "der Laden",
+    "portuguese_pt": "a loja"
+  },
+  {
+    "id": "226",
+    "group": "Places movement and Swiss life",
+    "english": "supermarket",
+    "czech": "supermarket",
+    "german_standard": "der Supermarkt",
+    "portuguese_pt": "o supermercado"
+  },
+  {
+    "id": "227",
+    "group": "Places movement and Swiss life",
+    "english": "pharmacy",
+    "czech": "lékárna",
+    "german_standard": "die Apotheke",
+    "portuguese_pt": "a farmácia"
+  },
+  {
+    "id": "228",
+    "group": "Places movement and Swiss life",
+    "english": "doctor",
+    "czech": "lékař",
+    "german_standard": "der Arzt / die Ärztin",
+    "portuguese_pt": "o médico / a médica"
+  },
+  {
+    "id": "229",
+    "group": "Places movement and Swiss life",
+    "english": "nursery / daycare",
+    "czech": "jesle",
+    "german_standard": "die Kita",
+    "portuguese_pt": "a creche"
+  },
+  {
+    "id": "230",
+    "group": "Places movement and Swiss life",
+    "english": "school",
+    "czech": "škola",
+    "german_standard": "die Schule",
+    "portuguese_pt": "a escola"
+  },
+  {
+    "id": "231",
+    "group": "Places movement and Swiss life",
+    "english": "bus",
+    "czech": "autobus",
+    "german_standard": "der Bus",
+    "portuguese_pt": "o autocarro"
+  },
+  {
+    "id": "232",
+    "group": "Places movement and Swiss life",
+    "english": "train",
+    "czech": "vlak",
+    "german_standard": "der Zug",
+    "portuguese_pt": "o comboio"
+  },
+  {
+    "id": "233",
+    "group": "Places movement and Swiss life",
+    "english": "car",
+    "czech": "auto",
+    "german_standard": "das Auto",
+    "portuguese_pt": "o carro"
+  },
+  {
+    "id": "234",
+    "group": "Places movement and Swiss life",
+    "english": "bicycle",
+    "czech": "kolo",
+    "german_standard": "das Velo",
+    "portuguese_pt": "a bicicleta"
+  },
+  {
+    "id": "235",
+    "group": "Places movement and Swiss life",
+    "english": "street",
+    "czech": "ulice",
+    "german_standard": "die Strasse",
+    "portuguese_pt": "a rua"
+  },
+  {
+    "id": "236",
+    "group": "Places movement and Swiss life",
+    "english": "left",
+    "czech": "vlevo",
+    "german_standard": "links",
+    "portuguese_pt": "à esquerda"
+  },
+  {
+    "id": "237",
+    "group": "Places movement and Swiss life",
+    "english": "right",
+    "czech": "vpravo",
+    "german_standard": "rechts",
+    "portuguese_pt": "à direita"
+  },
+  {
+    "id": "238",
+    "group": "Places movement and Swiss life",
+    "english": "straight ahead",
+    "czech": "rovně",
+    "german_standard": "geradeaus",
+    "portuguese_pt": "em frente"
+  },
+  {
+    "id": "239",
+    "group": "Places movement and Swiss life",
+    "english": "stop",
+    "czech": "zastavit",
+    "german_standard": "anhalten",
+    "portuguese_pt": "parar"
+  },
+  {
+    "id": "240",
+    "group": "Places movement and Swiss life",
+    "english": "arrival",
+    "czech": "příjezd",
+    "german_standard": "die Ankunft",
+    "portuguese_pt": "a chegada"
+  },
+  {
+    "id": "241",
+    "group": "Animals and nature",
+    "english": "dog",
+    "czech": "pes",
+    "german_standard": "der Hund",
+    "portuguese_pt": "o cão"
+  },
+  {
+    "id": "242",
+    "group": "Animals and nature",
+    "english": "cat",
+    "czech": "kočka",
+    "german_standard": "die Katze",
+    "portuguese_pt": "o gato"
+  },
+  {
+    "id": "243",
+    "group": "Animals and nature",
+    "english": "bird",
+    "czech": "pták",
+    "german_standard": "der Vogel",
+    "portuguese_pt": "o pássaro"
+  },
+  {
+    "id": "244",
+    "group": "Animals and nature",
+    "english": "fish",
+    "czech": "ryba",
+    "german_standard": "der Fisch",
+    "portuguese_pt": "o peixe"
+  },
+  {
+    "id": "245",
+    "group": "Animals and nature",
+    "english": "horse",
+    "czech": "kůň",
+    "german_standard": "das Pferd",
+    "portuguese_pt": "o cavalo"
+  },
+  {
+    "id": "246",
+    "group": "Animals and nature",
+    "english": "cow",
+    "czech": "kráva",
+    "german_standard": "die Kuh",
+    "portuguese_pt": "a vaca"
+  },
+  {
+    "id": "247",
+    "group": "Animals and nature",
+    "english": "sheep",
+    "czech": "ovce",
+    "german_standard": "das Schaf",
+    "portuguese_pt": "a ovelha"
+  },
+  {
+    "id": "248",
+    "group": "Animals and nature",
+    "english": "chicken",
+    "czech": "kura",
+    "german_standard": "das Huhn",
+    "portuguese_pt": "a galinha"
+  },
+  {
+    "id": "249",
+    "group": "Animals and nature",
+    "english": "rabbit",
+    "czech": "králík",
+    "german_standard": "das Kaninchen",
+    "portuguese_pt": "o coelho"
+  },
+  {
+    "id": "250",
+    "group": "Animals and nature",
+    "english": "duck",
+    "czech": "kachna",
+    "german_standard": "die Ente",
+    "portuguese_pt": "o pato"
+  },
+  {
+    "id": "251",
+    "group": "Animals and nature",
+    "english": "bear",
+    "czech": "medvěd",
+    "german_standard": "der Bär",
+    "portuguese_pt": "o urso"
+  },
+  {
+    "id": "252",
+    "group": "Animals and nature",
+    "english": "lion",
+    "czech": "lev",
+    "german_standard": "der Löwe",
+    "portuguese_pt": "o leão"
+  },
+  {
+    "id": "253",
+    "group": "Animals and nature",
+    "english": "elephant",
+    "czech": "slon",
+    "german_standard": "der Elefant",
+    "portuguese_pt": "o elefante"
+  },
+  {
+    "id": "254",
+    "group": "Animals and nature",
+    "english": "monkey",
+    "czech": "opice",
+    "german_standard": "der Affe",
+    "portuguese_pt": "o macaco"
+  },
+  {
+    "id": "255",
+    "group": "Animals and nature",
+    "english": "bee",
+    "czech": "včela",
+    "german_standard": "die Biene",
+    "portuguese_pt": "a abelha"
+  },
+  {
+    "id": "256",
+    "group": "Animals and nature",
+    "english": "butterfly",
+    "czech": "motýl",
+    "german_standard": "der Schmetterling",
+    "portuguese_pt": "a borboleta"
+  },
+  {
+    "id": "257",
+    "group": "Animals and nature",
+    "english": "tree",
+    "czech": "strom",
+    "german_standard": "der Baum",
+    "portuguese_pt": "a árvore"
+  },
+  {
+    "id": "258",
+    "group": "Animals and nature",
+    "english": "flower",
+    "czech": "květina",
+    "german_standard": "die Blume",
+    "portuguese_pt": "a flor"
+  },
+  {
+    "id": "259",
+    "group": "Animals and nature",
+    "english": "grass",
+    "czech": "tráva",
+    "german_standard": "das Gras",
+    "portuguese_pt": "a relva"
+  },
+  {
+    "id": "260",
+    "group": "Animals and nature",
+    "english": "leaf",
+    "czech": "list",
+    "german_standard": "das Blatt",
+    "portuguese_pt": "a folha"
+  },
+  {
+    "id": "261",
+    "group": "Play toys and learning",
+    "english": "toy",
+    "czech": "hračka",
+    "german_standard": "das Spielzeug",
+    "portuguese_pt": "o brinquedo"
+  },
+  {
+    "id": "262",
+    "group": "Play toys and learning",
+    "english": "ball",
+    "czech": "míč",
+    "german_standard": "der Ball",
+    "portuguese_pt": "a bola"
+  },
+  {
+    "id": "263",
+    "group": "Play toys and learning",
+    "english": "doll",
+    "czech": "panenka",
+    "german_standard": "die Puppe",
+    "portuguese_pt": "a boneca"
+  },
+  {
+    "id": "264",
+    "group": "Play toys and learning",
+    "english": "toy car",
+    "czech": "autíčko",
+    "german_standard": "das Spielzeugauto",
+    "portuguese_pt": "o carrinho"
+  },
+  {
+    "id": "265",
+    "group": "Play toys and learning",
+    "english": "building blocks",
+    "czech": "kostky",
+    "german_standard": "die Bauklötze",
+    "portuguese_pt": "os blocos"
+  },
+  {
+    "id": "266",
+    "group": "Play toys and learning",
+    "english": "puzzle",
+    "czech": "puzzle",
+    "german_standard": "das Puzzle",
+    "portuguese_pt": "o puzzle"
+  },
+  {
+    "id": "267",
+    "group": "Play toys and learning",
+    "english": "drawing",
+    "czech": "kresba",
+    "german_standard": "die Zeichnung",
+    "portuguese_pt": "o desenho"
+  },
+  {
+    "id": "268",
+    "group": "Play toys and learning",
+    "english": "paint",
+    "czech": "barva",
+    "german_standard": "die Farbe",
+    "portuguese_pt": "a tinta"
+  },
+  {
+    "id": "269",
+    "group": "Play toys and learning",
+    "english": "music",
+    "czech": "hudba",
+    "german_standard": "die Musik",
+    "portuguese_pt": "a música"
+  },
+  {
+    "id": "270",
+    "group": "Play toys and learning",
+    "english": "song",
+    "czech": "píseň",
+    "german_standard": "das Lied",
+    "portuguese_pt": "a canção"
+  },
+  {
+    "id": "271",
+    "group": "Play toys and learning",
+    "english": "story",
+    "czech": "příběh",
+    "german_standard": "die Geschichte",
+    "portuguese_pt": "a história"
+  },
+  {
+    "id": "272",
+    "group": "Play toys and learning",
+    "english": "game",
+    "czech": "hra",
+    "german_standard": "das Spiel",
+    "portuguese_pt": "o jogo"
+  },
+  {
+    "id": "273",
+    "group": "Play toys and learning",
+    "english": "crayon",
+    "czech": "pastelka",
+    "german_standard": "der Wachsmalstift",
+    "portuguese_pt": "o lápis de cera"
+  },
+  {
+    "id": "274",
+    "group": "Play toys and learning",
+    "english": "paper",
+    "czech": "papír",
+    "german_standard": "das Papier",
+    "portuguese_pt": "o papel"
+  },
+  {
+    "id": "275",
+    "group": "Play toys and learning",
+    "english": "pen",
+    "czech": "pero",
+    "german_standard": "der Stift",
+    "portuguese_pt": "a caneta"
+  },
+  {
+    "id": "276",
+    "group": "Play toys and learning",
+    "english": "picture",
+    "czech": "obrázek",
+    "german_standard": "das Bild",
+    "portuguese_pt": "a imagem"
+  },
+  {
+    "id": "277",
+    "group": "Play toys and learning",
+    "english": "dance",
+    "czech": "tanec",
+    "german_standard": "der Tanz",
+    "portuguese_pt": "a dança"
+  },
+  {
+    "id": "278",
+    "group": "Play toys and learning",
+    "english": "clap",
+    "czech": "tleskat",
+    "german_standard": "klatschen",
+    "portuguese_pt": "bater palmas"
+  },
+  {
+    "id": "279",
+    "group": "Play toys and learning",
+    "english": "share",
+    "czech": "sdílet",
+    "german_standard": "teilen",
+    "portuguese_pt": "partilhar"
+  },
+  {
+    "id": "280",
+    "group": "Play toys and learning",
+    "english": "build",
+    "czech": "stavět",
+    "german_standard": "bauen",
+    "portuguese_pt": "construir"
+  },
+  {
+    "id": "281",
+    "group": "Questions and connectors",
+    "english": "what",
+    "czech": "co",
+    "german_standard": "was",
+    "portuguese_pt": "o que"
+  },
+  {
+    "id": "282",
+    "group": "Questions and connectors",
+    "english": "where",
+    "czech": "kde",
+    "german_standard": "wo",
+    "portuguese_pt": "onde"
+  },
+  {
+    "id": "283",
+    "group": "Questions and connectors",
+    "english": "who",
+    "czech": "kdo",
+    "german_standard": "wer",
+    "portuguese_pt": "quem"
+  },
+  {
+    "id": "284",
+    "group": "Questions and connectors",
+    "english": "when",
+    "czech": "kdy",
+    "german_standard": "wann",
+    "portuguese_pt": "quando"
+  },
+  {
+    "id": "285",
+    "group": "Questions and connectors",
+    "english": "why",
+    "czech": "proč",
+    "german_standard": "warum",
+    "portuguese_pt": "porquê"
+  },
+  {
+    "id": "286",
+    "group": "Questions and connectors",
+    "english": "how",
+    "czech": "jak",
+    "german_standard": "wie",
+    "portuguese_pt": "como"
+  },
+  {
+    "id": "287",
+    "group": "Questions and connectors",
+    "english": "which",
+    "czech": "který",
+    "german_standard": "welcher",
+    "portuguese_pt": "qual"
+  },
+  {
+    "id": "288",
+    "group": "Questions and connectors",
+    "english": "this",
+    "czech": "tento",
+    "german_standard": "dieser",
+    "portuguese_pt": "este / esta"
+  },
+  {
+    "id": "289",
+    "group": "Questions and connectors",
+    "english": "that",
+    "czech": "tamten",
+    "german_standard": "jener",
+    "portuguese_pt": "esse / essa"
+  },
+  {
+    "id": "290",
+    "group": "Questions and connectors",
+    "english": "and",
+    "czech": "a",
+    "german_standard": "und",
+    "portuguese_pt": "e"
+  },
+  {
+    "id": "291",
+    "group": "Questions and connectors",
+    "english": "or",
+    "czech": "nebo",
+    "german_standard": "oder",
+    "portuguese_pt": "ou"
+  },
+  {
+    "id": "292",
+    "group": "Questions and connectors",
+    "english": "but",
+    "czech": "ale",
+    "german_standard": "aber",
+    "portuguese_pt": "mas"
+  },
+  {
+    "id": "293",
+    "group": "Questions and connectors",
+    "english": "because",
+    "czech": "protože",
+    "german_standard": "weil",
+    "portuguese_pt": "porque"
+  },
+  {
+    "id": "294",
+    "group": "Questions and connectors",
+    "english": "with",
+    "czech": "s",
+    "german_standard": "mit",
+    "portuguese_pt": "com"
+  },
+  {
+    "id": "295",
+    "group": "Questions and connectors",
+    "english": "without",
+    "czech": "bez",
+    "german_standard": "ohne",
+    "portuguese_pt": "sem"
+  },
+  {
+    "id": "296",
+    "group": "Questions and connectors",
+    "english": "for",
+    "czech": "pro",
+    "german_standard": "für",
+    "portuguese_pt": "para"
+  },
+  {
+    "id": "297",
+    "group": "Questions and connectors",
+    "english": "from",
+    "czech": "z",
+    "german_standard": "von",
+    "portuguese_pt": "de"
+  },
+  {
+    "id": "298",
+    "group": "Questions and connectors",
+    "english": "in",
+    "czech": "v",
+    "german_standard": "im / in",
+    "portuguese_pt": "no / na"
+  },
+  {
+    "id": "299",
+    "group": "Questions and connectors",
+    "english": "on",
+    "czech": "na",
+    "german_standard": "auf",
+    "portuguese_pt": "em cima de"
+  },
+  {
+    "id": "300",
+    "group": "Questions and connectors",
+    "english": "under",
+    "czech": "pod",
+    "german_standard": "unter",
+    "portuguese_pt": "debaixo de"
+  }
+]

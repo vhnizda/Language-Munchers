@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#15173b" />
+    <title>Language Munchers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <p class="eyebrow">A retro language game</p>
+        <h1>LANGUAGE<br />MUNCHERS</h1>
+      </header>
+
+      <section id="topic-screen" class="panel" aria-labelledby="topic-title">
+        <h2 id="topic-title">Choose a topic</h2>
+        <p class="intro">Eat every Czech, German, and Portuguese translation of the English word at the top.</p>
+        <div id="topic-list" class="topic-list" aria-live="polite"></div>
+      </section>
+
+      <section id="game-screen" class="game-screen hidden" aria-live="polite">
+        <div class="status-bar">
+          <div><span class="status-label">TOPIC</span><strong id="topic-name"></strong></div>
+          <div><span class="status-label">WORD</span><strong id="word-progress"></strong></div>
+          <div><span class="status-label">LIVES</span><strong id="lives" aria-label="Lives remaining"></strong></div>
+        </div>
+        <div class="prompt-box">
+          <span class="status-label">EAT EVERY TRANSLATION OF</span>
+          <h2 id="prompt-word"></h2>
+        </div>
+        <div id="feedback" class="feedback" role="status" aria-live="assertive"></div>
+        <div id="board" class="board" aria-label="Word board"></div>
+        <div class="controls" aria-label="Game controls">
+          <div class="arrow-pad">
+            <button type="button" data-move="up" aria-label="Move up">▲</button>
+            <button type="button" data-move="left" aria-label="Move left">◀</button>
+            <button type="button" data-move="down" aria-label="Move down">▼</button>
+            <button type="button" data-move="right" aria-label="Move right">▶</button>
+          </div>
+          <button id="munch-button" class="munch-button" type="button">SPACE<br /><span>MUNCH</span></button>
+          <button id="leave-button" class="leave-button" type="button">MENU</button>
+        </div>
+      </section>
+
+      <section id="result-screen" class="panel hidden" aria-live="polite">
+        <h2 id="result-title"></h2>
+        <p id="result-message" class="intro"></p>
+        <button id="return-button" class="primary-button" type="button">Return to topics</button>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

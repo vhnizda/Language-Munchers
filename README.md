@@ -1,36 +1,53 @@
 # Language Munchers
 
-A browser-based language-learning game inspired by the grid-and-munch loop of the classic *Number Munchers* games.
+A browser-based language-recognition game inspired by the grid-and-munch loop of the classic *Number Munchers* games.
 
-The player controls a frog on a grid of word tiles. A prompt at the top of the screen gives an English word. The frog hops across the board and eats every Czech, Standard German, and European Portuguese (`pt-PT`) tile that translates that English prompt. Other vocabulary tiles are distractors.
+The frog moves across a 4-row × 6-column word board. Each level gives an English prompt. Eat all Czech, Standard German, and European Portuguese (`pt-PT`) tiles that translate that prompt; avoid the distractors.
 
-## Project status
+## Play
 
-**Planning only.** This repository intentionally contains no game implementation yet. Development begins after the game design is agreed.
+The MVP is deployed to GitHub Pages from `main` after the Pages workflow runs. It is designed for public, browser-only play with no login.
+
+### Controls
+
+- **Arrow keys** or on-screen arrow buttons: move the frog.
+- **Space** or the on-screen **Space / Munch** button: eat the focused tile.
+- **Escape**: return to the topic menu.
+
+Touch/pointer and connected keyboards use the same move-then-munch interaction.
+
+## MVP rules
+
+- Select one vocabulary topic; its 20 concepts are shuffled and played once each.
+- Each 24-tile board has 12 correct answers and 12 distractors.
+- Every board contains eight Czech, eight German, and eight `pt-PT` tiles.
+- Correct answers repeat intentionally and are mixed across the board; there are no language labels or positional language patterns.
+- A run starts with three lives. A wrong answer shows its English meaning for one second, then clears and costs one life.
+- Progress is stored only in the browser's local storage. Version 1 has no sound.
 
 ## Vocabulary source
 
-The first playable vocabulary corpus already exists in the private repository [`vhnizda/vaclav-language-learning-path`](https://github.com/vhnizda/vaclav-language-learning-path):
+The canonical source remains the private [`vhnizda/vaclav-language-learning-path`](https://github.com/vhnizda/vaclav-language-learning-path) repository:
 
 - [`vocabulary/first-300-family-life.csv`](https://github.com/vhnizda/vaclav-language-learning-path/blob/main/vocabulary/first-300-family-life.csv)
 
-That CSV contains 300 stable concepts with English, Czech, Standard German, and `pt-PT` fields. It remains the canonical source of vocabulary. The game should consume a deliberately versioned copy or export only once the data-integration policy is agreed; it should not silently fork or rewrite the source data.
+`data/vocabulary.json` is a reviewed playable export of the CSV. It includes only `id`, `group`, `english`, `czech`, `german_standard`, and `portuguese_pt`; the source `notes` field is intentionally omitted. Each target-language field is shown as one indivisible tile, including articles and written alternatives.
 
-Important source-data rules:
+Regenerate the export from an authorized local checkout with:
 
-- Keep the stable `id` as the concept key.
-- Preserve German and Portuguese articles.
-- Preserve written gender alternatives.
-- Keep Swiss-context Standard German and European Portuguese intact.
+```bash
+npm run export:vocabulary
+```
 
-## Intended delivery
+## Development
 
-The game is intended to be a WebGL browser game. When implementation starts, the repository should publish a static build with GitHub Pages so it can be played from the repository's Pages URL. No GitHub Pages workflow or deployment has been configured during this planning phase.
+No runtime dependencies are required.
 
-## Design
+```bash
+npm test
+python3 -m http.server 4173
+```
 
-The current design brief, confirmed assumptions, and unresolved decisions are in [docs/game-design-document.md](docs/game-design-document.md).
+Then open `http://127.0.0.1:4173`.
 
-## Scope boundary
-
-This initial repository setup includes only project documentation. It does not include a game engine, WebGL framework, source-code scaffold, vocabulary import, asset, GitHub Pages configuration, or automated workflow.
+The full MVP contract and future feature boundaries are in [docs/game-design-document.md](docs/game-design-document.md).
