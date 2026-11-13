@@ -70,6 +70,9 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   padding: clamp(18px, 3vw, 32px);
 }
 .intro { font-size: clamp(21px, 3vw, 28px); line-height: 1.15; color: #d5e8dc; }
+#result-screen { text-align: center; }
+#result-screen h2 { font-size: clamp(28px, 5vw, 48px); }
+#result-screen .primary-button { margin-top: 10px; }
 .topic-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .language-controls { display: flex; align-items: center; gap: 10px; }
 .language-label { color: #91d8cf; font-family: "Press Start 2P", monospace; font-size: 10px; line-height: 1.35; }

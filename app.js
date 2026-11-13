@@ -334,7 +334,7 @@ function finishTopic(won) {
   resultTitle.textContent = won ? 'TOPIC CLEARED!' : 'GAME OVER';
   resultMessage.textContent = won
     ? `You completed every word in ${state.group}. Choose another topic or play it again with a fresh shuffle.`
-    : `You used all three lives in ${state.group}. Try again for a fresh word order.`;
+    : "You have lost all your lives. I'm sure you will do better next time!";
   show(screens.result);
   state = null;
 }
