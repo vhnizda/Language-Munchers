@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 1.0 — MVP decisions recorded
+**Status:** Draft 1.1 — MVP design decisions complete
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -87,7 +87,7 @@ The inspected source is a 300-row, stable-ID CSV with this schema:
 | `czech` | Candidate tile text. |
 | `german_standard` | Candidate tile text. |
 | `portuguese_pt` | Candidate tile text. |
-| `notes` | Display, validation, or content guidance where required. |
+| `notes` | Ignored in version 1; not exported to a playable tile or used by board generation. |
 
 The corpus has 15 situational groups, from family and people through questions and connectors.
 
@@ -100,7 +100,9 @@ The corpus has 15 situational groups, from family and people through questions a
 - Standard German must retain the corpus's Swiss-context spelling and vocabulary where provided.
 - Portuguese must remain `pt-PT`; Brazilian Portuguese must not be substituted.
 - German and Portuguese articles are part of the answer text and must remain visible.
-- Written gender alternatives and slash-separated alternatives must remain intact unless an explicit content rule replaces them.
+- Written gender alternatives and slash-separated alternatives must remain intact inside one indivisible tile; do not split them into separately selectable answers.
+- Each tile displays the complete value of its target-language CSV field exactly as written, including articles and alternatives.
+- The `notes` field is ignored in version 1: it must not be rendered, used for answer validation, or used in board generation.
 - A CSV row represents one concept, not independent translation cards.
 
 ### Future pronunciation mechanic
@@ -120,7 +122,7 @@ language: "czech" | "german_standard" | "portuguese_pt"
 displayText: "rodina"
 ```
 
-For a prompt with concept ID `P`, a tile is correct if and only if its `conceptId` is `P`. Display strings must not be re-parsed at runtime to decide correctness.
+For a prompt with concept ID `P`, a tile is correct if and only if its `conceptId` is `P`. The tile displays the full selected target-language field from the CSV, including articles and alternatives. Display strings must not be re-parsed at runtime to decide correctness.
 
 Before a board is shown, the generator must create and validate a board manifest containing:
 
@@ -242,8 +244,7 @@ The browser build must not require access to the private source repository at ru
 - WebGL engine/framework (for example, a game engine export versus a lightweight custom renderer).
 - JavaScript/TypeScript versus another WebGL toolchain.
 - Build and deployment workflow.
-- Browser and mobile support targets.
-- Save-data location and privacy model.
+- Browser test matrix and minimum supported viewport.
 
 Technical choices should be made after a small vertical-slice decision, not pre-emptively in this planning repository.
 
@@ -255,15 +256,19 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 - Art, sound, animation, and character assets.
 - Accounts, online features, leaderboards, and monetization.
 
-## 11. Open decisions
+## 11. MVP design status
 
-The current decisions define the MVP loop. The following still require direction before implementation:
+The MVP game-design decisions are complete. The complete-field tile rule removes ambiguity for articles, alternatives, gendered forms, and notes:
 
-1. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
+- display each selected target-language CSV field exactly as written in one indivisible tile;
+- retain articles and written alternatives together on that tile;
+- ignore the `notes` field in version 1.
 
-## 12. Next planning milestone
+Future-version questions such as pronunciation sources, mastery pressure, and broader accessibility settings do not block the MVP.
 
-Resolve the decisions that change the core loop, then approve one vertical slice:
+## 12. Next milestone
+
+When development is explicitly approved, prepare one vertical slice using this completed MVP contract:
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
 - the confirmed 4-row × 6-column board layout with a 12/12 correct-to-distractor split, eight tiles per language, repeated correct tiles, and no spatial language/concept pattern;
