@@ -182,9 +182,9 @@ function renderGame() {
     button.type = 'button';
     button.className = 'tile';
     button.textContent = tile.cleared ? '' : tile.displayText;
-    button.disabled = tile.cleared || pendingTiles.has(tile.id);
+    button.disabled = pendingTiles.has(tile.id);
     if (tile.cleared) button.classList.add('empty');
-    if (tileIndex === focus && !tile.cleared) button.classList.add('focused');
+    if (tileIndex === focus) button.classList.add('focused');
     if (pendingTiles.has(tile.id)) button.classList.add('pending');
     button.addEventListener('click', () => {
       state.focus = tileIndex;

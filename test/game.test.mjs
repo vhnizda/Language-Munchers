@@ -119,6 +119,12 @@ test('buildBoard excludes duplicate distractor display text in the same language
   assert.equal(new Set(distractorKeys).size, distractorKeys.length);
 });
 
+test('resolveMunch does not re-eat a cleared tile', () => {
+  const result = resolveMunch({ tile: { id: 'cleared', cleared: true, isCorrect: true }, lives: 2 });
+
+  assert.deepEqual(result, { kind: 'ignored', lives: 2, clearTile: false });
+});
+
 test('resolveMunch clears a correct tile without losing a life', () => {
   const result = resolveMunch({ tile: { id: 'a', isCorrect: true }, lives: 3 });
 

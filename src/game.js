@@ -116,6 +116,9 @@ export function isBoardValid(board) {
 }
 
 export function resolveMunch({ tile, lives }) {
+  if (tile.cleared) {
+    return { kind: 'ignored', lives, clearTile: false };
+  }
   if (tile.isCorrect) {
     return { kind: 'correct', lives, clearTile: true };
   }

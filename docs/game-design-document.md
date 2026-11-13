@@ -51,8 +51,8 @@ Eat all and only the tiles that correctly translate the current English prompt.
 6. Show a clear focus state for the tile under the frog.
 7. On an explicit **Munch** action, evaluate the focused tile.
 8. Resolve feedback immediately:
-   - **Correct:** eat the tile, update board progress, and preserve the remaining unresolved tiles. Pronunciation is deferred until after the MVP.
-   - **Incorrect:** show the English equivalent of the selected wrong word, clear that tile from the board, deduct one life, and record the mistake for potential review. Pronunciation is deferred until after the MVP.
+   - **Correct:** remove only the word content from that board square, update board progress, and preserve the square as a traversable non-munchable location. Pronunciation is deferred until after the MVP.
+   - **Incorrect:** show the English equivalent of the selected wrong word, then remove only that tile's word content, preserve its traversable non-munchable square, deduct one life, and record the mistake for potential review. Pronunciation is deferred until after the MVP.
 9. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
 10. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
 11. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
@@ -190,7 +190,7 @@ The first release should prioritize accurate recognition, repeated exposure, and
 ### Required feedback
 
 - On a correct answer: show clear positive confirmation and an updated progress count.
-- On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically clear that tile and deduct one life. The game continues; this feedback does not pause the board and cannot be manually dismissed.
+- On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically remove only its word content and deduct one life. Its blank board square remains traversable but cannot be eaten again. The game continues; this feedback does not pause the board and cannot be manually dismissed.
 - On losing the third life: show a topic-loss summary and return to the choice menu.
 - On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round, then begin the next concept in the selected topic.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.

@@ -23,7 +23,7 @@ Touch/pointer and connected keyboards use the same move-then-munch interaction.
 - Each 24-tile board has 12 correct answers and 12 distractors.
 - Every board contains eight Czech, eight German, and eight `pt-PT` tiles.
 - Correct answers repeat intentionally and are mixed across the board; there are no language labels or positional language patterns.
-- A run starts with three lives. A wrong answer shows its English meaning for one second, then clears and costs one life.
+- A run starts with three lives. A wrong answer shows its English meaning for one second, then clears only the word content and costs one life. The board square remains available for frog movement but cannot be eaten again.
 - Progress is stored only in the browser's local storage. Version 1 has no sound.
 
 ## Vocabulary source
