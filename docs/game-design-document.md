@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.8 — research-informed planning baseline
+**Status:** Draft 0.9 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -128,7 +128,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. Czech, German, and Portuguese totals must be roughly balanced (for a 16-tile board, 5/5/6 in any order is the target). It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. For the 24-tile MVP board, it must use an exact 12/12 correct-to-distractor split and eight Czech, eight German, and eight Portuguese tiles. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -138,7 +138,7 @@ The pre-game session setup should be deliberately small:
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
-| Tile languages | Every board contains roughly equal counts of Czech, German, and Portuguese tiles; every tile displays exactly one language. For the initial 16-tile board, use 5/5/6 in randomized language assignment. |
+| Tile languages | Every board contains eight Czech, eight German, and eight Portuguese tiles; every tile displays exactly one language. Language assignment and tile placement are randomized subject to this distribution. |
 | Correct answers | Every board targets a roughly 50/50 correct-to-distractor ratio, contains at least one correct tile in each language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
@@ -157,7 +157,7 @@ The source games demonstrate that a compact, fully visible grid supports scan-an
 Each board must:
 
 - have one or more correct tiles and at least one distractor;
-- make every tile fully legible before selection;
+- make every tile fully legible before selection; text may wrap onto multiple lines inside its tile and must not be clipped;
 - remain winnable from the state shown to the player;
 - preserve each unresolved tile's text and location throughout a calm-mode round;
 - intentionally repeat one or more correct translations while avoiding accidental duplicate distractors;
@@ -166,18 +166,18 @@ Each board must:
 
 The game starts one topic run at a time: the player selects one CSV `group` and plays every concept in that group before returning to the choice menu. It does not begin with all 300 concepts at once.
 
-### Initial vertical-slice board proposal
+### Initial MVP board layout
 
-This is a proposal to validate, not a locked requirement:
+The MVP uses the following board:
 
-- 4 × 4 grid (16 tiles);
+- 4-row × 6-column grid (24 tiles), optimized for wider-than-tall desktop screens;
 - one prompt concept;
-- eight correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
-- eight distractors drawn from the same study group;
-- a roughly balanced 5/5/6 Czech/German/Portuguese distribution, in a different randomized assignment each board;
+- 12 correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
+- 12 distractors drawn from the same study group;
+- eight Czech, eight German, and eight Portuguese tiles, with positions randomized across the full grid;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
-A 4 × 4 board is a starting usability hypothesis. Its 16 tiles allow a roughly balanced 5/5/6 language mix and repeated correct translations, which supports critical scanning rather than a simple three-answer lookup. The generator must shuffle every language and concept across the whole grid with no dedicated language or concept region. This proposal must be tested against long strings and revised before implementation is treated as complete.
+A 4-row × 6-column board is the initial MVP layout. Its 24 tiles provide an exact 12/12 correct-to-distractor split and eight tiles per language, while its landscape shape suits wider-than-tall screens. Tile text may wrap to multiple lines; character limits and minimum font-size tuning are implementation refinements to validate once the game is playable. The generator must shuffle every language and concept across the whole grid with no dedicated language or concept region.
 
 ## 7. Feedback, progression, and learning intent
 
@@ -258,21 +258,20 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 
 The research and current decisions define the base loop. The following still require direction before implementation:
 
-1. **Board size and tile count:** Does the proposed 4 × 4 grid fit the longest vocabulary entries at the intended viewport?
-2. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
-3. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
-4. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
-5. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
-6. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
-7. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
-8. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
+1. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
+2. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
+3. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
+4. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
+5. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
+6. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
+7. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
 
 ## 12. Next planning milestone
 
 Resolve the decisions that change the core loop, then approve one vertical slice:
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
-- a validated 4 × 4 (or revised) board layout with roughly balanced language counts, repeated correct tiles, and no spatial language/concept pattern;
+- the confirmed 4-row × 6-column board layout with a 12/12 correct-to-distractor split, eight tiles per language, repeated correct tiles, and no spatial language/concept pattern;
 - the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
 - calm mode with no hazards;
