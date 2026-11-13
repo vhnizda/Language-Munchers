@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.4 — research-informed planning baseline
+**Status:** Draft 0.5 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -45,8 +45,8 @@ Eat all and only the tiles that correctly translate the current English prompt.
 2. At the start of the run, create one randomized order containing every concept in that topic exactly once.
 3. Select the next unfinished concept in the run and display its English value as the prompt.
 4. Build a board with a mix of:
-   - at least one correct single-language translation in each of Czech, Standard German, and `pt-PT`; and
-   - distractor tiles from other concepts in the selected topic, distributed evenly across the three languages.
+   - at least one correct single-language translation in each of Czech, Standard German, and `pt-PT`, with one or more of those correct translations intentionally repeated; and
+   - distractor tiles from other concepts in the selected topic, with language totals kept roughly balanced across the three languages.
 5. Let the player move the frog one grid square at a time without evaluating the tile.
 6. Show a clear focus state for the tile under the frog.
 7. On an explicit **Munch** action, evaluate the focused tile.
@@ -122,7 +122,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile in **each** target language, an equal total count of Czech, German, and Portuguese tiles, at least one distractor, no malformed or empty display text, and no duplicate tile that creates avoidable ambiguity. Therefore, its total tile count must be divisible by three. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. Czech, German, and Portuguese totals must be roughly balanced (for a 16-tile board, 5/5/6 in any order is the target). It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -132,8 +132,8 @@ The pre-game session setup should be deliberately small:
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
-| Tile languages | Every board contains equal counts of Czech, German, and Portuguese tiles; every tile displays exactly one language. The language assignment and tile placement are randomized subject to that equal-count constraint. |
-| Correct answers | Every board contains at least one correct tile in each of Czech, German, and Portuguese. |
+| Tile languages | Every board contains roughly equal counts of Czech, German, and Portuguese tiles; every tile displays exactly one language. For the initial 16-tile board, use 5/5/6 in randomized language assignment. |
+| Correct answers | Every board contains at least one correct tile in each language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
@@ -154,7 +154,8 @@ Each board must:
 - make every tile fully legible before selection;
 - remain winnable from the state shown to the player;
 - preserve each unresolved tile's text and location throughout a calm-mode round;
-- avoid accidental ambiguity caused by duplicate strings, alternatives, or insufficient context;
+- intentionally repeat one or more correct translations while avoiding accidental duplicate distractors;
+- distribute languages and concepts across the whole grid rather than by row, column, quadrant, or other recognizable region;
 - expose remaining lives, `correct eaten / correct total`, and `word n / total words` without revealing which unselected tiles are correct.
 
 The game starts one topic run at a time: the player selects one CSV `group` and plays every concept in that group before returning to the choice menu. It does not begin with all 300 concepts at once.
@@ -163,13 +164,14 @@ The game starts one topic run at a time: the player selects one CSV `group` and 
 
 This is a proposal to validate, not a locked requirement:
 
-- 3 × 4 grid (12 tiles, divisible evenly across three languages);
+- 4 × 4 grid (16 tiles);
 - one prompt concept;
-- three correct tiles: exactly one each in Czech, German, and `pt-PT`;
-- nine distractors drawn from the same study group: three tiles in each language;
+- six correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
+- ten distractors drawn from the same study group;
+- a roughly balanced 5/5/6 Czech/German/Portuguese distribution, in a different randomized assignment each board;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
-A 3 × 4 board is a starting usability hypothesis. A 4 × 4 board cannot satisfy equal Czech/German/Portuguese tile counts because 16 is not divisible by three. The 3 × 4 proposal must be tested against long strings and revised before implementation is treated as complete.
+A 4 × 4 board is a starting usability hypothesis. Its 16 tiles allow a roughly balanced 5/5/6 language mix and repeated correct translations, which supports critical scanning rather than a simple three-answer lookup. The generator must shuffle every language and concept across the whole grid with no dedicated language or concept region. This proposal must be tested against long strings and revised before implementation is treated as complete.
 
 ## 7. Feedback, progression, and learning intent
 
@@ -250,7 +252,7 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 
 The research and current decisions define the base loop. The following still require direction before implementation:
 
-1. **Board size and tile count:** Does the proposed 3 × 4 grid fit the longest vocabulary entries at the intended viewport?
+1. **Board size and tile count:** Does the proposed 4 × 4 grid fit the longest vocabulary entries at the intended viewport?
 2. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
 3. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
 4. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
@@ -265,7 +267,7 @@ The research and current decisions define the base loop. The following still req
 Resolve the decisions that change the core loop, then approve one vertical slice:
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
-- a validated 3 × 4 (or revised, but three-language-divisible) board layout;
+- a validated 4 × 4 (or revised) board layout with roughly balanced language counts, repeated correct tiles, and no spatial language/concept pattern;
 - the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
 - calm mode with no hazards;
