@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.6 — research-informed planning baseline
+**Status:** Draft 0.7 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -51,8 +51,8 @@ Eat all and only the tiles that correctly translate the current English prompt.
 6. Show a clear focus state for the tile under the frog.
 7. On an explicit **Munch** action, evaluate the focused tile.
 8. Resolve feedback immediately:
-   - **Correct:** eat the tile, update board progress, and preserve the remaining unresolved tiles.
-   - **Incorrect:** show the English equivalent of the selected wrong word, clear that tile from the board, deduct one life, and record the mistake for potential review.
+   - **Correct:** play the selected tile's pronunciation in its displayed target language, eat the tile, update board progress, and preserve the remaining unresolved tiles.
+   - **Incorrect:** play the selected tile's pronunciation in its displayed target language, show the English equivalent of the selected wrong word, clear that tile from the board, deduct one life, and record the mistake for potential review.
 9. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
 10. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
 11. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
@@ -64,7 +64,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 | Move | Arrow keys and WASD | Moves exactly one orthogonal tile. |
 | Munch / select | Space or Enter | Evaluates only the focused tile. |
 | Pause | Escape | Freezes game state and exposes resume/leave actions. |
-| Replay prompt | `R` | Repeats the English prompt in text; future audio, if enabled, also plays here. |
+| Replay last pronunciation | `R` | Replays the most recently eaten tile's target-language pronunciation. |
 
 A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 
@@ -103,7 +103,11 @@ The corpus has 15 situational groups, from family and people through questions a
 - Written gender alternatives and slash-separated alternatives must remain intact unless an explicit content rule replaces them.
 - A CSV row represents one concept, not independent translation cards.
 
-### Tile model and answer contract
+### Pronunciation requirement
+
+Pronunciation is a required learning mechanic, not optional polish. Whenever the frog eats a tile—whether correct or wrong—the game must play the displayed tile's pronunciation in that tile's language: Czech, Standard German, or European Portuguese. The pronunciation must correspond to the exact displayed form, including articles and written alternatives where present.
+
+Each playable tile must resolve to a reviewed pronunciation asset using its `conceptId`, `language`, and `displayText`. A board generator must not place a tile when no matching pronunciation asset is available. The source, licensing, voice standard, and asset-production pipeline remain implementation decisions.
 
 A generated tile must retain display content, language, and concept provenance:
 
@@ -120,6 +124,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - prompt concept ID;
 - each tile's concept ID, language, and display text;
 - each tile's correct/incorrect status;
+- a valid pronunciation asset for each tile;
 - the count and positions of all correct tiles.
 
 The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. Czech, German, and Portuguese totals must be roughly balanced (for a 16-tile board, 5/5/6 in any order is the target). It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
@@ -179,8 +184,8 @@ The first release should prioritize accurate recognition, repeated exposure, and
 
 ### Required feedback
 
-- On a correct answer: clear positive confirmation and an updated progress count.
-- On a wrong answer: show the selected target-language tile and its English meaning, then clear that tile and deduct one life.
+- On a correct answer: play the selected tile's native-language pronunciation, then show clear positive confirmation and an updated progress count.
+- On a wrong answer: play the selected tile's native-language pronunciation, show the selected target-language tile and its English meaning, then clear that tile and deduct one life.
 - On losing the third life: show a topic-loss summary and return to the choice menu.
 - On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round, then begin the next concept in the selected topic.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
@@ -206,12 +211,13 @@ Initial presentation requirements:
 - the currently focused tile has a clear non-colour-only focus treatment;
 - correct and incorrect responses are distinguishable without relying only on colour or sound;
 - the full game is usable by keyboard;
-- Pause and Replay prompt controls are visible and documented;
-- animations must not make text unreadable or delay input unnecessarily.
+- Pause and Replay-last-pronunciation controls are visible and documented;
+- every eaten tile plays its reviewed pronunciation in the displayed target language, whether it was correct or wrong;
+- animations and audio must not make text unreadable or delay input unnecessarily.
 
-The older *Word Munchers Deluxe* made spoken target playback available during play.[4] Language Munchers should reserve a clean extension point for audio pronunciation, but audio is not required for the first vertical slice and must never be the only way to understand a prompt or tile.
+The older *Word Munchers Deluxe* made spoken target playback available during play.[4] Language Munchers makes target-language pronunciation a required immediate response to every eaten tile. Audio must be controllable and replayable, but text must remain available so that sound is never the only way to understand a prompt or tile.
 
-Music, sound effects, animation style, voice source, visual mood, and wider accessibility options remain open.
+Music, sound effects, animation style, pronunciation-voice source, visual mood, and wider accessibility options remain open.
 
 ## 9. Technical direction
 
@@ -228,7 +234,7 @@ The private vocabulary repository remains canonical. Before implementation, choo
 1. a reviewed, versioned game-data export committed to this repository; or
 2. a build-time import from an authorized local checkout that produces a reviewed static export.
 
-The browser build must not require access to the private source repository at runtime. A public Pages deployment must not expose notes or source content that is not intentionally included in the game export.
+The browser build must not require access to the private source repository at runtime. A public Pages deployment must not expose notes or source content that is not intentionally included in the game export. Pronunciation assets must be packaged or otherwise reliably available to the browser build; a tile without a reviewed pronunciation asset is not playable.
 
 ### Not decided
 
@@ -245,7 +251,7 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 - Game code or a WebGL scaffold.
 - Importing or copying the vocabulary CSV into this repository.
 - GitHub Pages configuration or deployment.
-- Art, sound, animation, and character assets.
+- Art, music, non-pronunciation sound effects, animation, and character assets.
 - Accounts, online features, leaderboards, and monetization.
 
 ## 11. Open decisions
@@ -256,7 +262,7 @@ The research and current decisions define the base loop. The following still req
 2. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
 3. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
 4. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
-5. **Audio:** Is on-demand pronunciation needed after the first text-only vertical slice? If yes, what licensed source and which languages/forms are authoritative?
+5. **Pronunciation assets:** Which licensed source and voice standard will provide the reviewed Czech, Standard German, and `pt-PT` pronunciations for every displayed form?
 6. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
 7. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
 8. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
@@ -271,7 +277,7 @@ Resolve the decisions that change the core loop, then approve one vertical slice
 - the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
 - calm mode with no hazards;
-- one reviewed static game-data export path;
+- a reviewed static game-data export path and matching pronunciation-asset source/licensing plan;
 - static WebGL build and GitHub Pages deployment path.
 
 Only after that approval should development begin.
