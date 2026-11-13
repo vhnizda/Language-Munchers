@@ -2,6 +2,8 @@ const LANGUAGES = ['czech', 'german_standard', 'portuguese_pt'];
 const BOARD_COLUMNS = 6;
 const BOARD_ROWS = 4;
 const BOARD_SIZE = BOARD_COLUMNS * BOARD_ROWS;
+const CORRECT_TILE_COUNT = 10;
+const DISTRACTOR_TILE_COUNT = BOARD_SIZE - CORRECT_TILE_COUNT;
 
 function shuffle(items, random) {
   const result = [...items];
@@ -10,6 +12,15 @@ function shuffle(items, random) {
     [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
   }
   return result;
+}
+
+function distributeCount(total, languages, random) {
+  const counts = new Map(languages.map((language) => [language, Math.floor(total / languages.length)]));
+  const remainder = total % languages.length;
+  for (const language of shuffle(languages, random).slice(0, remainder)) {
+    counts.set(language, counts.get(language) + 1);
+  }
+  return counts;
 }
 
 function createTile({ concept, language, isCorrect, sequence }) {
@@ -43,8 +54,8 @@ function buildCandidateTiles({ topicRows, prompt, languages, random }) {
   if (activeLanguages.length === 0 || activeLanguages.some((language) => !LANGUAGES.includes(language))) {
     throw new Error('A board needs at least one supported target language.');
   }
-  if (new Set(activeLanguages).size !== activeLanguages.length || 12 % activeLanguages.length !== 0) {
-    throw new Error('Selected target languages must be unique and divide the 12-answer board evenly.');
+  if (new Set(activeLanguages).size !== activeLanguages.length) {
+    throw new Error('Selected target languages must be unique.');
   }
   const distractors = topicRows.filter((row) => row.id !== prompt.id);
   if (distractors.length < 4) {
@@ -52,10 +63,13 @@ function buildCandidateTiles({ topicRows, prompt, languages, random }) {
   }
 
   const tiles = [];
-  const tilesPerOutcomePerLanguage = 12 / activeLanguages.length;
+  const correctCounts = distributeCount(CORRECT_TILE_COUNT, activeLanguages, random);
+  const tilesPerLanguage = BOARD_SIZE / activeLanguages.length;
   let sequence = 0;
   for (const language of activeLanguages) {
-    for (let count = 0; count < tilesPerOutcomePerLanguage; count += 1) {
+    const correctCount = correctCounts.get(language);
+    const distractorCount = tilesPerLanguage - correctCount;
+    for (let count = 0; count < correctCount; count += 1) {
       tiles.push(createTile({ concept: prompt, language, isCorrect: true, sequence: sequence++ }));
     }
 
@@ -63,9 +77,9 @@ function buildCandidateTiles({ topicRows, prompt, languages, random }) {
       .filter((row, index, rows) => (
         rows.findIndex((candidate) => candidate[language] === row[language]) === index
       ))
-      .slice(0, tilesPerOutcomePerLanguage);
-    if (languageDistractors.length < tilesPerOutcomePerLanguage) {
-      throw new Error(`A topic needs ${tilesPerOutcomePerLanguage} distinct ${language} distractors to build an MVP board.`);
+      .slice(0, distractorCount);
+    if (languageDistractors.length < distractorCount) {
+      throw new Error(`A topic needs ${distractorCount} distinct ${language} distractors to build an MVP board.`);
     }
     for (const concept of languageDistractors) {
       tiles.push(createTile({ concept, language, isCorrect: false, sequence: sequence++ }));
@@ -104,15 +118,21 @@ export function isBoardValid(board) {
 
   const correctTiles = board.tiles.filter((tile) => tile.isCorrect);
   const distractorTiles = board.tiles.filter((tile) => !tile.isCorrect);
-  if (correctTiles.length !== 12 || distractorTiles.length !== 12) {
+  if (correctTiles.length !== CORRECT_TILE_COUNT || distractorTiles.length !== DISTRACTOR_TILE_COUNT) {
     return false;
   }
 
   const tilesPerLanguage = BOARD_SIZE / activeLanguages.length;
-  const correctTilesPerLanguage = 12 / activeLanguages.length;
+  const minimumCorrectTilesPerLanguage = Math.floor(CORRECT_TILE_COUNT / activeLanguages.length);
+  const maximumCorrectTilesPerLanguage = Math.ceil(CORRECT_TILE_COUNT / activeLanguages.length);
   for (const language of activeLanguages) {
     const languageTiles = board.tiles.filter((tile) => tile.language === language);
-    if (languageTiles.length !== tilesPerLanguage || languageTiles.filter((tile) => tile.isCorrect).length !== correctTilesPerLanguage) {
+    const languageCorrectTiles = languageTiles.filter((tile) => tile.isCorrect).length;
+    if (
+      languageTiles.length !== tilesPerLanguage
+      || languageCorrectTiles < minimumCorrectTilesPerLanguage
+      || languageCorrectTiles > maximumCorrectTilesPerLanguage
+    ) {
       return false;
     }
   }

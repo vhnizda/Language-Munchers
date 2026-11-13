@@ -49,6 +49,14 @@ const TOPIC_ROWS = [
     german_standard: 'das Baby',
     portuguese_pt: 'o bebé',
   },
+  {
+    id: '006',
+    group: 'Family and people',
+    english: 'sibling',
+    czech: 'sourozenec',
+    german_standard: 'das Geschwister',
+    portuguese_pt: 'o irmão / a irmã',
+  },
 ];
 
 function deterministicRandom(values) {
@@ -64,7 +72,7 @@ test('createTopicRun returns every selected-topic concept exactly once in a shuf
   assert.notDeepEqual(run.map((row) => row.id), TOPIC_ROWS.map((row) => row.id));
 });
 
-test('buildBoard creates a valid 24-tile 12/12 board with eight tiles per language', () => {
+test('buildBoard creates a valid 24-tile 10/14 board with eight tiles per language', () => {
   const board = buildBoard({
     topicRows: TOPIC_ROWS,
     prompt: TOPIC_ROWS[0],
@@ -72,8 +80,8 @@ test('buildBoard creates a valid 24-tile 12/12 board with eight tiles per langua
   });
 
   assert.equal(board.tiles.length, 24);
-  assert.equal(board.tiles.filter((tile) => tile.isCorrect).length, 12);
-  assert.equal(board.tiles.filter((tile) => !tile.isCorrect).length, 12);
+  assert.equal(board.tiles.filter((tile) => tile.isCorrect).length, 10);
+  assert.equal(board.tiles.filter((tile) => !tile.isCorrect).length, 14);
   for (const language of ['czech', 'german_standard', 'portuguese_pt']) {
     assert.equal(board.tiles.filter((tile) => tile.language === language).length, 8);
     assert.ok(board.tiles.some((tile) => tile.language === language && tile.isCorrect));
@@ -81,10 +89,10 @@ test('buildBoard creates a valid 24-tile 12/12 board with eight tiles per langua
   assert.ok(isBoardValid(board));
 });
 
-test('buildBoard uses only selected languages while preserving a 12/12 board', () => {
+test('buildBoard uses only selected languages while preserving a 10/14 board', () => {
   const rows = [
     ...TOPIC_ROWS,
-    ...['006', '007', '008'].map((id) => ({
+    ...['007', '008'].map((id) => ({
       id,
       group: 'Family and people',
       english: `extra ${id}`,
@@ -102,8 +110,8 @@ test('buildBoard uses only selected languages while preserving a 12/12 board', (
 
   assert.equal(board.tiles.length, 24);
   assert.deepEqual(new Set(board.tiles.map((tile) => tile.language)), new Set(['czech', 'portuguese_pt']));
-  assert.equal(board.tiles.filter((tile) => tile.isCorrect).length, 12);
-  assert.equal(board.tiles.filter((tile) => !tile.isCorrect).length, 12);
+  assert.equal(board.tiles.filter((tile) => tile.isCorrect).length, 10);
+  assert.equal(board.tiles.filter((tile) => !tile.isCorrect).length, 14);
   assert.equal(board.tiles.filter((tile) => tile.language === 'czech').length, 12);
   assert.equal(board.tiles.filter((tile) => tile.language === 'portuguese_pt').length, 12);
   assert.ok(isBoardValid(board));
@@ -112,7 +120,7 @@ test('buildBoard uses only selected languages while preserving a 12/12 board', (
 test('buildBoard supports a single selected language', () => {
   const rows = [
     ...TOPIC_ROWS,
-    ...Array.from({ length: 8 }, (_, index) => ({
+    ...Array.from({ length: 9 }, (_, index) => ({
       id: `single-${index}`,
       group: 'Family and people',
       english: `single ${index}`,

@@ -131,7 +131,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. For the 24-tile MVP board, it must use an exact 12/12 correct-to-distractor split. The active languages divide each outcome evenly: 12 correct and 12 distractors for one language, six of each per language for two, or four of each per language for all three. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target roughly 40% correct answers and 60% distractors. For the 24-tile MVP board, that is an exact 10 correct / 14 distractor split (about 42% / 58%). The 24 board positions stay evenly distributed across active languages; correct tiles divide as evenly as possible, with any one-tile remainder assigned randomly. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -142,7 +142,7 @@ The pre-game session setup should be deliberately small:
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
 | Tile languages | Toggle Czech 🇨🇿, Standard German 🇩🇪, and `pt-PT` 🇵🇹 independently at the choice menu. At least one is required; the active set stays fixed for the topic run. Each tile displays exactly one active language. |
-| Correct answers | Every board targets a roughly 50/50 correct-to-distractor ratio, contains at least one correct tile in each active language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
+| Correct answers | Every board targets roughly 40% correct answers and 60% distractors: 10 correct / 14 distractors on the 24-tile MVP board. It contains at least one correct tile in each active language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
@@ -175,12 +175,12 @@ The MVP uses the following board:
 
 - 4-row × 6-column grid (24 tiles), optimized for wider-than-tall desktop screens;
 - one prompt concept;
-- 12 correct tiles: at least one in each active language, with the prompt's translations intentionally repeated;
-- 12 distractors drawn from the same study group;
+- 10 correct tiles: at least one in each active language, with the prompt's translations intentionally repeated;
+- 14 distractors drawn from the same study group;
 - active-language totals divided evenly: 24 tiles for one active language, 12 each for two, or eight each for all three, with positions randomized across the full grid;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
-A 4-row × 6-column board is the initial MVP layout. Its 24 tiles provide an exact 12/12 correct-to-distractor split while dividing the active languages evenly, and its landscape shape suits wider-than-tall screens. Tile text may wrap to multiple lines; character limits and minimum font-size tuning are implementation refinements to validate once the game is playable. The generator must shuffle every active language and concept across the whole grid with no dedicated language or concept region.
+A 4-row × 6-column board is the initial MVP layout. Its 24 tiles provide 10 correct answers and 14 distractors—approximately a 40/60 ratio—while dividing the active languages evenly, and its landscape shape suits wider-than-tall screens. Tile text may wrap to multiple lines; character limits and minimum font-size tuning are implementation refinements to validate once the game is playable. The generator must shuffle every active language and concept across the whole grid with no dedicated language or concept region.
 
 ## 7. Feedback, progression, and learning intent
 
@@ -264,7 +264,7 @@ Future-version questions such as pronunciation sources, mastery pressure, and br
 When development is explicitly approved, prepare one vertical slice using this completed MVP contract:
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
-- the confirmed 4-row × 6-column board layout with a 12/12 correct-to-distractor split, eight tiles per language, repeated correct tiles, and no spatial language/concept pattern;
+- the confirmed 4-row × 6-column board layout with a 10/14 correct-to-distractor split, active-language tile distribution, repeated correct tiles, and no spatial language/concept pattern;
 - the confirmed three-life loss rule and calm mode with no hazards;
 - keyboard controls plus required touch/pointer on-screen arrow and `Space` buttons;
 - the confirmed one-second, non-pausing wrong-tile feedback sequence;
