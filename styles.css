@@ -156,20 +156,27 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   left: 50%;
   width: 65%;
   height: 65%;
+  overflow: hidden;
   transform: translate(-50%, -50%);
-  background: url("assets/frog-sprites.png") 0 0 / 600% 500% no-repeat;
   pointer-events: none;
 }
-.frog--eating { animation: frog-eating 540ms steps(6, end); }
-.frog--jump-up { animation: frog-jump-up 360ms steps(6, end); }
-.frog--jump-down { animation: frog-jump-down 360ms steps(6, end); }
-.frog--jump-left { animation: frog-jump-left 360ms steps(6, end); }
-.frog--jump-right { animation: frog-jump-right 360ms steps(6, end); }
-@keyframes frog-eating { from { background-position: 0 0; } to { background-position: -100% 0; } }
-@keyframes frog-jump-up { from { background-position: 0 -25%; } to { background-position: -100% -25%; } }
-@keyframes frog-jump-down { from { background-position: 0 -50%; } to { background-position: -100% -50%; } }
-@keyframes frog-jump-left { from { background-position: 0 -75%; } to { background-position: -100% -75%; } }
-@keyframes frog-jump-right { from { background-position: 0 -100%; } to { background-position: -100% -100%; } }
+.frog img {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 600%;
+  height: 500%;
+  max-width: none;
+}
+.frog--eating img { animation: frog-eating 540ms steps(6, end); }
+.frog--jump-up img { animation: frog-jump-up 360ms steps(6, end); }
+.frog--jump-down img { animation: frog-jump-down 360ms steps(6, end); }
+.frog--jump-left img { animation: frog-jump-left 360ms steps(6, end); }
+.frog--jump-right img { animation: frog-jump-right 360ms steps(6, end); }
+@keyframes frog-eating { from { transform: translate(0, 0); } to { transform: translate(-83.3333%, 0); } }
+@keyframes frog-jump-up { from { transform: translate(0, -20%); } to { transform: translate(-83.3333%, -20%); } }
+@keyframes frog-jump-down { from { transform: translate(0, -40%); } to { transform: translate(-83.3333%, -40%); } }
+@keyframes frog-jump-left { from { transform: translate(0, -60%); } to { transform: translate(-83.3333%, -60%); } }
+@keyframes frog-jump-right { from { transform: translate(0, -80%); } to { transform: translate(-83.3333%, -80%); } }
 .tile.focused { outline: 5px solid #ffb86b; outline-offset: -5px; background: #4e6c9f; }
 .tile.pending { background: #823f64; color: #fff; }
 .tile.empty { border-color: #fbf1cc; background: #2d396a; color: transparent; }

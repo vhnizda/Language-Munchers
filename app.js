@@ -248,6 +248,10 @@ function renderGame() {
       const frog = document.createElement('span');
       frog.className = `frog frog--${frogAnimation}`;
       frog.setAttribute('aria-hidden', 'true');
+      const frogSprite = document.createElement('img');
+      frogSprite.src = 'assets/frog-sprites.png';
+      frogSprite.alt = '';
+      frog.append(frogSprite);
       button.prepend(frog);
     }
     if (pendingTiles.has(tile.id)) button.classList.add('pending');
