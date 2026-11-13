@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.2 — research-informed planning baseline
+**Status:** Draft 0.3 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -41,18 +41,21 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 ### Required round loop
 
-1. Select a vocabulary concept from the active study set.
-2. Display its English value as the prompt.
-3. Build a board with a mix of:
+1. From the choice menu, select one CSV `group` (topic).
+2. Start a topic run containing every concept in that group, in the CSV's stable `id` order.
+3. Select the next unfinished concept in the run and display its English value as the prompt.
+4. Build a board with a mix of:
    - correct translations of that concept in Czech, Standard German, and/or `pt-PT`; and
-   - distractor translations from other active concepts.
-4. Let the player move the frog one grid square at a time without evaluating the tile.
-5. Show a clear focus state for the tile under the frog.
-6. On an explicit **Munch** action, evaluate the focused tile.
-7. Resolve feedback immediately:
-   - **Correct:** eat the tile, update round progress, and preserve the remaining board state.
-   - **Incorrect:** apply the selected mistake rule, reveal the tile's correct English meaning, and record the event for potential review.
-8. Complete the board only after every correct tile has been eaten; then show concise feedback and advance.
+   - distractor translations from other concepts in the selected topic.
+5. Let the player move the frog one grid square at a time without evaluating the tile.
+6. Show a clear focus state for the tile under the frog.
+7. On an explicit **Munch** action, evaluate the focused tile.
+8. Resolve feedback immediately:
+   - **Correct:** eat the tile, update board progress, and preserve the remaining unresolved tiles.
+   - **Incorrect:** show the English equivalent of the selected wrong word, clear that tile from the board, deduct one life, and record the mistake for potential review.
+9. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
+10. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
+11. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
 
 ### Baseline control contract
 
@@ -62,6 +65,8 @@ Eat all and only the tiles that correctly translate the current English prompt.
 | Munch / select | Space or Enter | Evaluates only the focused tile. |
 | Pause | Escape | Freezes game state and exposes resume/leave actions. |
 | Replay prompt | `R` | Repeats the English prompt in text; future audio, if enabled, also plays here. |
+
+A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 
 Mouse, touch, and gamepad support are not decided. If mouse support is added, selecting a tile must not silently submit it; use a two-step focus-then-munch model or an equally deliberate accessible equivalent.
 
@@ -116,7 +121,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile, at least one distractor, no malformed or empty display text, and no duplicate tile that creates avoidable ambiguity. The board must remain stable for the entire round in calm mode.
+The manifest must guarantee at least one correct tile, at least one distractor, no malformed or empty display text, and no duplicate tile that creates avoidable ambiguity. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -124,14 +129,14 @@ The pre-game session setup should be deliberately small:
 
 | Setting | Initial proposal |
 |---|---|
-| Study set | One selected `group`, then a smaller chosen subset if necessary. |
+| Topic | One CSV `group`, selected from the choice menu. |
+| Run length | One level per concept in the selected topic; progress follows stable CSV `id` order. |
 | Correct-tile languages | Czech only, German only, Portuguese only, or mixed. |
-| Prompt order | Ordered by selected concept list or randomized. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
 
-Calm mode has no enemies and no timer. A wrong answer should cost a round mistake rather than immediately erase a learning opportunity. The exact life/scoring rule is still open, but feedback must name the selected tile's English meaning and leave the player able to learn from the error.
+Calm mode has no enemies and no timer. A topic run starts with three lives. Each wrong answer shows the English meaning of the selected wrong tile, removes that tile, and deducts exactly one life. Losing the third life immediately ends the run as a loss. A completed board advances to the next concept; completing every concept in the selected topic wins the run and returns the player to the choice menu.
 
 ### Mastery mode — future option, not v1 commitment
 
@@ -146,11 +151,11 @@ Each board must:
 - have one or more correct tiles and at least one distractor;
 - make every tile fully legible before selection;
 - remain winnable from the state shown to the player;
-- preserve tile text and location throughout a calm-mode round;
+- preserve each unresolved tile's text and location throughout a calm-mode round;
 - avoid accidental ambiguity caused by duplicate strings, alternatives, or insufficient context;
-- expose progress as `correct eaten / correct total` without revealing which unselected tiles are correct.
+- expose remaining lives, `correct eaten / correct total`, and `word n / total words` without revealing which unselected tiles are correct.
 
-The game should begin with a limited active group or small concept subset rather than all 300 concepts at once.
+The game starts one topic run at a time: the player selects one CSV `group` and plays every concept in that group before returning to the choice menu. It does not begin with all 300 concepts at once.
 
 ### Initial vertical-slice board proposal
 
@@ -160,7 +165,7 @@ This is a proposal to validate, not a locked requirement:
 - one prompt concept;
 - three correct tiles: one each in Czech, German, and `pt-PT`;
 - 13 distractors drawn from the same study group;
-- Calm mode; keyboard controls; explicit Munch action; no score pressure.
+- Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
 A 4 × 4 board is a starting usability hypothesis. It must be tested against long strings and revised before implementation is treated as complete.
 
@@ -171,15 +176,16 @@ The first release should prioritize accurate recognition, repeated exposure, and
 ### Required feedback
 
 - On a correct answer: clear positive confirmation and an updated progress count.
-- On a wrong answer: clear but non-punitive correction showing the selected target-language tile and its English meaning.
-- On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round.
-- Between boards: make the next prompt distinct from the previous one unless deliberate review is active.
+- On a wrong answer: show the selected target-language tile and its English meaning, then clear that tile and deduct one life.
+- On losing the third life: show a topic-loss summary and return to the choice menu.
+- On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round, then begin the next concept in the selected topic.
+- On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
 
 ### Proposed progression path
 
-1. One selected target language; small group; Calm mode.
+1. One selected target language; one complete topic run; Calm mode.
 2. Mixed Czech, German, and Portuguese correct tiles.
-3. More confusable distractors within the same study group.
+3. More confusable distractors within the selected topic.
 4. Review boards selected from recent mistakes or weak concepts.
 5. Optional Mastery mode, only after the calm learning loop tests well.
 
@@ -240,29 +246,26 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 
 ## 11. Open decisions
 
-The research reduces ambiguity in the base loop but does not decide product choices. The following still require direction before implementation:
+The research and current decisions define the base loop. The following still require direction before implementation:
 
-1. **Round completion:** Is the initial requirement exactly one correct tile per language, or can a board contain repeated correct translations of a concept?
-2. **Wrong answers:** In Calm mode, should a wrong tile deduct a life, score, streak, or only create a review mark? How many mistakes end a board, if any?
-3. **Mastery pressure:** Should v1 omit hazards entirely, or reserve an experimental timer/enemy prototype after the calm vertical slice?
-4. **Board size and tile count:** Does the proposed 4 × 4 grid fit the longest vocabulary entries at the intended viewport?
-5. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
-6. **Vocabulary mode:** Which of the 15 groups starts the game, and how large should the initial selectable mini-set be?
-7. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
-8. **Learning feedback:** Should wrong answers and completion screens include all three translations, and should mistakes drive subsequent review boards?
-9. **Audio:** Is on-demand pronunciation needed after the first text-only vertical slice? If yes, what licensed source and which languages/forms are authoritative?
-10. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
-11. **Progress and privacy:** Should progress be local-only, and is user data needed at all for the first release?
-12. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
-13. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
+1. **Correct-tile languages:** Does each level require all three translations, one selected target language, or a selectable mixture?
+2. **Board size and tile count:** Does the proposed 4 × 4 grid fit the longest vocabulary entries at the intended viewport?
+3. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
+4. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
+5. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
+6. **Audio:** Is on-demand pronunciation needed after the first text-only vertical slice? If yes, what licensed source and which languages/forms are authoritative?
+7. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
+8. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
+9. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
+10. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
 
 ## 12. Next planning milestone
 
 Resolve the decisions that change the core loop, then approve one vertical slice:
 
-- one named small study set;
+- one named CSV topic, played in stable `id` order until every concept is cleared;
 - a validated 4 × 4 (or revised) board layout;
-- explicit correct/wrong and completion rules;
+- the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
 - calm mode with no hazards;
 - one reviewed static game-data export path;
