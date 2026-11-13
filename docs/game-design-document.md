@@ -42,7 +42,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 ### Required round loop
 
 1. From the choice menu, select one CSV `group` (topic).
-2. Start a topic run containing every concept in that group, in the CSV's stable `id` order.
+2. At the start of the run, create one randomized order containing every concept in that topic exactly once.
 3. Select the next unfinished concept in the run and display its English value as the prompt.
 4. Build a board with a mix of:
    - correct translations of that concept in Czech, Standard German, and/or `pt-PT`; and
@@ -130,7 +130,7 @@ The pre-game session setup should be deliberately small:
 | Setting | Initial proposal |
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
-| Run length | One level per concept in the selected topic; progress follows stable CSV `id` order. |
+| Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
 | Correct-tile languages | Czech only, German only, Portuguese only, or mixed. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
@@ -263,7 +263,7 @@ The research and current decisions define the base loop. The following still req
 
 Resolve the decisions that change the core loop, then approve one vertical slice:
 
-- one named CSV topic, played in stable `id` order until every concept is cleared;
+- one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
 - a validated 4 × 4 (or revised) board layout;
 - the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
 - keyboard movement plus explicit Munch and Pause actions;
