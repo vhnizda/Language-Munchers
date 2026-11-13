@@ -42,6 +42,16 @@ button {
   line-height: 1.5;
 }
 .fullscreen-button:hover, .fullscreen-button:focus-visible { background: #36517d; outline: 3px solid #ffe29a; outline-offset: 2px; }
+.fullscreen-notice {
+  width: min(680px, 100%);
+  margin: 12px auto 0;
+  padding: 10px 12px;
+  border: 2px solid #ffb86b;
+  background: #14183b;
+  color: #ffe29a;
+  font-size: clamp(18px, 2.6vw, 25px);
+  line-height: 1.05;
+}
 .eyebrow, .status-label { color: #91d8cf; letter-spacing: .11em; font-size: clamp(14px, 2vw, 19px); }
 h1, h2 { margin: 0; }
 h1 {

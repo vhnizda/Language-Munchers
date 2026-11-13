@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#15173b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Language Munchers</title>
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -13,6 +16,7 @@
         <button id="fullscreen-button" class="fullscreen-button" type="button" aria-label="Enter full screen">FULL<br />SCREEN</button>
         <p class="eyebrow">A retro language game</p>
         <h1>LANGUAGE<br />MUNCHERS</h1>
+        <p id="fullscreen-notice" class="fullscreen-notice hidden" role="status"></p>
       </header>
 
       <section id="topic-screen" class="panel" aria-labelledby="topic-title">

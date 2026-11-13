@@ -64,7 +64,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 | Move | Arrow keys and on-screen arrow buttons | Moves exactly one orthogonal tile. On-screen buttons support touch and pointer input. |
 | Munch / select | Space and an on-screen `Space` button | Evaluates only the focused tile. The button supports touch and pointer input. |
 | Pause | Escape and an on-screen `Pause` button | Freezes game state, including incorrect-answer feedback timing, and exposes `Continue` and `Quit topic` actions. |
-| Maximize | Header `Full Screen` button | Uses native browser/device full-screen mode when available, with an in-page maximize fallback. Available on every screen. |
+| Maximize | Header `Full Screen` button | Requests native browser/device full-screen mode with hidden navigation UI where supported. If unavailable, shows an in-page maximize fallback and iPad Home Screen install guidance. Available on every screen. |
 
 A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 

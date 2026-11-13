@@ -18,6 +18,7 @@ const boardElement = document.querySelector('#board');
 const feedbackElement = document.querySelector('#feedback');
 const pauseDialog = document.querySelector('#pause-dialog');
 const fullscreenButton = document.querySelector('#fullscreen-button');
+const fullscreenNotice = document.querySelector('#fullscreen-notice');
 const topicName = document.querySelector('#topic-name');
 const wordProgress = document.querySelector('#word-progress');
 const livesElement = document.querySelector('#lives');
@@ -105,8 +106,19 @@ function quitTopic() {
   renderTopics();
 }
 
+function showFullscreenNotice() {
+  fullscreenNotice.textContent = 'This browser cannot enter system full screen. Maximize is active. On iPad, use Safari Share → Add to Home Screen, then open Language Munchers from the Home Screen for a screen-filling app.';
+  fullscreenNotice.classList.remove('hidden');
+}
+
+function hideFullscreenNotice() {
+  fullscreenNotice.classList.add('hidden');
+}
+
 function toggleCssMaximize() {
   appShell.classList.toggle('maximized');
+  if (appShell.classList.contains('maximized')) showFullscreenNotice();
+  else hideFullscreenNotice();
   updateFullscreenButton();
 }
 
@@ -115,12 +127,19 @@ async function toggleFullscreen() {
     await document.exitFullscreen();
     return;
   }
-  if (!document.fullscreenEnabled || !document.documentElement.requestFullscreen) {
+  if (appShell.classList.contains('maximized')) {
+    toggleCssMaximize();
+    return;
+  }
+
+  const requestFullscreen = appShell.requestFullscreen ?? appShell.webkitRequestFullscreen;
+  if (!document.fullscreenEnabled || !requestFullscreen) {
     toggleCssMaximize();
     return;
   }
   try {
-    await document.documentElement.requestFullscreen();
+    await requestFullscreen.call(appShell, { navigationUI: 'hide' });
+    hideFullscreenNotice();
   } catch {
     toggleCssMaximize();
   }

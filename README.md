@@ -13,7 +13,7 @@ The MVP is deployed to GitHub Pages from `main` after the Pages workflow runs. I
 - **Arrow keys** or on-screen arrow buttons: move the frog.
 - **Space** or the on-screen **Space / Munch** button: eat the focused tile.
 - **Escape** or the on-screen **Pause** button: pause the game. The pause panel freezes the board and feedback timer, and offers **Continue** or **Quit topic**.
-- **Full Screen**: enter or leave device full-screen mode from the header button, on every screen.
+- **Full Screen**: requests native operating-system full screen, including hidden browser navigation where the browser permits it. If a browser refuses this (common on iPad Safari), the game explains that it can only maximize in-page; use **Safari Share → Add to Home Screen** and launch the installed app for screen-filling play.
 
 Touch/pointer and connected keyboards use the same move-then-munch interaction. Tapping a different square moves focus; tapping the already focused square explicitly munches it.
 

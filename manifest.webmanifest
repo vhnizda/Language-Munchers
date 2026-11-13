@@ -1,0 +1,9 @@
+{
+  "name": "Language Munchers",
+  "short_name": "Munchers",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#10122e",
+  "theme_color": "#15173b"
+}
