@@ -1,7 +1,7 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 1.1 — MVP design decisions complete
-**Implementation status:** Not started
+**Status:** Living MVP specification — deployed and playable
+**Implementation status:** Static browser MVP implemented and deployed to GitHub Pages
 
 ## 1. Concept
 
@@ -41,18 +41,18 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 ### Required round loop
 
-1. From the choice menu, select one CSV `group` (topic) and enable one or more target-language flags: Czech 🇨🇿, Standard German 🇩🇪, and/or `pt-PT` 🇵🇹. At least one must be enabled.
+1. From the choice menu, read **“Eat your way to language mastery. Pick a topic below and complete all the levels.”** Select one CSV `group` (topic) and enable one or more target-language flags: Czech 🇨🇿, Standard German 🇩🇪, and/or `pt-PT` 🇵🇹. The `LANGUAGES` label explains the controls; an enabled flag is normal, while a disabled flag carries a red × centered over its icon. At least one language must be enabled.
 2. Freeze that language selection for the topic run; it may be changed only after returning to the choice menu.
 3. At the start of the run, create one randomized order containing every concept in that topic exactly once.
 4. Select the next unfinished concept in the run and display its English value as the prompt.
-5. Build a board with correct translations and distractors from the active languages only, distributed evenly across those active languages.
+5. Build a 4-row × 6-column board with exactly 10 correct translations and 14 distractors using the active languages only. Distribute all 24 tiles evenly across active languages; correct tiles divide as evenly as possible, with a randomly assigned remainder.
 6. Let the player move the frog one grid square at a time without evaluating the tile.
-7. Show a clear focus state for the tile under the frog.
+7. Show a clear focus state and the frog at the center of its focused tile.
 8. On an explicit **Munch** action, evaluate the focused tile.
-9. Resolve feedback immediately:
-   - **Correct:** play the 540 ms eating animation, then remove only the word content from that board square, update board progress, and preserve the square as a traversable non-munchable location. Pronunciation is deferred until after the MVP.
-   - **Incorrect:** show the English equivalent of the selected wrong word, then remove only that tile's word content, preserve its traversable non-munchable square, deduct one life, and record the mistake for potential review. Pronunciation is deferred until after the MVP.
-10. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
+9. Resolve feedback:
+   - **Correct:** keep the word visible throughout the 540 ms eating animation; temporarily lock board movement and Munch input; then remove only the word content, update board progress, and preserve the square as a traversable non-munchable location.
+   - **Incorrect:** immediately show the selected target-language word and its English equivalent for exactly one second; movement remains available; then remove only that tile's word content, preserve its traversable non-munchable square, and deduct one life.
+10. If the player has lost all three lives, end the topic run as a loss and show a summary.
 11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
 12. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
 
@@ -62,12 +62,12 @@ Eat all and only the tiles that correctly translate the current English prompt.
 |---|---|---|
 | Move | Arrow keys and on-screen arrow buttons | Moves exactly one orthogonal tile. On-screen buttons support touch and pointer input. |
 | Munch / select | Space and an on-screen `Space` button | Evaluates only the focused tile. The button supports touch and pointer input. |
-| Pause | Escape and an on-screen `Pause` button | Freezes game state, including incorrect-answer feedback timing, and exposes `Continue` and `Quit topic` actions. |
+| Pause | Escape and an on-screen `Pause` button | Freezes game state, including incorrect-answer feedback and a pending correct-eat timer; exposes `Continue` and `Quit topic` actions. |
 | Maximize | Header `Full Screen` button | Requests native browser/device full-screen mode with hidden navigation UI where supported. If unavailable, shows an in-page maximize fallback and iPad Home Screen install guidance. Available on every screen. |
 
 A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 
-Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action.
+Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action. A touch move plays the frog's jump-up animation at the destination; keyboard and on-screen arrows use the matching directional jump animation.
 
 ## 4. Vocabulary and language requirements
 
@@ -131,7 +131,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target roughly 40% correct answers and 60% distractors. For the 24-tile MVP board, that is an exact 10 correct / 14 distractor split (about 42% / 58%). The 24 board positions stay evenly distributed across active languages; correct tiles divide as evenly as possible, with any one-tile remainder assigned randomly. For each active language, choose a deliberately small pool of up to three distractor concepts and repeat its tile values as needed to fill that language's distractor slots. Repeated distractors are intentional learning pressure, not a validation error. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target roughly 40% correct answers and 60% distractors. For the 24-tile MVP board, that is an exact 10 correct / 14 distractor split (about 42% / 58%). The 24 board positions stay evenly distributed across active languages; correct tiles divide as evenly as possible, with any one-tile remainder assigned randomly. For each active language, choose a deliberately small pool of up to three distractor concepts and repeat its tile values as needed to fill that language's distractor slots. Repeated distractors are intentional learning pressure, not a validation error. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The grid structure remains stable for the entire round: a correct tile's word content clears only after its 540 ms eat animation, and an incorrect tile's word content clears after one second of feedback.
 
 ## 5. Practice configuration and modes
 
@@ -188,10 +188,10 @@ The first release should prioritize accurate recognition, repeated exposure, and
 
 ### Required feedback
 
-- On a correct answer: show clear positive confirmation and an updated progress count.
+- On a correct answer: show `CORRECT!`; retain the word during the 540 ms eat animation, then clear its word content and update level progress. The player cannot move or munch during that short animation.
 - On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically remove only its word content and deduct one life. Its blank board square remains traversable but cannot be eaten again. The game continues; this feedback does not pause the board and cannot be manually dismissed.
-- On losing the third life: show a topic-loss summary and return to the choice menu.
-- On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round, then begin the next concept in the selected topic.
+- On losing the third life: show a topic-loss summary with a return-to-topics action.
+- On board completion: begin the next concept in the selected topic after a short transition.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
 
 ### Proposed progression path
@@ -206,7 +206,7 @@ Progress is stored locally on the player's device for version 1. No account, clo
 
 ## 8. Presentation, audio, and accessibility
 
-The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. The bundled transparent frog sprite sheet is a 5-row × 6-frame animation source: eating, jump up, jump down, jump left, and jump right. The frog occupies the center 65% of its focused tile, above the tile background and below the word text. Keyboard and on-screen directional input select the matching jump row; moving focus by touch uses jump-up at the destination; Munch uses the eating row. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
+The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. The shipped asset is `assets/frog-sprites.png`, a 1374 × 1145 px RGBA sprite sheet arranged on an exact 6-column × 5-row grid of 229 × 229 px cells with no gutters. Rows map top-to-bottom to **Eating**, **Jump up**, **Jump down**, **Jump left**, and **Jump right**; frames run left-to-right at X positions 0, 229, 458, 687, 916, and 1145 px. The implementation must advance across the five frame-to-frame displacements with `steps(5, end)`, not `steps(6, end)`, so it only shows whole cells. The sprite window shifts the sheet 3 px left to center the frog and keep adjacent-frame fragments outside the crop. The frog fills 65% of its focused tile, above the tile background and below the word text. Keyboard and on-screen directional input select the matching jump row; moving focus by touch uses jump-up at the destination; Munch uses the eating row. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
 
 Initial presentation requirements:
 
@@ -238,42 +238,41 @@ Version 1 has no pronunciation assets or runtime audio dependency. It stores pro
 
 ### Validation
 
-- `npm test` verifies vocabulary export rules and pure board/run behavior.
+- `npm test` verifies vocabulary export rules, board/run behavior, touch semantics, timer helpers, topic-menu copy, and frog animation/crop invariants.
 - The Pages workflow runs that test suite before deployment.
-- Manual browser verification covers the topic menu, a 24-tile board, keyboard movement, touch controls, and one-second incorrect-answer feedback.
+- Manual browser verification covers the topic menu, language flags, red-X disabled state, a 24-tile board, keyboard movement, touch controls, sprite animation, correct-word clear timing, one-second incorrect-answer feedback, pause, and full-screen fallback.
 
 ## 10. Deferred work
 
 - A real WebGL rendering layer, if visual requirements justify its added text-rendering complexity.
 - Browser test matrix and a defined minimum supported viewport.
-- Art, sound, animation, and character assets.
+- Additional art, sound, and accessibility settings beyond the shipped frog sprite animation.
 - Accounts, online features, leaderboards, and monetization.
 
 ## 11. MVP design status
 
-The MVP game-design decisions are complete. The complete-field tile rule removes ambiguity for articles, alternatives, gendered forms, and notes:
+The playable MVP implements the confirmed contract:
 
-- display each selected target-language CSV field exactly as written in one indivisible tile;
-- retain articles and written alternatives together on that tile;
-- ignore the `notes` field in version 1.
+- each selected target-language CSV field is rendered exactly as written in one indivisible tile;
+- articles and written alternatives remain together on that tile;
+- `notes` are omitted from the public export and ignored at runtime;
+- the browser stores topic-completion progress locally, without an account or server-side player data;
+- the public game is available through GitHub Pages.
 
-Future-version questions such as pronunciation sources, mastery pressure, and broader accessibility settings do not block the MVP.
+Future-version questions such as pronunciation sources, mastery pressure, broader accessibility settings, and a possible WebGL renderer do not block the current MVP.
 
-## 12. Next milestone
+## 12. Current maintenance milestone
 
-When development is explicitly approved, prepare one vertical slice using this completed MVP contract:
+Keep the deployed game aligned with this document as design decisions change. The current acceptance contract is:
 
-- one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
-- the confirmed 4-row × 6-column board layout with a 10/14 correct-to-distractor split, active-language tile distribution, repeated correct tiles, and no spatial language/concept pattern;
-- the confirmed three-life loss rule and calm mode with no hazards;
-- keyboard controls plus required touch/pointer on-screen arrow and `Space` buttons;
-- the confirmed one-second, non-pausing wrong-tile feedback sequence;
-- browser-local progress storage with no account or server data collection;
-- original blocky Apple II-era visual direction with clear word tiles;
-- one reviewed static game-data export path with no audio dependency;
-- public GitHub Pages deployment that requires no player login.
-
-Only after that approval should development begin.
+- a fresh randomized topic run covering every concept in the selected group exactly once;
+- a 4-row × 6-column board with a 10/14 correct-to-distractor split, balanced active-language placement, intentionally repeated correct translations, and small repeated distractor pools;
+- three lives, calm mode, no hazards, persistent traversable blank squares, and no runtime audio;
+- keyboard, on-screen, mouse, and touch controls with the specified focus-then-Munch behavior;
+- a 540 ms correct-eat animation before clearing; one-second non-pausing incorrect feedback; pause freezes both pending feedback paths;
+- red-X disabled language flags, native/full-page full-screen fallback, standalone PWA metadata, and iPad Add-to-Home-Screen guidance;
+- the 229 px frog sprite grid, exact row mapping, whole-frame stepping, and left crop offset;
+- browser-local progress, reviewed public vocabulary export only, and a public GitHub Pages deployment.
 
 ## Sources
 
