@@ -224,35 +224,28 @@ Music, pronunciation voices, sound effects, animation style, visual mood, and wi
 
 ## 9. Technical direction
 
-The intended game is a WebGL application delivered as static files.
+The MVP is a dependency-free static browser game: HTML, CSS, and ES modules. Its word tiles are rendered in the DOM so their multilingual text can wrap accessibly and remain legible on GitHub Pages. This is a deliberate MVP trade-off: it is **not yet a WebGL renderer**. A future WebGL visual layer may sit behind or replace the presentation layer without changing the isolated board-generation rules in `src/game.js`.
 
-### Planned hosting
+### Hosting
 
-When implementation begins, publish a production build through **public GitHub Pages** so anyone can play in a browser without logging in or requesting access. Make the repository public when required by the selected GitHub Pages configuration; it remains private during planning until that deployment decision is enacted.
+The public repository deploys through a GitHub Actions Pages workflow whenever `main` changes. The playable public URL is `https://vhnizda.github.io/Language-Munchers/`; no login is required.
 
 ### Data boundary
 
-The private vocabulary repository remains canonical. Before implementation, choose one explicit integration model:
+The private vocabulary repository remains canonical. `scripts/export-vocabulary.mjs` imports from an authorized local checkout at build/export time and creates the reviewed static `data/vocabulary.json` export. The public export contains only `id`, `group`, `english`, `czech`, `german_standard`, and `portuguese_pt`. It omits `notes` and the browser never contacts the private source repository at runtime.
 
-1. a reviewed, versioned game-data export committed to this repository; or
-2. a build-time import from an authorized local checkout that produces a reviewed static export.
+Version 1 has no pronunciation assets or runtime audio dependency. It stores progress only in browser-local storage and sends no player data to a server.
 
-The browser build must not require access to the private source repository at runtime. A public Pages deployment must not expose notes or source content that is not intentionally included in the game export. Version 1 has no pronunciation assets or runtime audio dependency. Version 1 may use browser-local storage only for progress; it must not send player data to a server.
+### Validation
 
-### Not decided
+- `npm test` verifies vocabulary export rules and pure board/run behavior.
+- The Pages workflow runs that test suite before deployment.
+- Manual browser verification covers the topic menu, a 24-tile board, keyboard movement, touch controls, and one-second incorrect-answer feedback.
 
-- WebGL engine/framework (for example, a game engine export versus a lightweight custom renderer).
-- JavaScript/TypeScript versus another WebGL toolchain.
-- Build and deployment workflow.
-- Browser test matrix and minimum supported viewport.
+## 10. Deferred work
 
-Technical choices should be made after a small vertical-slice decision, not pre-emptively in this planning repository.
-
-## 10. Out of scope for the current phase
-
-- Game code or a WebGL scaffold.
-- Importing or copying the vocabulary CSV into this repository.
-- GitHub Pages configuration or deployment.
+- A real WebGL rendering layer, if visual requirements justify its added text-rendering complexity.
+- Browser test matrix and a defined minimum supported viewport.
 - Art, sound, animation, and character assets.
 - Accounts, online features, leaderboards, and monetization.
 
