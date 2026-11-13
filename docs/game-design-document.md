@@ -68,7 +68,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 
-Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Pointer/touch movement must not silently submit a tile.
+Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action.
 
 ## 4. Vocabulary and language requirements
 

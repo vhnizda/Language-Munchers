@@ -15,7 +15,7 @@ The MVP is deployed to GitHub Pages from `main` after the Pages workflow runs. I
 - **Escape** or the on-screen **Pause** button: pause the game. The pause panel freezes the board and feedback timer, and offers **Continue** or **Quit topic**.
 - **Full Screen**: enter or leave device full-screen mode from the header button, on every screen.
 
-Touch/pointer and connected keyboards use the same move-then-munch interaction.
+Touch/pointer and connected keyboards use the same move-then-munch interaction. Tapping a different square moves focus; tapping the already focused square explicitly munches it.
 
 ## MVP rules
 

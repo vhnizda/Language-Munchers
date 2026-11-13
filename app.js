@@ -1,5 +1,6 @@
 import { boardConfig, buildBoard, createTopicRun, resolveMunch } from './src/game.js';
 import { pauseTimer, resumeTimer } from './src/pause.js';
+import { shouldMunchOnTileTap } from './src/tap-controls.js';
 
 const vocabulary = await fetch('./data/vocabulary.json').then((response) => {
   if (!response.ok) throw new Error('Could not load vocabulary data.');
@@ -187,6 +188,14 @@ function renderGame() {
     if (tileIndex === focus) button.classList.add('focused');
     if (pendingTiles.has(tile.id)) button.classList.add('pending');
     button.addEventListener('click', () => {
+      if (shouldMunchOnTileTap({
+        focusedIndex: state.focus,
+        tappedIndex: tileIndex,
+        isPending: pendingTiles.has(tile.id),
+      })) {
+        munch();
+        return;
+      }
       state.focus = tileIndex;
       renderGame();
     });
