@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.5 — research-informed planning baseline
+**Status:** Draft 0.6 — research-informed planning baseline
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -122,7 +122,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. Czech, German, and Portuguese totals must be roughly balanced (for a 16-tile board, 5/5/6 in any order is the target). It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. Czech, German, and Portuguese totals must be roughly balanced (for a 16-tile board, 5/5/6 in any order is the target). It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -133,7 +133,7 @@ The pre-game session setup should be deliberately small:
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
 | Tile languages | Every board contains roughly equal counts of Czech, German, and Portuguese tiles; every tile displays exactly one language. For the initial 16-tile board, use 5/5/6 in randomized language assignment. |
-| Correct answers | Every board contains at least one correct tile in each language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
+| Correct answers | Every board targets a roughly 50/50 correct-to-distractor ratio, contains at least one correct tile in each language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
@@ -166,8 +166,8 @@ This is a proposal to validate, not a locked requirement:
 
 - 4 × 4 grid (16 tiles);
 - one prompt concept;
-- six correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
-- ten distractors drawn from the same study group;
+- eight correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
+- eight distractors drawn from the same study group;
 - a roughly balanced 5/5/6 Czech/German/Portuguese distribution, in a different randomized assignment each board;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
