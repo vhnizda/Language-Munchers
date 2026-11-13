@@ -1,6 +1,6 @@
 # Language Munchers — Game Design Document
 
-**Status:** Draft 0.9 — research-informed planning baseline
+**Status:** Draft 1.0 — MVP decisions recorded
 **Implementation status:** Not started
 
 ## 1. Concept
@@ -61,13 +61,13 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 | Action | Desktop keyboard | Requirement |
 |---|---|---|
-| Move | Arrow keys and WASD | Moves exactly one orthogonal tile. |
-| Munch / select | Space or Enter | Evaluates only the focused tile. |
+| Move | Arrow keys and on-screen arrow buttons | Moves exactly one orthogonal tile. On-screen buttons support touch and pointer input. |
+| Munch / select | Space and an on-screen `Space` button | Evaluates only the focused tile. The button supports touch and pointer input. |
 | Pause | Escape | Freezes game state and exposes resume/leave actions. |
 
 A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
 
-Mouse, touch, and gamepad support are not decided. If mouse support is added, selecting a tile must not silently submit it; use a two-step focus-then-munch model or an equally deliberate accessible equivalent.
+Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Pointer/touch movement must not silently submit a tile.
 
 ## 4. Vocabulary and language requirements
 
@@ -94,8 +94,9 @@ The corpus has 15 situational groups, from family and people through questions a
 ### Content fidelity
 
 - English is the prompt language for the initial game.
-- Every tile displays exactly one source field in exactly one target language; it must never group Czech, German, and Portuguese on one tile.
 - Tile languages are Czech, Standard German, and European Portuguese only.
+- Every tile displays exactly one source field in exactly one target language; it must never group Czech, German, and Portuguese on one tile.
+- Tiles provide **no language hints** in version 1: no explicit language labels, flags, language-specific colours, or language-specific styling. The player must recognize each displayed word independently. A later version may add optional hints as an accessibility or learning setting.
 - Standard German must retain the corpus's Swiss-context spelling and vocabulary where provided.
 - Portuguese must remain `pt-PT`; Brazilian Portuguese must not be substituted.
 - German and Portuguese articles are part of the answer text and must remain visible.
@@ -186,7 +187,7 @@ The first release should prioritize accurate recognition, repeated exposure, and
 ### Required feedback
 
 - On a correct answer: show clear positive confirmation and an updated progress count.
-- On a wrong answer: show the selected target-language tile and its English meaning, then clear that tile and deduct one life.
+- On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically clear that tile and deduct one life. The game continues; this feedback does not pause the board and cannot be manually dismissed.
 - On losing the third life: show a topic-loss summary and return to the choice menu.
 - On board completion: list the prompt and the correct Czech, German, and Portuguese forms used in that round, then begin the next concept in the selected topic.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
@@ -199,11 +200,11 @@ The first release should prioritize accurate recognition, repeated exposure, and
 4. Review boards selected from recent mistakes or weak concepts.
 5. Optional Mastery mode, only after the calm learning loop tests well.
 
-Progress tracking, spaced repetition, profiles, persistent saves, and a high-score table are possible later additions. They are not confirmed initial scope.
+Progress is stored locally on the player's device for version 1. No account, cloud synchronization, analytics, or other user-data collection is required. Clearing browser storage may clear local progress.
 
 ## 8. Presentation, audio, and accessibility
 
-The player character is a frog. The visual direction must be original.
+The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
 
 Initial presentation requirements:
 
@@ -225,7 +226,7 @@ The intended game is a WebGL application delivered as static files.
 
 ### Planned hosting
 
-When implementation begins, publish a production build through GitHub Pages so the game can run in a web browser from the repository's Pages URL.
+When implementation begins, publish a production build through **public GitHub Pages** so anyone can play in a browser without logging in or requesting access. Make the repository public when required by the selected GitHub Pages configuration; it remains private during planning until that deployment decision is enacted.
 
 ### Data boundary
 
@@ -234,7 +235,7 @@ The private vocabulary repository remains canonical. Before implementation, choo
 1. a reviewed, versioned game-data export committed to this repository; or
 2. a build-time import from an authorized local checkout that produces a reviewed static export.
 
-The browser build must not require access to the private source repository at runtime. A public Pages deployment must not expose notes or source content that is not intentionally included in the game export. Version 1 has no pronunciation assets or runtime audio dependency.
+The browser build must not require access to the private source repository at runtime. A public Pages deployment must not expose notes or source content that is not intentionally included in the game export. Version 1 has no pronunciation assets or runtime audio dependency. Version 1 may use browser-local storage only for progress; it must not send player data to a server.
 
 ### Not decided
 
@@ -256,15 +257,9 @@ Technical choices should be made after a small vertical-slice decision, not pre-
 
 ## 11. Open decisions
 
-The research and current decisions define the base loop. The following still require direction before implementation:
+The current decisions define the MVP loop. The following still require direction before implementation:
 
-1. **Language display:** Should each tile show an explicit language label, language-specific styling, or no language hint?
-2. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
-3. **Mistake feedback timing:** For how long should the wrong tile's English meaning remain visible before the tile clears, and can the player dismiss it early?
-4. **Controls and devices:** Is desktop keyboard-only acceptable for v1, or are mouse, touch, and mobile support required?
-5. **Progress and privacy:** Should topic-run progress be local-only, and is any persistent user data needed for the first release?
-6. **Visual direction:** What original art/UI mood should the frog, board, and feedback use?
-7. **Repository visibility and launch:** Should the future playable site be publicly accessible through GitHub Pages, or restricted to a private repository/audience?
+1. **Variants:** How should entries containing alternatives, gendered forms, articles, or notes be presented without creating multiple-answer ambiguity?
 
 ## 12. Next planning milestone
 
@@ -272,11 +267,13 @@ Resolve the decisions that change the core loop, then approve one vertical slice
 
 - one named CSV topic, played in a fresh randomized order until every concept is cleared exactly once;
 - the confirmed 4-row × 6-column board layout with a 12/12 correct-to-distractor split, eight tiles per language, repeated correct tiles, and no spatial language/concept pattern;
-- the confirmed three-life loss rule and wrong-tile clear/feedback sequence;
-- keyboard movement plus explicit Munch and Pause actions;
-- calm mode with no hazards;
+- the confirmed three-life loss rule and calm mode with no hazards;
+- keyboard controls plus required touch/pointer on-screen arrow and `Space` buttons;
+- the confirmed one-second, non-pausing wrong-tile feedback sequence;
+- browser-local progress storage with no account or server data collection;
+- original blocky Apple II-era visual direction with clear word tiles;
 - one reviewed static game-data export path with no audio dependency;
-- static WebGL build and GitHub Pages deployment path.
+- public GitHub Pages deployment that requires no player login.
 
 Only after that approval should development begin.
 
