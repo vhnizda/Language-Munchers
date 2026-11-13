@@ -206,7 +206,7 @@ Progress is stored locally on the player's device for version 1. No account, clo
 
 ## 8. Presentation, audio, and accessibility
 
-The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
+The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. The bundled transparent frog sprite sheet is a 5-row × 6-frame animation source: eating, jump up, jump down, jump left, and jump right. The frog occupies the center 65% of its focused tile, above the tile background and below the word text. Keyboard and on-screen directional input select the matching jump row; moving focus by touch uses jump-up at the destination; Munch uses the eating row. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
 
 Initial presentation requirements:
 

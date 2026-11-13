@@ -1,6 +1,7 @@
 import { boardConfig, buildBoard, createTopicRun, resolveMunch } from './src/game.js';
 import { pauseTimer, resumeTimer } from './src/pause.js';
 import { shouldMunchOnTileTap } from './src/tap-controls.js';
+import { FROG_EAT_ANIMATION, frogAnimationForMove } from './src/frog.js';
 
 const vocabulary = await fetch('./data/vocabulary.json').then((response) => {
   if (!response.ok) throw new Error('Could not load vocabulary data.');
@@ -204,6 +205,7 @@ function startTopic(group) {
     lives: 3,
     board: null,
     focus: 0,
+    frogAnimation: 'idle',
     pendingTiles: new Set(),
     paused: false,
     wrongTimer: null,
@@ -226,7 +228,7 @@ function startLevel() {
 }
 
 function renderGame() {
-  const { board, focus, group, index, run, lives, pendingTiles } = state;
+  const { board, focus, frogAnimation, group, index, run, lives, pendingTiles } = state;
   topicName.textContent = group;
   wordProgress.textContent = `${index + 1} / ${run.length}`;
   livesElement.textContent = '●'.repeat(lives) + '○'.repeat(3 - lives);
@@ -235,11 +237,23 @@ function renderGame() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'tile';
-    button.textContent = tile.cleared ? '' : tile.displayText;
+    const text = document.createElement('span');
+    text.className = 'tile-text';
+    text.textContent = tile.cleared ? '' : tile.displayText;
+    button.append(text);
     button.disabled = pendingTiles.has(tile.id);
     if (tile.cleared) button.classList.add('empty');
-    if (tileIndex === focus) button.classList.add('focused');
+    if (tileIndex === focus) {
+      button.classList.add('focused');
+      const frog = document.createElement('span');
+      frog.className = `frog frog--${frogAnimation}`;
+      frog.setAttribute('aria-hidden', 'true');
+      button.prepend(frog);
+    }
     if (pendingTiles.has(tile.id)) button.classList.add('pending');
+    button.addEventListener('pointerdown', (event) => {
+      button.dataset.pointerType = event.pointerType;
+    });
     button.addEventListener('click', () => {
       if (shouldMunchOnTileTap({
         focusedIndex: state.focus,
@@ -250,6 +264,7 @@ function renderGame() {
         return;
       }
       state.focus = tileIndex;
+      state.frogAnimation = frogAnimationForMove('up', { isTouch: button.dataset.pointerType === 'touch' });
       renderGame();
     });
     return button;
@@ -265,7 +280,10 @@ function move(direction) {
   const [rowOffset, columnOffset] = offsets[direction];
   const nextRow = Math.min(boardConfig.rows - 1, Math.max(0, row + rowOffset));
   const nextColumn = Math.min(boardConfig.columns - 1, Math.max(0, column + columnOffset));
-  state.focus = nextRow * boardConfig.columns + nextColumn;
+  const nextFocus = nextRow * boardConfig.columns + nextColumn;
+  if (nextFocus === state.focus) return;
+  state.focus = nextFocus;
+  state.frogAnimation = frogAnimationForMove(direction);
   renderGame();
 }
 
@@ -302,6 +320,7 @@ function munch() {
   const tile = state.board.tiles[state.focus];
   if (!tile || tile.cleared || state.pendingTiles.has(tile.id)) return;
   const outcome = resolveMunch({ tile, lives: state.lives });
+  state.frogAnimation = FROG_EAT_ANIMATION;
 
   if (outcome.kind === 'correct') {
     tile.cleared = true;
