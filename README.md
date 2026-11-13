@@ -2,7 +2,7 @@
 
 A browser-based language-recognition game inspired by the grid-and-munch loop of the classic *Number Munchers* games.
 
-The frog moves across a 4-row × 6-column word board. Each level gives an English prompt. Eat all Czech, Standard German, and European Portuguese (`pt-PT`) tiles that translate that prompt; avoid the distractors.
+The frog moves across a 4-row × 6-column word board. Each level gives an English prompt. Eat every word in another language that matches the English word at the top; avoid the distractors.
 
 ## Play
 
@@ -20,8 +20,8 @@ Touch/pointer and connected keyboards use the same move-then-munch interaction. 
 ## MVP rules
 
 - Select one vocabulary topic; its 20 concepts are shuffled and played once each.
-- Each 24-tile board has 12 correct answers and 12 distractors.
-- Every board contains eight Czech, eight German, and eight `pt-PT` tiles.
+- At the topic menu, toggle the Czech 🇨🇿, German 🇩🇪, and `pt-PT` 🇵🇹 flags. At least one language must remain enabled; the selection is fixed for that topic run and can be changed again only after returning to the topic menu.
+- Each 24-tile board has 12 correct answers and 12 distractors. The active languages share those tiles evenly: 24 tiles for one language, 12 each for two languages, or eight each for all three.
 - Correct answers repeat intentionally and are mixed across the board; there are no language labels or positional language patterns.
 - A run starts with three lives. A wrong answer shows its English meaning for one second, then clears only the word content and costs one life. The board square remains available for frog movement but cannot be eaten again.
 - Progress is stored only in the browser's local storage. Version 1 has no sound.

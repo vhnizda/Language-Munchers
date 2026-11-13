@@ -14,6 +14,7 @@ const screens = {
 };
 const appShell = document.querySelector('.app-shell');
 const topicList = document.querySelector('#topic-list');
+const languageToggles = document.querySelector('#language-toggles');
 const boardElement = document.querySelector('#board');
 const feedbackElement = document.querySelector('#feedback');
 const pauseDialog = document.querySelector('#pause-dialog');
@@ -26,7 +27,14 @@ const promptWord = document.querySelector('#prompt-word');
 const resultTitle = document.querySelector('#result-title');
 const resultMessage = document.querySelector('#result-message');
 
+const LANGUAGE_OPTIONS = [
+  { key: 'czech', flag: '🇨🇿', label: 'Czech' },
+  { key: 'german_standard', flag: '🇩🇪', label: 'German' },
+  { key: 'portuguese_pt', flag: '🇵🇹', label: 'Portuguese' },
+];
+
 let state = null;
+let selectedLanguages = new Set(LANGUAGE_OPTIONS.map((language) => language.key));
 
 function groups() {
   return [...new Set(vocabulary.map((row) => row.group))];
@@ -151,7 +159,28 @@ function updateFullscreenButton() {
   fullscreenButton.setAttribute('aria-label', isFullscreen ? 'Exit full screen' : 'Enter full screen');
 }
 
+function renderLanguageToggles() {
+  const onlyEnabledLanguage = selectedLanguages.size === 1;
+  languageToggles.replaceChildren(...LANGUAGE_OPTIONS.map((language) => {
+    const enabled = selectedLanguages.has(language.key);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'language-toggle';
+    button.textContent = language.flag;
+    button.setAttribute('aria-label', `${enabled ? 'Disable' : 'Enable'} ${language.label}`);
+    button.setAttribute('aria-pressed', String(enabled));
+    button.disabled = enabled && onlyEnabledLanguage;
+    button.addEventListener('click', () => {
+      if (enabled) selectedLanguages.delete(language.key);
+      else selectedLanguages.add(language.key);
+      renderTopics();
+    });
+    return button;
+  }));
+}
+
 function renderTopics() {
+  renderLanguageToggles();
   const progress = readProgress();
   topicList.replaceChildren(...groups().map((group) => {
     const count = vocabulary.filter((row) => row.group === group).length;
@@ -169,6 +198,7 @@ function startTopic(group) {
   const run = createTopicRun(vocabulary, group);
   state = {
     group,
+    languages: [...selectedLanguages],
     run,
     index: 0,
     lives: 3,
@@ -183,7 +213,11 @@ function startTopic(group) {
 }
 
 function startLevel() {
-  state.board = buildBoard({ topicRows: state.run, prompt: state.run[state.index] });
+  state.board = buildBoard({
+    topicRows: state.run,
+    prompt: state.run[state.index],
+    languages: state.languages,
+  });
   state.focus = 0;
   state.pendingTiles = new Set();
   feedbackElement.textContent = '';

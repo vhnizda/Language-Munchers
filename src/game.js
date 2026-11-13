@@ -23,7 +23,7 @@ function createTile({ concept, language, isCorrect, sequence }) {
   };
 }
 
-function hasSpatialCue(tiles) {
+function hasSpatialCue(tiles, checkLanguagePattern = true) {
   const rows = Array.from({ length: BOARD_ROWS }, (_, row) =>
     tiles.slice(row * BOARD_COLUMNS, (row + 1) * BOARD_COLUMNS),
   );
@@ -34,20 +34,28 @@ function hasSpatialCue(tiles) {
   return [...rows, ...columns].some((line) => {
     const languages = new Set(line.map((tile) => tile.language));
     const concepts = new Set(line.map((tile) => tile.conceptId));
-    return languages.size === 1 || concepts.size === 1;
+    return (checkLanguagePattern && languages.size === 1) || concepts.size === 1;
   });
 }
 
-function buildCandidateTiles({ topicRows, prompt, random }) {
+function buildCandidateTiles({ topicRows, prompt, languages, random }) {
+  const activeLanguages = languages ?? LANGUAGES;
+  if (activeLanguages.length === 0 || activeLanguages.some((language) => !LANGUAGES.includes(language))) {
+    throw new Error('A board needs at least one supported target language.');
+  }
+  if (new Set(activeLanguages).size !== activeLanguages.length || 12 % activeLanguages.length !== 0) {
+    throw new Error('Selected target languages must be unique and divide the 12-answer board evenly.');
+  }
   const distractors = topicRows.filter((row) => row.id !== prompt.id);
   if (distractors.length < 4) {
     throw new Error('A topic needs at least five concepts to build an MVP board.');
   }
 
   const tiles = [];
+  const tilesPerOutcomePerLanguage = 12 / activeLanguages.length;
   let sequence = 0;
-  for (const language of LANGUAGES) {
-    for (let count = 0; count < 4; count += 1) {
+  for (const language of activeLanguages) {
+    for (let count = 0; count < tilesPerOutcomePerLanguage; count += 1) {
       tiles.push(createTile({ concept: prompt, language, isCorrect: true, sequence: sequence++ }));
     }
 
@@ -55,9 +63,9 @@ function buildCandidateTiles({ topicRows, prompt, random }) {
       .filter((row, index, rows) => (
         rows.findIndex((candidate) => candidate[language] === row[language]) === index
       ))
-      .slice(0, 4);
-    if (languageDistractors.length < 4) {
-      throw new Error(`A topic needs four distinct ${language} distractors to build an MVP board.`);
+      .slice(0, tilesPerOutcomePerLanguage);
+    if (languageDistractors.length < tilesPerOutcomePerLanguage) {
+      throw new Error(`A topic needs ${tilesPerOutcomePerLanguage} distinct ${language} distractors to build an MVP board.`);
     }
     for (const concept of languageDistractors) {
       tiles.push(createTile({ concept, language, isCorrect: false, sequence: sequence++ }));
@@ -70,23 +78,27 @@ export function createTopicRun(rows, group, random = Math.random) {
   return shuffle(rows.filter((row) => row.group === group), random);
 }
 
-export function buildBoard({ topicRows, prompt, random = Math.random }) {
-  const candidateTiles = buildCandidateTiles({ topicRows, prompt, random });
+export function buildBoard({ topicRows, prompt, languages = LANGUAGES, random = Math.random }) {
+  const candidateTiles = buildCandidateTiles({ topicRows, prompt, languages, random });
   let tiles = candidateTiles;
 
   for (let attempt = 0; attempt < 100; attempt += 1) {
     const shuffled = shuffle(candidateTiles, random);
-    if (!hasSpatialCue(shuffled)) {
+    if (!hasSpatialCue(shuffled, languages.length > 1)) {
       tiles = shuffled;
       break;
     }
   }
 
-  return { prompt, tiles };
+  return { prompt, languages: [...languages], tiles };
 }
 
 export function isBoardValid(board) {
-  if (board.tiles.length !== BOARD_SIZE || hasSpatialCue(board.tiles)) {
+  const activeLanguages = board.languages ?? LANGUAGES;
+  if (activeLanguages.length === 0 || new Set(activeLanguages).size !== activeLanguages.length) {
+    return false;
+  }
+  if (board.tiles.length !== BOARD_SIZE || hasSpatialCue(board.tiles, activeLanguages.length > 1)) {
     return false;
   }
 
@@ -96,11 +108,16 @@ export function isBoardValid(board) {
     return false;
   }
 
-  for (const language of LANGUAGES) {
+  const tilesPerLanguage = BOARD_SIZE / activeLanguages.length;
+  const correctTilesPerLanguage = 12 / activeLanguages.length;
+  for (const language of activeLanguages) {
     const languageTiles = board.tiles.filter((tile) => tile.language === language);
-    if (languageTiles.length !== 8 || !languageTiles.some((tile) => tile.isCorrect)) {
+    if (languageTiles.length !== tilesPerLanguage || languageTiles.filter((tile) => tile.isCorrect).length !== correctTilesPerLanguage) {
       return false;
     }
+  }
+  if (board.tiles.some((tile) => !activeLanguages.includes(tile.language))) {
+    return false;
   }
 
   const distractorKeys = new Set();

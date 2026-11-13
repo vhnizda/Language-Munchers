@@ -81,6 +81,58 @@ test('buildBoard creates a valid 24-tile 12/12 board with eight tiles per langua
   assert.ok(isBoardValid(board));
 });
 
+test('buildBoard uses only selected languages while preserving a 12/12 board', () => {
+  const rows = [
+    ...TOPIC_ROWS,
+    ...['006', '007', '008'].map((id) => ({
+      id,
+      group: 'Family and people',
+      english: `extra ${id}`,
+      czech: `česky ${id}`,
+      german_standard: `Deutsch ${id}`,
+      portuguese_pt: `português ${id}`,
+    })),
+  ];
+  const board = buildBoard({
+    topicRows: rows,
+    prompt: TOPIC_ROWS[0],
+    languages: ['czech', 'portuguese_pt'],
+    random: deterministicRandom([0.91, 0.22, 0.73, 0.44, 0.65, 0.36, 0.57, 0.18]),
+  });
+
+  assert.equal(board.tiles.length, 24);
+  assert.deepEqual(new Set(board.tiles.map((tile) => tile.language)), new Set(['czech', 'portuguese_pt']));
+  assert.equal(board.tiles.filter((tile) => tile.isCorrect).length, 12);
+  assert.equal(board.tiles.filter((tile) => !tile.isCorrect).length, 12);
+  assert.equal(board.tiles.filter((tile) => tile.language === 'czech').length, 12);
+  assert.equal(board.tiles.filter((tile) => tile.language === 'portuguese_pt').length, 12);
+  assert.ok(isBoardValid(board));
+});
+
+test('buildBoard supports a single selected language', () => {
+  const rows = [
+    ...TOPIC_ROWS,
+    ...Array.from({ length: 8 }, (_, index) => ({
+      id: `single-${index}`,
+      group: 'Family and people',
+      english: `single ${index}`,
+      czech: `jedno ${index}`,
+      german_standard: `ein ${index}`,
+      portuguese_pt: `um ${index}`,
+    })),
+  ];
+  const board = buildBoard({
+    topicRows: rows,
+    prompt: TOPIC_ROWS[0],
+    languages: ['czech'],
+    random: deterministicRandom([0.91, 0.22, 0.73, 0.44, 0.65, 0.36, 0.57, 0.18]),
+  });
+
+  assert.equal(board.tiles.length, 24);
+  assert.equal(board.tiles.filter((tile) => tile.language === 'czech').length, 24);
+  assert.ok(isBoardValid(board));
+});
+
 test('buildBoard keeps articles and alternatives together as the full CSV field', () => {
   const board = buildBoard({
     topicRows: TOPIC_ROWS,

@@ -41,21 +41,20 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 ### Required round loop
 
-1. From the choice menu, select one CSV `group` (topic).
-2. At the start of the run, create one randomized order containing every concept in that topic exactly once.
-3. Select the next unfinished concept in the run and display its English value as the prompt.
-4. Build a board with a mix of:
-   - at least one correct single-language translation in each of Czech, Standard German, and `pt-PT`, with one or more of those correct translations intentionally repeated; and
-   - distractor tiles from other concepts in the selected topic, with language totals kept roughly balanced across the three languages.
-5. Let the player move the frog one grid square at a time without evaluating the tile.
-6. Show a clear focus state for the tile under the frog.
-7. On an explicit **Munch** action, evaluate the focused tile.
-8. Resolve feedback immediately:
+1. From the choice menu, select one CSV `group` (topic) and enable one or more target-language flags: Czech 🇨🇿, Standard German 🇩🇪, and/or `pt-PT` 🇵🇹. At least one must be enabled.
+2. Freeze that language selection for the topic run; it may be changed only after returning to the choice menu.
+3. At the start of the run, create one randomized order containing every concept in that topic exactly once.
+4. Select the next unfinished concept in the run and display its English value as the prompt.
+5. Build a board with correct translations and distractors from the active languages only, distributed evenly across those active languages.
+6. Let the player move the frog one grid square at a time without evaluating the tile.
+7. Show a clear focus state for the tile under the frog.
+8. On an explicit **Munch** action, evaluate the focused tile.
+9. Resolve feedback immediately:
    - **Correct:** remove only the word content from that board square, update board progress, and preserve the square as a traversable non-munchable location. Pronunciation is deferred until after the MVP.
    - **Incorrect:** show the English equivalent of the selected wrong word, then remove only that tile's word content, preserve its traversable non-munchable square, deduct one life, and record the mistake for potential review. Pronunciation is deferred until after the MVP.
-9. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
-10. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
-11. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
+10. If the player has lost all three lives, end the topic run as a loss and return to the choice menu after the loss summary.
+11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
+12. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
 
 ### Baseline control contract
 
@@ -132,7 +131,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must guarantee at least one correct tile in **each** target language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. For the 24-tile MVP board, it must use an exact 12/12 correct-to-distractor split and eight Czech, eight German, and eight Portuguese tiles. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target a roughly 50/50 correct-to-distractor ratio. For the 24-tile MVP board, it must use an exact 12/12 correct-to-distractor split. The active languages divide each outcome evenly: 12 correct and 12 distractors for one language, six of each per language for two, or four of each per language for all three. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -142,8 +141,8 @@ The pre-game session setup should be deliberately small:
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
-| Tile languages | Every board contains eight Czech, eight German, and eight Portuguese tiles; every tile displays exactly one language. Language assignment and tile placement are randomized subject to this distribution. |
-| Correct answers | Every board targets a roughly 50/50 correct-to-distractor ratio, contains at least one correct tile in each language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
+| Tile languages | Toggle Czech 🇨🇿, Standard German 🇩🇪, and `pt-PT` 🇵🇹 independently at the choice menu. At least one is required; the active set stays fixed for the topic run. Each tile displays exactly one active language. |
+| Correct answers | Every board targets a roughly 50/50 correct-to-distractor ratio, contains at least one correct tile in each active language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
 ### Calm mode — confirmed baseline direction
@@ -176,12 +175,12 @@ The MVP uses the following board:
 
 - 4-row × 6-column grid (24 tiles), optimized for wider-than-tall desktop screens;
 - one prompt concept;
-- 12 correct tiles: at least one in each language, with the prompt's translations intentionally repeated;
+- 12 correct tiles: at least one in each active language, with the prompt's translations intentionally repeated;
 - 12 distractors drawn from the same study group;
-- eight Czech, eight German, and eight Portuguese tiles, with positions randomized across the full grid;
+- active-language totals divided evenly: 24 tiles for one active language, 12 each for two, or eight each for all three, with positions randomized across the full grid;
 - Calm mode; three lives per topic run; keyboard controls; explicit Munch action; no score pressure.
 
-A 4-row × 6-column board is the initial MVP layout. Its 24 tiles provide an exact 12/12 correct-to-distractor split and eight tiles per language, while its landscape shape suits wider-than-tall screens. Tile text may wrap to multiple lines; character limits and minimum font-size tuning are implementation refinements to validate once the game is playable. The generator must shuffle every language and concept across the whole grid with no dedicated language or concept region.
+A 4-row × 6-column board is the initial MVP layout. Its 24 tiles provide an exact 12/12 correct-to-distractor split while dividing the active languages evenly, and its landscape shape suits wider-than-tall screens. Tile text may wrap to multiple lines; character limits and minimum font-size tuning are implementation refinements to validate once the game is playable. The generator must shuffle every active language and concept across the whole grid with no dedicated language or concept region.
 
 ## 7. Feedback, progression, and learning intent
 
