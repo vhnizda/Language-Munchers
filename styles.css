@@ -86,10 +86,11 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 .language-toggle[aria-pressed="false"]::after {
   content: "×";
   position: absolute;
-  inset: -7px -2px auto auto;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
   color: #ff4d68;
   font-family: "Press Start 2P", monospace;
-  font-size: 27px;
+  font-size: 32px;
   line-height: 1;
   text-shadow: 2px 2px #14183b;
   pointer-events: none;
