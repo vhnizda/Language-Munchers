@@ -131,7 +131,7 @@ Before a board is shown, the generator must create and validate a board manifest
 - each tile's correct/incorrect status;
 - the count and positions of all correct tiles.
 
-The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target roughly 40% correct answers and 60% distractors. For the 24-tile MVP board, that is an exact 10 correct / 14 distractor split (about 42% / 58%). The 24 board positions stay evenly distributed across active languages; correct tiles divide as evenly as possible, with any one-tile remainder assigned randomly. It must also guarantee at least one distractor, no malformed or empty display text, and no accidental duplicate distractor that creates avoidable ambiguity. Repeated correct tiles are intentional and required. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
+The manifest must include the active target-language set. It must guarantee at least one correct tile in **each active** language, more than three correct tiles overall, and at least one intentionally repeated correct translation. It must target roughly 40% correct answers and 60% distractors. For the 24-tile MVP board, that is an exact 10 correct / 14 distractor split (about 42% / 58%). The 24 board positions stay evenly distributed across active languages; correct tiles divide as evenly as possible, with any one-tile remainder assigned randomly. For each active language, choose a deliberately small pool of up to three distractor concepts and repeat its tile values as needed to fill that language's distractor slots. Repeated distractors are intentional learning pressure, not a validation error. After construction, language and concept positions must be shuffled across the full grid: no language or concept may occupy a dedicated row, column, quadrant, or other predictable region. The board must remain stable for the entire round except that a tile is removed when the player correctly eats it or incorrectly selects it.
 
 ## 5. Practice configuration and modes
 
@@ -163,7 +163,7 @@ Each board must:
 - make every tile fully legible before selection; text may wrap onto multiple lines inside its tile and must not be clipped;
 - remain winnable from the state shown to the player;
 - preserve each unresolved tile's text and location throughout a calm-mode round;
-- intentionally repeat one or more correct translations while avoiding accidental duplicate distractors;
+- intentionally repeat one or more correct translations and repeat distractors from each active language's small selected distractor pool;
 - distribute languages and concepts across the whole grid rather than by row, column, quadrant, or other recognizable region;
 - expose remaining lives, `correct eaten / correct total`, and `word n / total words` without revealing which unselected tiles are correct.
 

@@ -4,6 +4,7 @@ const BOARD_ROWS = 4;
 const BOARD_SIZE = BOARD_COLUMNS * BOARD_ROWS;
 const CORRECT_TILE_COUNT = 10;
 const DISTRACTOR_TILE_COUNT = BOARD_SIZE - CORRECT_TILE_COUNT;
+const DISTRACTOR_POOL_SIZE = 3;
 
 function shuffle(items, random) {
   const result = [...items];
@@ -73,16 +74,21 @@ function buildCandidateTiles({ topicRows, prompt, languages, random }) {
       tiles.push(createTile({ concept: prompt, language, isCorrect: true, sequence: sequence++ }));
     }
 
-    const languageDistractors = shuffle(distractors, random)
+    const distractorPool = shuffle(distractors, random)
       .filter((row, index, rows) => (
         rows.findIndex((candidate) => candidate[language] === row[language]) === index
       ))
-      .slice(0, distractorCount);
-    if (languageDistractors.length < distractorCount) {
-      throw new Error(`A topic needs ${distractorCount} distinct ${language} distractors to build an MVP board.`);
+      .slice(0, Math.min(DISTRACTOR_POOL_SIZE, distractorCount));
+    if (distractorPool.length < Math.min(DISTRACTOR_POOL_SIZE, distractorCount)) {
+      throw new Error(`A topic needs ${Math.min(DISTRACTOR_POOL_SIZE, distractorCount)} distinct ${language} distractors to build an MVP board.`);
     }
-    for (const concept of languageDistractors) {
-      tiles.push(createTile({ concept, language, isCorrect: false, sequence: sequence++ }));
+    for (let count = 0; count < distractorCount; count += 1) {
+      tiles.push(createTile({
+        concept: distractorPool[count % distractorPool.length],
+        language,
+        isCorrect: false,
+        sequence: sequence++,
+      }));
     }
   }
   return tiles;
@@ -138,15 +144,6 @@ export function isBoardValid(board) {
   }
   if (board.tiles.some((tile) => !activeLanguages.includes(tile.language))) {
     return false;
-  }
-
-  const distractorKeys = new Set();
-  for (const tile of distractorTiles) {
-    const key = `${tile.language}:${tile.displayText}`;
-    if (distractorKeys.has(key)) {
-      return false;
-    }
-    distractorKeys.add(key);
   }
 
   return true;

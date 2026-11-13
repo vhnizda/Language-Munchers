@@ -153,22 +153,9 @@ test('buildBoard keeps articles and alternatives together as the full CSV field'
   assert.ok(czechCorrect.every((tile) => tile.displayText === 'máma / matka'));
 });
 
-test('buildBoard excludes duplicate distractor display text in the same language', () => {
-  const rows = [
-    ...TOPIC_ROWS.map((row) => (
-      row.id === '003' ? { ...row, portuguese_pt: 'a mãe' } : row
-    )),
-    {
-      id: '006',
-      group: 'Family and people',
-      english: 'evening duplicate',
-      czech: 'večer 2',
-      german_standard: 'der Abend 2',
-      portuguese_pt: 'a noite',
-    },
-  ];
+test('buildBoard repeats a deliberately small distractor pool', () => {
   const board = buildBoard({
-    topicRows: rows,
+    topicRows: TOPIC_ROWS,
     prompt: TOPIC_ROWS[0],
     random: deterministicRandom([0.99, 0.01, 0.8, 0.2, 0.6, 0.4]),
   });
@@ -176,7 +163,7 @@ test('buildBoard excludes duplicate distractor display text in the same language
     .filter((tile) => !tile.isCorrect)
     .map((tile) => `${tile.language}:${tile.displayText}`);
 
-  assert.equal(new Set(distractorKeys).size, distractorKeys.length);
+  assert.ok(new Set(distractorKeys).size < distractorKeys.length);
 });
 
 test('resolveMunch does not re-eat a cleared tile', () => {

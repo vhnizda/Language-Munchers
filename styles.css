@@ -71,6 +71,8 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 }
 .intro { font-size: clamp(21px, 3vw, 28px); line-height: 1.15; color: #d5e8dc; }
 .topic-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.language-controls { display: flex; align-items: center; gap: 10px; }
+.language-label { color: #91d8cf; font-family: "Press Start 2P", monospace; font-size: 10px; line-height: 1.35; }
 .language-toggles { display: flex; align-items: center; gap: 8px; }
 .language-toggle {
   position: relative;
@@ -206,7 +208,7 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   .status-bar { grid-template-columns: 1fr 1fr; }
   .status-bar > :last-child { grid-column: 1 / -1; text-align: center; }
   .topic-heading { align-items: flex-start; flex-direction: column; }
-  .language-toggles { align-self: flex-end; }
+  .language-controls { align-self: flex-end; }
   .board { gap: 3px; min-height: 360px; }
   .tile { border-width: 2px; padding: 6px 3px; font-size: clamp(16px, 4.2vw, 23px); }
   .tile.focused::after { font-size: 6px; }
