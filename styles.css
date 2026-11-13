@@ -24,7 +24,20 @@ button { font: inherit; cursor: pointer; }
   padding: 20px clamp(12px, 3vw, 36px) 42px;
 }
 
-.masthead { text-align: center; margin: 6px 0 22px; }
+.masthead { position: relative; text-align: center; margin: 6px 0 22px; }
+.fullscreen-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 3px solid #91d8cf;
+  background: #14183b;
+  color: #91d8cf;
+  padding: 7px 9px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 9px;
+  line-height: 1.5;
+}
+.fullscreen-button:hover, .fullscreen-button:focus-visible { background: #36517d; outline: 3px solid #ffe29a; outline-offset: 2px; }
 .eyebrow, .status-label { color: #91d8cf; letter-spacing: .11em; font-size: clamp(14px, 2vw, 19px); }
 h1, h2 { margin: 0; }
 h1 {
@@ -108,6 +121,39 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 .munch-button span { font-family: "VT323", monospace; font-size: 23px; }
 .leave-button { background: #d5e8dc; min-width: 80px; }
 .arrow-pad button:active, .munch-button:active, .leave-button:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #14183b; }
+
+.app-shell.is-paused > :not(.pause-dialog) { filter: grayscale(.9) brightness(.45); pointer-events: none; }
+.app-shell.is-paused .fullscreen-button { pointer-events: auto; }
+.pause-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(5 7 24 / 62%);
+}
+.pause-panel {
+  width: min(520px, 100%);
+  border: 5px solid #ffe29a;
+  background: #242955;
+  box-shadow: 8px 8px 0 #833f72;
+  padding: clamp(22px, 5vw, 42px);
+  text-align: center;
+}
+.pause-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.pause-actions .leave-button { min-width: 130px; }
+
+:fullscreen { background: #10122e; overflow: auto; }
+:fullscreen .app-shell { min-height: 100vh; }
+.app-shell.maximized {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  overflow: auto;
+  background: repeating-linear-gradient(0deg, #10122e 0 3px, #14183b 3px 6px);
+}
 
 @media (max-width: 650px) {
   .app-shell { padding: 12px 8px 30px; }

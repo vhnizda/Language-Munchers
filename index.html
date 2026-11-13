@@ -10,6 +10,7 @@
   <body>
     <main class="app-shell">
       <header class="masthead">
+        <button id="fullscreen-button" class="fullscreen-button" type="button" aria-label="Enter full screen">FULL<br />SCREEN</button>
         <p class="eyebrow">A retro language game</p>
         <h1>LANGUAGE<br />MUNCHERS</h1>
       </header>
@@ -40,7 +41,7 @@
             <button type="button" data-move="right" aria-label="Move right">▶</button>
           </div>
           <button id="munch-button" class="munch-button" type="button">SPACE<br /><span>MUNCH</span></button>
-          <button id="leave-button" class="leave-button" type="button">MENU</button>
+          <button id="pause-button" class="leave-button" type="button">PAUSE</button>
         </div>
       </section>
 
@@ -48,6 +49,18 @@
         <h2 id="result-title"></h2>
         <p id="result-message" class="intro"></p>
         <button id="return-button" class="primary-button" type="button">Return to topics</button>
+      </section>
+
+      <section id="pause-dialog" class="pause-dialog hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+        <div class="pause-panel">
+          <p class="eyebrow">GAME PAUSED</p>
+          <h2 id="pause-title">TAKE A BREATH</h2>
+          <p class="intro">Your board and timer are frozen.</p>
+          <div class="pause-actions">
+            <button id="continue-button" class="primary-button" type="button">CONTINUE</button>
+            <button id="quit-button" class="leave-button" type="button">QUIT TOPIC</button>
+          </div>
+        </div>
       </section>
     </main>
     <script type="module" src="app.js"></script>

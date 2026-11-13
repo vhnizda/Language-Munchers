@@ -1,4 +1,5 @@
 import { boardConfig, buildBoard, createTopicRun, resolveMunch } from './src/game.js';
+import { pauseTimer, resumeTimer } from './src/pause.js';
 
 const vocabulary = await fetch('./data/vocabulary.json').then((response) => {
   if (!response.ok) throw new Error('Could not load vocabulary data.');
@@ -10,9 +11,12 @@ const screens = {
   game: document.querySelector('#game-screen'),
   result: document.querySelector('#result-screen'),
 };
+const appShell = document.querySelector('.app-shell');
 const topicList = document.querySelector('#topic-list');
 const boardElement = document.querySelector('#board');
 const feedbackElement = document.querySelector('#feedback');
+const pauseDialog = document.querySelector('#pause-dialog');
+const fullscreenButton = document.querySelector('#fullscreen-button');
 const topicName = document.querySelector('#topic-name');
 const wordProgress = document.querySelector('#word-progress');
 const livesElement = document.querySelector('#lives');
@@ -39,6 +43,94 @@ function show(screen) {
   screen.classList.remove('hidden');
 }
 
+function clearWrongTimer() {
+  if (state?.wrongTimer?.timeoutId) window.clearTimeout(state.wrongTimer.timeoutId);
+  if (state) state.wrongTimer = null;
+}
+
+function resolveWrongAnswer() {
+  const timer = state?.wrongTimer;
+  if (!timer || state.paused || state.board !== timer.board) return;
+
+  timer.tile.cleared = true;
+  state.pendingTiles.delete(timer.tile.id);
+  state.wrongTimer = null;
+  feedbackElement.textContent = '';
+  feedbackElement.className = 'feedback';
+  if (state.lives === 0) {
+    finishTopic(false);
+    return;
+  }
+  renderGame();
+  completeLevelWhenReady();
+}
+
+function scheduleWrongAnswer() {
+  const timer = state?.wrongTimer;
+  if (!timer || state.paused) return;
+  timer.timeoutId = window.setTimeout(resolveWrongAnswer, Math.max(0, timer.dueAt - Date.now()));
+}
+
+function pauseGame() {
+  if (!state || state.paused) return;
+  if (state.wrongTimer) {
+    window.clearTimeout(state.wrongTimer.timeoutId);
+    Object.assign(state.wrongTimer, pauseTimer(state.wrongTimer, Date.now()), { timeoutId: null });
+  }
+  state.paused = true;
+  appShell.classList.add('is-paused');
+  pauseDialog.classList.remove('hidden');
+  document.querySelector('#continue-button').focus();
+}
+
+function resumeGame() {
+  if (!state || !state.paused) return;
+  state.paused = false;
+  if (state.wrongTimer) {
+    Object.assign(state.wrongTimer, resumeTimer(state.wrongTimer, Date.now()));
+    scheduleWrongAnswer();
+  }
+  appShell.classList.remove('is-paused');
+  pauseDialog.classList.add('hidden');
+  renderGame();
+}
+
+function quitTopic() {
+  if (!state) return;
+  clearWrongTimer();
+  state = null;
+  appShell.classList.remove('is-paused');
+  pauseDialog.classList.add('hidden');
+  renderTopics();
+}
+
+function toggleCssMaximize() {
+  appShell.classList.toggle('maximized');
+  updateFullscreenButton();
+}
+
+async function toggleFullscreen() {
+  if (document.fullscreenElement) {
+    await document.exitFullscreen();
+    return;
+  }
+  if (!document.fullscreenEnabled || !document.documentElement.requestFullscreen) {
+    toggleCssMaximize();
+    return;
+  }
+  try {
+    await document.documentElement.requestFullscreen();
+  } catch {
+    toggleCssMaximize();
+  }
+}
+
+function updateFullscreenButton() {
+  const isFullscreen = Boolean(document.fullscreenElement) || appShell.classList.contains('maximized');
+  fullscreenButton.innerHTML = isFullscreen ? 'EXIT<br />FULL' : 'FULL<br />SCREEN';
+  fullscreenButton.setAttribute('aria-label', isFullscreen ? 'Exit full screen' : 'Enter full screen');
+}
+
 function renderTopics() {
   const progress = readProgress();
   topicList.replaceChildren(...groups().map((group) => {
@@ -55,7 +147,17 @@ function renderTopics() {
 
 function startTopic(group) {
   const run = createTopicRun(vocabulary, group);
-  state = { group, run, index: 0, lives: 3, board: null, focus: 0, pendingTiles: new Set() };
+  state = {
+    group,
+    run,
+    index: 0,
+    lives: 3,
+    board: null,
+    focus: 0,
+    pendingTiles: new Set(),
+    paused: false,
+    wrongTimer: null,
+  };
   show(screens.game);
   startLevel();
 }
@@ -94,7 +196,7 @@ function renderGame() {
 }
 
 function move(direction) {
-  if (!state) return;
+  if (!state || state.paused) return;
   const row = Math.floor(state.focus / boardConfig.columns);
   const column = state.focus % boardConfig.columns;
   const offsets = { up: [-1, 0], down: [1, 0], left: [0, -1], right: [0, 1] };
@@ -106,6 +208,9 @@ function move(direction) {
 }
 
 function finishTopic(won) {
+  clearWrongTimer();
+  appShell.classList.remove('is-paused');
+  pauseDialog.classList.add('hidden');
   const progress = readProgress();
   if (won && !progress.wonTopics.includes(state.group)) {
     progress.wonTopics.push(state.group);
@@ -131,7 +236,7 @@ function completeLevelWhenReady() {
 }
 
 function munch() {
-  if (!state) return;
+  if (!state || state.paused) return;
   const tile = state.board.tiles[state.focus];
   if (!tile || tile.cleared || state.pendingTiles.has(tile.id)) return;
   const outcome = resolveMunch({ tile, lives: state.lives });
@@ -145,36 +250,39 @@ function munch() {
     return;
   }
 
-  const board = state.board;
   state.lives = outcome.lives;
   state.pendingTiles.add(tile.id);
   feedbackElement.textContent = `${tile.displayText} = ${outcome.englishMeaning}`;
   feedbackElement.className = 'feedback wrong';
   renderGame();
-  window.setTimeout(() => {
-    if (!state || state.board !== board) return;
-    tile.cleared = true;
-    state.pendingTiles.delete(tile.id);
-    feedbackElement.textContent = '';
-    feedbackElement.className = 'feedback';
-    if (state.lives === 0) {
-      finishTopic(false);
-      return;
-    }
-    renderGame();
-    completeLevelWhenReady();
-  }, 1000);
+  state.wrongTimer = {
+    board: state.board,
+    tile,
+    dueAt: Date.now() + 1000,
+    timeoutId: null,
+  };
+  scheduleWrongAnswer();
 }
 
 document.querySelectorAll('[data-move]').forEach((button) => {
   button.addEventListener('click', () => move(button.dataset.move));
 });
 document.querySelector('#munch-button').addEventListener('click', munch);
-document.querySelector('#leave-button').addEventListener('click', renderTopics);
+document.querySelector('#pause-button').addEventListener('click', pauseGame);
+document.querySelector('#continue-button').addEventListener('click', resumeGame);
+document.querySelector('#quit-button').addEventListener('click', quitTopic);
 document.querySelector('#return-button').addEventListener('click', renderTopics);
+fullscreenButton.addEventListener('click', () => { toggleFullscreen().catch(() => {}); });
+document.addEventListener('fullscreenchange', updateFullscreenButton);
 
 document.addEventListener('keydown', (event) => {
   if (!state) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    if (state.paused) resumeGame(); else pauseGame();
+    return;
+  }
+  if (state.paused) return;
   const moves = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
   if (moves[event.key]) {
     event.preventDefault();
@@ -184,7 +292,6 @@ document.addEventListener('keydown', (event) => {
     event.preventDefault();
     munch();
   }
-  if (event.key === 'Escape') renderTopics();
 });
 
 renderTopics();
