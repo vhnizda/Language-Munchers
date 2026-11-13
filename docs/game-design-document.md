@@ -69,9 +69,9 @@ Mouse, touch, and gamepad support are not decided. If mouse support is added, se
 
 ### Canonical source
 
-The first corpus is the private `vhnizda/vaclav-language-learning-path` repository:
+The first corpus is the private [`vhnizda/vaclav-language-learning-path`](https://github.com/vhnizda/vaclav-language-learning-path) repository:
 
-`vocabulary/first-300-family-life.csv`
+[`vocabulary/first-300-family-life.csv`](https://github.com/vhnizda/vaclav-language-learning-path/blob/main/vocabulary/first-300-family-life.csv)
 
 The inspected source is a 300-row, stable-ID CSV with this schema:
 

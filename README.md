@@ -12,7 +12,7 @@ The player controls a frog on a grid of word tiles. A prompt at the top of the s
 
 The first playable vocabulary corpus already exists in the private repository [`vhnizda/vaclav-language-learning-path`](https://github.com/vhnizda/vaclav-language-learning-path):
 
-- `vocabulary/first-300-family-life.csv`
+- [`vocabulary/first-300-family-life.csv`](https://github.com/vhnizda/vaclav-language-learning-path/blob/main/vocabulary/first-300-family-life.csv)
 
 That CSV contains 300 stable concepts with English, Czech, Standard German, and `pt-PT` fields. It remains the canonical source of vocabulary. The game should consume a deliberately versioned copy or export only once the data-integration policy is agreed; it should not silently fork or rewrite the source data.
 
