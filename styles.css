@@ -108,8 +108,13 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 .tile.focused { outline: 5px solid #ffb86b; outline-offset: -5px; background: #4e6c9f; }
 .tile.focused::after { content: "FROG"; position: absolute; top: 4px; left: 4px; font-family: "Press Start 2P", monospace; font-size: 8px; color: #14183b; background: #8fd54b; padding: 3px; }
 .tile.pending { background: #823f64; color: #fff; }
-.tile.empty { border-color: #91d8cf; background: #2d396a; color: transparent; }
+.tile.empty { border-color: #fbf1cc; background: #2d396a; color: transparent; }
 .tile.empty.focused { background: #36517d; }
+.tile.empty.focused::after {
+  content: "FROG";
+  color: #14183b;
+  background: #8fd54b;
+}
 
 .controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
 .arrow-pad { display: grid; grid-template: repeat(2, 50px) / repeat(3, 50px); gap: 4px; }
