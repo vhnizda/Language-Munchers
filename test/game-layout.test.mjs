@@ -7,7 +7,11 @@ test('game screen uses touch-first instructions and a status-bar pause button', 
 
   assert.doesNotMatch(html, /id="munch-button"|class="arrow-pad"|data-move=/);
   assert.match(html, /<button id="pause-button" class="leave-button" type="button">PAUSE<\/button>/);
-  assert.match(html, /Click or tap a tile to move, then tap it again to eat it\. With a keyboard, use Arrow keys to move and Space to eat\./);
+  assert.match(html, /class="instruction instruction--pointer"/);
+  assert.match(html, /Tap or click any box to select it\. Once selected, tap or click it again to eat it\. For faster play, double tap or double click each box you want to eat\./);
+  assert.match(html, /class="instruction instruction--keyboard"/);
+  assert.match(html, /<kbd class="key" aria-label="Arrow up">↑<\/kbd>/);
+  assert.match(html, /<kbd class="key key--space">Space<\/kbd>/);
 });
 
 test('lives use frog sprites instead of text circles', async () => {
@@ -36,4 +40,5 @@ test('styles provide room for frog lives and keep the instructions centered', as
   assert.match(css, /\.lives-panel \{/);
   assert.match(css, /\.life-frog \{/);
   assert.match(css, /\.play-instructions \{[^}]*text-align:\s*center/);
+  assert.match(css, /\.key--space \{[^}]*min-width:/);
 });

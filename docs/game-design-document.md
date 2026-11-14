@@ -52,7 +52,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 9. Resolve feedback:
    - **Correct:** keep the word visible throughout the single 360 ms eating animation; hold its final animation frame until the word clears; temporarily lock board movement and Munch input; then remove only the word content, return the frog directly to idle without replaying the eating animation, update board progress, and preserve the square as a traversable non-munchable location.
    - **Incorrect:** immediately show the selected target-language word and its English equivalent for exactly one second; movement remains available; then remove only that tile's word content, return the frog directly to idle without replaying the eating animation, preserve its traversable non-munchable square, and deduct one life.
-10. If the player has lost all three lives, end the topic run as a loss and show a centered summary: a large **GAME OVER** heading, the exact message **“You have lost all your lives. I'm sure you will do better next time!”**, and a centered **Try Again** button that returns to the topic menu.
+10. If the player has lost all three lives, end the topic run as a loss and show a centered summary: a large **GAME OVER** heading, the exact message **“You have lost all your lives. I'm sure you will do better next time!”**, and a centered **Try Again?** button that returns to the topic menu.
 11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
 12. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
 
@@ -67,7 +67,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 A topic run starts with **three lives**. The game must display remaining lives as resting frog sprites, the current topic, and current level progress (`word n / total words`) throughout play.
 
-Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The board has no on-screen arrow or Munch controls. A centered instruction below the board explains tile tapping/clicking and the attached-keyboard controls. A connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action. A touch move plays the frog's jump-up animation at the destination; keyboard arrows use the matching directional jump animation.
+Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The board has no on-screen arrow or Munch controls. Centered instructions below the board have separate **TOUCH OR MOUSE** and **KEYBOARD** sections: touch/mouse explains first tap/click selects, the second eats, and double-tap/double-click is faster; keyboard renders raised arrow-key symbols plus a long `Space` key. A connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action. A touch move plays the frog's jump-up animation at the destination; keyboard arrows use the matching directional jump animation.
 
 ## 4. Vocabulary and language requirements
 
@@ -190,7 +190,7 @@ The first release should prioritize accurate recognition, repeated exposure, and
 
 - On a correct answer: show `CORRECT!`; retain the word during the 360 ms eat animation, then clear its word content and update level progress. The player cannot move or munch during that short animation.
 - On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically remove only its word content and deduct one life. Its blank board square remains traversable but cannot be eaten again. The game continues; this feedback does not pause the board and cannot be manually dismissed.
-- On losing the third life: show a topic-loss summary with a **Try Again** action that returns to the topic menu.
+- On losing the third life: show a topic-loss summary with a **Try Again?** action that returns to the topic menu.
 - On board completion: begin the next concept in the selected topic after a short transition.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
 
@@ -269,7 +269,7 @@ Keep the deployed game aligned with this document as design decisions change. Th
 - a fresh randomized topic run covering every concept in the selected group exactly once;
 - a 4-row × 6-column board with a 10/14 correct-to-distractor split, balanced active-language placement, intentionally repeated correct translations, and small repeated distractor pools;
 - three lives, calm mode, no hazards, persistent traversable blank squares, and no runtime audio;
-- keyboard, on-screen, mouse, and touch controls with the specified focus-then-Munch behavior;
+- keyboard, mouse, and touch controls with the specified focus-then-Munch behavior;
 - a 360 ms correct-eat animation before clearing; one-second non-pausing incorrect feedback; pause freezes both pending feedback paths;
 - red-X disabled language flags, native/full-page full-screen fallback, standalone PWA metadata, and iPad Add-to-Home-Screen guidance;
 - the 229 px frog sprite grid, exact row mapping, whole-frame stepping, and left crop offset;

@@ -46,13 +46,16 @@
         </div>
         <div id="feedback" class="feedback" role="status" aria-live="assertive"></div>
         <div id="board" class="board" aria-label="Word board"></div>
-        <p class="play-instructions">Click or tap a tile to move, then tap it again to eat it. With a keyboard, use Arrow keys to move and Space to eat.</p>
+        <div class="play-instructions" aria-label="Game controls">
+          <p class="instruction instruction--pointer"><span class="instruction-label">TOUCH OR MOUSE</span>Tap or click any box to select it. Once selected, tap or click it again to eat it. For faster play, double tap or double click each box you want to eat.</p>
+          <p class="instruction instruction--keyboard"><span class="instruction-label">KEYBOARD</span><span class="key-group" aria-label="Arrow keys"><kbd class="key" aria-label="Arrow up">↑</kbd><kbd class="key" aria-label="Arrow left">←</kbd><kbd class="key" aria-label="Arrow down">↓</kbd><kbd class="key" aria-label="Arrow right">→</kbd></span> Arrow keys move. <kbd class="key key--space">Space</kbd> eats.</p>
+        </div>
       </section>
 
       <section id="result-screen" class="panel hidden" aria-live="polite">
         <h2 id="result-title"></h2>
         <p id="result-message" class="intro"></p>
-        <button id="return-button" class="primary-button" type="button">Try Again</button>
+        <button id="return-button" class="primary-button" type="button">Try Again?</button>
       </section>
 
       <section id="pause-dialog" class="pause-dialog hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title">

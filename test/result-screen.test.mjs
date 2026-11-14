@@ -12,7 +12,7 @@ test('game-over screen uses the encouraging loss message', async () => {
 test('game-over screen return button invites the player to try again', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
-  assert.match(html, /<button id="return-button" class="primary-button" type="button">Try Again<\/button>/);
+  assert.match(html, /<button id="return-button" class="primary-button" type="button">Try Again\?<\/button>/);
   assert.doesNotMatch(html, />Return to topics</);
 });
 
