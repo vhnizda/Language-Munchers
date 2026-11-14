@@ -165,8 +165,8 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 }
 .frog img {
   position: absolute;
-  top: 0;
-  left: -12px;
+  top: -3px;
+  left: -10px;
   width: 600%;
   height: 500%;
   max-width: none;

@@ -19,10 +19,11 @@ test('frog animations advance one whole frame at a time', async () => {
   for (const rule of animationRules) assert.match(rule, /steps\(5, end\)/);
 });
 
-test('frog sprite window offsets the sheet 12 pixels left to prevent adjacent-frame bleed', async () => {
+test('frog sprite window offsets the sheet 3 pixels up and 10 pixels left', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
   const rule = css.match(/\.frog img \{([\s\S]*?)\n\}/)?.[1];
 
   assert.ok(rule, 'frog image crop rule must exist');
-  assert.match(rule, /left:\s*-12px/);
+  assert.match(rule, /top:\s*-3px/);
+  assert.match(rule, /left:\s*-10px/);
 });
