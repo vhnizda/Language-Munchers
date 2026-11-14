@@ -9,6 +9,13 @@ test('game-over screen uses the encouraging loss message', async () => {
   assert.doesNotMatch(app, /You used all three lives/);
 });
 
+test('game-over screen return button invites the player to try again', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+
+  assert.match(html, /<button id="return-button" class="primary-button" type="button">Try Again<\/button>/);
+  assert.doesNotMatch(html, />Return to topics</);
+});
+
 test('game-over screen centers its content and enlarges its title', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
   const rule = css.match(/#result-screen \{([\s\S]*?)\n\}/)?.[1];

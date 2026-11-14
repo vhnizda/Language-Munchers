@@ -171,7 +171,7 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   height: 500%;
   max-width: none;
 }
-.frog--eating img { animation: frog-eating 540ms steps(5, end); }
+.frog--eating img { animation: frog-eating 540ms steps(5, end) forwards; }
 .frog--jump-up img { animation: frog-jump-up 360ms steps(5, end); }
 .frog--jump-down img { animation: frog-jump-down 360ms steps(5, end); }
 .frog--jump-left img { animation: frog-jump-left 360ms steps(5, end); }
