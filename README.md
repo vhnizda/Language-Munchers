@@ -10,9 +10,9 @@ The MVP is deployed to GitHub Pages from `main` after the Pages workflow runs. I
 
 ### Controls
 
-- **Arrow keys** or on-screen arrow buttons: move the frog.
-- **Space** or the on-screen **Space / Munch** button: eat the focused tile.
-- **Escape** or the on-screen **Pause** button: pause the game. The pause panel freezes the board and feedback timer, and offers **Continue** or **Quit topic**.
+- Click or tap a different tile to move the frog; click or tap the focused tile again to eat it.
+- **Arrow keys** move the frog; **Space** eats the focused tile.
+- **Escape** or the **Pause** button beside the lives: pause the game. The pause panel freezes the board and feedback timer, and offers **Continue** or **Quit topic**.
 - **Full Screen**: requests native operating-system full screen, including hidden browser navigation where the browser permits it. If a browser refuses this (common on iPad Safari), the game explains that it can only maximize in-page; use **Safari Share → Add to Home Screen** and launch the installed app for screen-filling play.
 
 Touch/pointer and connected keyboards use the same move-then-munch interaction. Tapping a different square moves focus; tapping the already focused square explicitly munches it.
@@ -20,10 +20,10 @@ Touch/pointer and connected keyboards use the same move-then-munch interaction. 
 ## MVP rules
 
 - Select one vocabulary topic; its 20 concepts are shuffled and played once each.
-- At the topic menu, toggle the Czech 🇨🇿, German 🇩🇪, and `pt-PT` 🇵🇹 flags. At least one language must remain enabled; the selection is fixed for that topic run and can be changed again only after returning to the topic menu.
+- At the topic menu, toggle the Czech, German, and `pt-PT` local SVG flags. They do not rely on browser emoji support, so they render in Brave as well. At least one language remains enabled; the final selected flag stays coloured and clickable, but clicking it leaves it enabled. The selection is fixed for that topic run and can be changed again only after returning to the topic menu.
 - Each 24-tile board has 10 correct answers and 14 distractors—about 42% correct / 58% distractors. The active languages still share the 24 board positions evenly: 24 tiles for one language, 12 each for two languages, or eight each for all three.
 - Correct answers repeat intentionally and are mixed across the board. Distractors are drawn from a small per-language pool and intentionally repeat as well; there are no language labels or positional language patterns.
-- A run starts with three lives. A wrong answer shows its English meaning for one second, then clears only the word content and costs one life. The board square remains available for frog movement but cannot be eaten again.
+- A run starts with three resting-frog life icons. A wrong answer shows its English meaning for one second, then clears only the word content and costs one life. The board square remains available for frog movement but cannot be eaten again.
 - Progress is stored only in the browser's local storage. Version 1 has no sound.
 
 ## Vocabulary source

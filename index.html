@@ -35,7 +35,10 @@
         <div class="status-bar">
           <div><span class="status-label">TOPIC</span><strong id="topic-name"></strong></div>
           <div><span class="status-label">WORD</span><strong id="word-progress"></strong></div>
-          <div><span class="status-label">LIVES</span><strong id="lives" aria-label="Lives remaining"></strong></div>
+          <div class="lives-panel">
+            <div><span class="status-label">LIVES</span><strong id="lives" aria-label="Lives remaining"></strong></div>
+            <button id="pause-button" class="leave-button" type="button">PAUSE</button>
+          </div>
         </div>
         <div class="prompt-box">
           <span class="status-label">EAT EVERY TRANSLATION OF</span>
@@ -43,16 +46,7 @@
         </div>
         <div id="feedback" class="feedback" role="status" aria-live="assertive"></div>
         <div id="board" class="board" aria-label="Word board"></div>
-        <div class="controls" aria-label="Game controls">
-          <div class="arrow-pad">
-            <button type="button" data-move="up" aria-label="Move up">▲</button>
-            <button type="button" data-move="left" aria-label="Move left">◀</button>
-            <button type="button" data-move="down" aria-label="Move down">▼</button>
-            <button type="button" data-move="right" aria-label="Move right">▶</button>
-          </div>
-          <button id="munch-button" class="munch-button" type="button">SPACE<br /><span>MUNCH</span></button>
-          <button id="pause-button" class="leave-button" type="button">PAUSE</button>
-        </div>
+        <p class="play-instructions">Click or tap a tile to move, then tap it again to eat it. With a keyboard, use Arrow keys to move and Space to eat.</p>
       </section>
 
       <section id="result-screen" class="panel hidden" aria-live="polite">

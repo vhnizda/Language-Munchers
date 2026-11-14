@@ -100,11 +100,11 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 }
 .language-toggle[aria-pressed="true"] { background: #36517d; }
 .language-toggle:focus-visible { outline: 3px solid #ffb86b; outline-offset: 2px; }
-.language-toggle:disabled { cursor: not-allowed; opacity: .65; }
+.language-toggle img { display: block; width: 30px; height: 20px; }
 .hidden { display: none !important; }
 
 .topic-list { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.topic-button, .primary-button, .leave-button, .munch-button, .arrow-pad button {
+.topic-button, .primary-button, .leave-button {
   border: 3px solid #14183b;
   color: #14183b;
   background: #91d8cf;
@@ -118,12 +118,18 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 
 .status-bar {
   display: grid;
-  grid-template-columns: 1.4fr 1fr .7fr;
+  grid-template-columns: 1.4fr 1fr minmax(230px, 1.25fr);
   gap: 12px;
   padding: 12px 0;
   font-size: clamp(19px, 2.5vw, 27px);
 }
 .status-bar strong { display: block; color: #ffe29a; overflow-wrap: anywhere; }
+.lives-panel { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+#lives { display: flex; align-items: center; gap: 6px; min-height: 42px; }
+.life-frog { position: relative; display: inline-block; width: 38px; height: 38px; overflow: hidden; }
+.life-frog img { position: absolute; top: -3px; left: -4px; width: 600%; height: 500%; max-width: none; }
+.life-frog--lost { opacity: .22; }
+.lives-panel .leave-button { min-width: 92px; min-height: 46px; padding: 8px; }
 .prompt-box { text-align: center; background: #14183b; padding: 14px; border: 3px solid #91d8cf; }
 .prompt-box h2 { color: #ffb86b; margin-top: 6px; }
 .feedback { min-height: 35px; margin: 8px 0; text-align: center; color: #ffb86b; font-size: 26px; }
@@ -190,17 +196,9 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
 .tile.empty { border-color: #fbf1cc; background: #2d396a; color: transparent; }
 .tile.empty.focused { background: #36517d; }
 
-.controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
-.arrow-pad { display: grid; grid-template: repeat(2, 50px) / repeat(3, 50px); gap: 4px; }
-.arrow-pad button { min-height: 0; padding: 0; font-size: 22px; }
-.arrow-pad button[data-move="up"] { grid-column: 2; }
-.arrow-pad button[data-move="left"] { grid-column: 1; grid-row: 2; }
-.arrow-pad button[data-move="down"] { grid-column: 2; grid-row: 2; }
-.arrow-pad button[data-move="right"] { grid-column: 3; grid-row: 2; }
-.munch-button { background: #ffb86b; min-width: 125px; font-family: "Press Start 2P", monospace; font-size: 16px; line-height: 1.5; }
-.munch-button span { font-family: "VT323", monospace; font-size: 23px; }
 .leave-button { background: #d5e8dc; min-width: 80px; }
-.arrow-pad button:active, .munch-button:active, .leave-button:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #14183b; }
+.leave-button:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #14183b; }
+.play-instructions { max-width: 760px; margin: 18px auto 0; color: #d5e8dc; font-size: clamp(19px, 2.7vw, 25px); line-height: 1.05; text-align: center; }
 
 .app-shell.is-paused > :not(.pause-dialog) { filter: grayscale(.9) brightness(.45); pointer-events: none; }
 .app-shell.is-paused .fullscreen-button { pointer-events: auto; }
@@ -239,7 +237,7 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   .app-shell { padding: 12px 8px 30px; }
   .panel, .game-screen { padding: 14px; border-width: 3px; box-shadow: 4px 4px 0 #833f72; }
   .status-bar { grid-template-columns: 1fr 1fr; }
-  .status-bar > :last-child { grid-column: 1 / -1; text-align: center; }
+  .lives-panel { grid-column: 1 / -1; justify-content: flex-end; }
   .topic-heading { align-items: flex-start; flex-direction: column; }
   .language-controls { align-self: flex-end; }
   .board { gap: 3px; min-height: 360px; }

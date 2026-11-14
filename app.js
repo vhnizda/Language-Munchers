@@ -29,9 +29,9 @@ const resultTitle = document.querySelector('#result-title');
 const resultMessage = document.querySelector('#result-message');
 
 const LANGUAGE_OPTIONS = [
-  { key: 'czech', flag: '🇨🇿', label: 'Czech' },
-  { key: 'german_standard', flag: '🇩🇪', label: 'German' },
-  { key: 'portuguese_pt', flag: '🇵🇹', label: 'Portuguese' },
+  { key: 'czech', flag: 'assets/flags/cz.svg', label: 'Czech' },
+  { key: 'german_standard', flag: 'assets/flags/de.svg', label: 'German' },
+  { key: 'portuguese_pt', flag: 'assets/flags/pt.svg', label: 'Portuguese' },
 ];
 
 let state = null;
@@ -190,22 +190,37 @@ function updateFullscreenButton() {
 }
 
 function renderLanguageToggles() {
-  const onlyEnabledLanguage = selectedLanguages.size === 1;
   languageToggles.replaceChildren(...LANGUAGE_OPTIONS.map((language) => {
     const enabled = selectedLanguages.has(language.key);
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'language-toggle';
-    button.textContent = language.flag;
+    const flag = document.createElement('img');
+    flag.src = language.flag;
+    flag.alt = '';
+    button.append(flag);
     button.setAttribute('aria-label', `${enabled ? 'Disable' : 'Enable'} ${language.label}`);
     button.setAttribute('aria-pressed', String(enabled));
-    button.disabled = enabled && onlyEnabledLanguage;
     button.addEventListener('click', () => {
+      if (enabled && selectedLanguages.size === 1) return;
       if (enabled) selectedLanguages.delete(language.key);
       else selectedLanguages.add(language.key);
       renderTopics();
     });
     return button;
+  }));
+}
+
+function renderLives(lives) {
+  livesElement.replaceChildren(...Array.from({ length: 3 }, (_, index) => {
+    const life = document.createElement('span');
+    life.className = `life-frog${index >= lives ? ' life-frog--lost' : ''}`;
+    life.setAttribute('aria-hidden', 'true');
+    const sprite = document.createElement('img');
+    sprite.src = 'assets/frog-sprites.png';
+    sprite.alt = '';
+    life.append(sprite);
+    return life;
   }));
 }
 
@@ -261,7 +276,7 @@ function renderGame() {
   const { board, focus, frogAnimation, group, index, run, lives, pendingTiles } = state;
   topicName.textContent = group;
   wordProgress.textContent = `${index + 1} / ${run.length}`;
-  livesElement.textContent = '●'.repeat(lives) + '○'.repeat(3 - lives);
+  renderLives(lives);
   promptWord.textContent = board.prompt.english;
   const tileElements = board.tiles.map((tile, tileIndex) => {
     const button = document.createElement('button');
@@ -386,10 +401,6 @@ function munch() {
   scheduleWrongAnswer();
 }
 
-document.querySelectorAll('[data-move]').forEach((button) => {
-  button.addEventListener('click', () => move(button.dataset.move));
-});
-document.querySelector('#munch-button').addEventListener('click', munch);
 document.querySelector('#pause-button').addEventListener('click', pauseGame);
 document.querySelector('#continue-button').addEventListener('click', resumeGame);
 document.querySelector('#quit-button').addEventListener('click', quitTopic);

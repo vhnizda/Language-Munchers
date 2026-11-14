@@ -41,7 +41,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 ### Required round loop
 
-1. From the choice menu, read **“Eat your way to language mastery. Pick a topic below and complete all the levels.”** Select one CSV `group` (topic) and enable one or more target-language flags: Czech 🇨🇿, Standard German 🇩🇪, and/or `pt-PT` 🇵🇹. The `LANGUAGES` label explains the controls; an enabled flag is normal, while a disabled flag carries a red × centered over its icon. At least one language must be enabled.
+1. From the choice menu, read **“Eat your way to language mastery. Pick a topic below and complete all the levels.”** Select one CSV `group` (topic) and enable one or more target-language flags: Czech, Standard German, and/or `pt-PT`. The flags are local SVG assets rather than font emoji so they render consistently in browsers including Brave. The `LANGUAGES` label explains the controls; an enabled flag is normal, while a disabled flag carries a red × centered over its icon. At least one language must be enabled. The final enabled language remains coloured and clickable, but clicking it leaves it enabled.
 2. Freeze that language selection for the topic run; it may be changed only after returning to the choice menu.
 3. At the start of the run, create one randomized order containing every concept in that topic exactly once.
 4. Select the next unfinished concept in the run and display its English value as the prompt.
@@ -60,14 +60,14 @@ Eat all and only the tiles that correctly translate the current English prompt.
 
 | Action | Desktop keyboard | Requirement |
 |---|---|---|
-| Move | Arrow keys and on-screen arrow buttons | Moves exactly one orthogonal tile. On-screen buttons support touch and pointer input. |
-| Munch / select | Space and an on-screen `Space` button | Evaluates only the focused tile. The button supports touch and pointer input. |
-| Pause | Escape and an on-screen `Pause` button | Freezes game state, including incorrect-answer feedback and a pending correct-eat timer; exposes `Continue` and `Quit topic` actions. |
+| Move | Arrow keys | Moves exactly one orthogonal tile. Mouse or touch on a non-focused tile moves focus to that tile. |
+| Munch / select | Space | Evaluates only the focused tile. Mouse or touch on the focused tile is the same Munch action. |
+| Pause | Escape and the `Pause` button beside the lives at top right | Freezes game state, including incorrect-answer feedback and a pending correct-eat timer; exposes `Continue` and `Quit topic` actions. |
 | Maximize | Header `Full Screen` button | Requests native browser/device full-screen mode with hidden navigation UI where supported. If unavailable, shows an in-page maximize fallback and iPad Home Screen install guidance. Available on every screen. |
 
-A topic run starts with **three lives**. The game must display remaining lives, the current topic, and current level progress (`word n / total words`) throughout play.
+A topic run starts with **three lives**. The game must display remaining lives as resting frog sprites, the current topic, and current level progress (`word n / total words`) throughout play.
 
-Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The on-screen arrow and `Space` buttons are required for touch-capable devices; a connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action. A touch move plays the frog's jump-up animation at the destination; keyboard and on-screen arrows use the matching directional jump animation.
+Mouse, touch, and keyboard input must drive the same focused-tile and explicit-Munch actions. The board has no on-screen arrow or Munch controls. A centered instruction below the board explains tile tapping/clicking and the attached-keyboard controls. A connected keyboard remains fully usable on any device. Tapping a non-focused square moves focus only; tapping the already focused square is an explicit Munch action. A touch move plays the frog's jump-up animation at the destination; keyboard arrows use the matching directional jump animation.
 
 ## 4. Vocabulary and language requirements
 
@@ -141,7 +141,7 @@ The pre-game session setup should be deliberately small:
 |---|---|
 | Topic | One CSV `group`, selected from the choice menu. |
 | Run length and order | One level per concept in the selected topic; create a fresh randomized order at the start of each run, with every concept appearing exactly once. |
-| Tile languages | Toggle Czech 🇨🇿, Standard German 🇩🇪, and `pt-PT` 🇵🇹 independently at the choice menu. At least one is required; the active set stays fixed for the topic run. Each tile displays exactly one active language. |
+| Tile languages | Toggle Czech, Standard German, and `pt-PT` independently through local SVG flag assets at the choice menu. At least one is required; the active set stays fixed for the topic run. The final selection is never greyed out or disabled, but cannot be removed. Each tile displays exactly one active language. |
 | Correct answers | Every board targets roughly 40% correct answers and 60% distractors: 10 correct / 14 distractors on the 24-tile MVP board. It contains at least one correct tile in each active language, more than three correct tiles overall, and intentional repeats of one or more correct translations. |
 | Pace | **Calm** by default; **Mastery** remains future work. |
 
