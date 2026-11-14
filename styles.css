@@ -151,7 +151,11 @@ h2 { font-family: "Press Start 2P", monospace; font-size: clamp(17px, 2.5vw, 26p
   display: grid;
   place-items: center;
 }
-.tile-text { position: relative; z-index: 2; }
+.tile-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 0 #14183b, -2px 0 #14183b, 0 2px #14183b, 0 -2px #14183b;
+}
 .frog {
   position: absolute;
   z-index: 1;

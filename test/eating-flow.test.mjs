@@ -11,6 +11,14 @@ test('correct eating clears the word without pending-tile styling or a second an
   assert.match(app, /function resolveCorrectAnswer\(\)[\s\S]*?state\.frogAnimation = 'idle';/);
 });
 
+test('wrong-answer cleanup returns the frog to idle before rerendering', async () => {
+  const app = await readFile(new URL('../app.js', import.meta.url), 'utf8');
+  const wrongAnswerCleanup = app.match(/function resolveWrongAnswer\(\) \{([\s\S]*?)\n\}/)?.[1];
+
+  assert.ok(wrongAnswerCleanup, 'wrong-answer cleanup must exist');
+  assert.match(wrongAnswerCleanup, /state\.frogAnimation = 'idle';[\s\S]*?renderGame\(\);/);
+});
+
 test('eating animation holds its final frame until the word is cleared', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
 

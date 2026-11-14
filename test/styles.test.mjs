@@ -27,3 +27,12 @@ test('frog sprite window offsets the sheet 3 pixels up and 10 pixels left', asyn
   assert.match(rule, /top:\s*-3px/);
   assert.match(rule, /left:\s*-10px/);
 });
+
+test('tile words use a dark outline above the frog sprite', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  const rule = css.match(/\.tile-text \{([^}]+)\}/)?.[1];
+
+  assert.ok(rule, 'tile text rule must exist');
+  assert.match(rule, /z-index:\s*2/);
+  assert.match(rule, /text-shadow:\s*2px\s+0\s+#14183b,\s*-2px\s+0\s+#14183b,\s*0\s+2px\s+#14183b,\s*0\s+-2px\s+#14183b/);
+});

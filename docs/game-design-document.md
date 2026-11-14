@@ -51,7 +51,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 8. On an explicit **Munch** action, evaluate the focused tile.
 9. Resolve feedback:
    - **Correct:** keep the word visible throughout the single 360 ms eating animation; hold its final animation frame until the word clears; temporarily lock board movement and Munch input; then remove only the word content, return the frog directly to idle without replaying the eating animation, update board progress, and preserve the square as a traversable non-munchable location.
-   - **Incorrect:** immediately show the selected target-language word and its English equivalent for exactly one second; movement remains available; then remove only that tile's word content, preserve its traversable non-munchable square, and deduct one life.
+   - **Incorrect:** immediately show the selected target-language word and its English equivalent for exactly one second; movement remains available; then remove only that tile's word content, return the frog directly to idle without replaying the eating animation, preserve its traversable non-munchable square, and deduct one life.
 10. If the player has lost all three lives, end the topic run as a loss and show a centered summary: a large **GAME OVER** heading, the exact message **“You have lost all your lives. I'm sure you will do better next time!”**, and a centered **Try Again** button that returns to the topic menu.
 11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
 12. After the final concept in the selected topic is completed, show a topic-win summary and return to the choice menu.
@@ -212,6 +212,7 @@ Initial presentation requirements:
 
 - prompt remains prominent and readable;
 - word tiles prioritize typography, articles, alternatives, and diacritics;
+- word text keeps a dark outline so it remains legible over the frog sprite;
 - the currently focused tile has a clear non-colour-only focus treatment;
 - correct and incorrect responses are distinguishable without relying only on colour or sound;
 - the full game is usable by keyboard;

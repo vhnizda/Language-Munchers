@@ -88,6 +88,7 @@ function resolveWrongAnswer() {
   timer.tile.cleared = true;
   state.pendingTiles.delete(timer.tile.id);
   state.wrongTimer = null;
+  state.frogAnimation = 'idle';
   feedbackElement.textContent = '';
   feedbackElement.className = 'feedback';
   if (state.lives === 0) {
