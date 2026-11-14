@@ -1,5 +1,5 @@
 export const FROG_EAT_ANIMATION = 'eating';
-export const FROG_EAT_DURATION_MS = 540;
+export const FROG_EAT_DURATION_MS = 360;
 
 const DIRECTION_ANIMATIONS = {
   up: 'jump-up',

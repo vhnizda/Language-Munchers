@@ -16,5 +16,5 @@ test('touch movement uses the jump-up row at the destination', () => {
 
 test('frog uses the eating animation for a munch', () => {
   assert.equal(FROG_EAT_ANIMATION, 'eating');
-  assert.equal(FROG_EAT_DURATION_MS, 540);
+  assert.equal(FROG_EAT_DURATION_MS, 360);
 });

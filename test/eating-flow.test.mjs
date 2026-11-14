@@ -14,5 +14,5 @@ test('correct eating clears the word without pending-tile styling or a second an
 test('eating animation holds its final frame until the word is cleared', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
 
-  assert.match(css, /\.frog--eating img \{ animation: frog-eating 540ms steps\(5, end\) forwards; \}/);
+  assert.match(css, /\.frog--eating img \{ animation: frog-eating 360ms steps\(5, end\) forwards; \}/);
 });

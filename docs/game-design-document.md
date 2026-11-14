@@ -50,7 +50,7 @@ Eat all and only the tiles that correctly translate the current English prompt.
 7. Show a clear focus state and the frog at the center of its focused tile.
 8. On an explicit **Munch** action, evaluate the focused tile.
 9. Resolve feedback:
-   - **Correct:** keep the word visible throughout the single 540 ms eating animation; hold its final animation frame until the word clears; temporarily lock board movement and Munch input; then remove only the word content, return the frog directly to idle without replaying the eating animation, update board progress, and preserve the square as a traversable non-munchable location.
+   - **Correct:** keep the word visible throughout the single 360 ms eating animation; hold its final animation frame until the word clears; temporarily lock board movement and Munch input; then remove only the word content, return the frog directly to idle without replaying the eating animation, update board progress, and preserve the square as a traversable non-munchable location.
    - **Incorrect:** immediately show the selected target-language word and its English equivalent for exactly one second; movement remains available; then remove only that tile's word content, preserve its traversable non-munchable square, and deduct one life.
 10. If the player has lost all three lives, end the topic run as a loss and show a centered summary: a large **GAME OVER** heading, the exact message **“You have lost all your lives. I'm sure you will do better next time!”**, and a centered **Try Again** button that returns to the topic menu.
 11. If every correct tile has been eaten while at least one life remains, complete the level and advance to the next concept in the topic run.
@@ -188,9 +188,9 @@ The first release should prioritize accurate recognition, repeated exposure, and
 
 ### Required feedback
 
-- On a correct answer: show `CORRECT!`; retain the word during the 540 ms eat animation, then clear its word content and update level progress. The player cannot move or munch during that short animation.
+- On a correct answer: show `CORRECT!`; retain the word during the 360 ms eat animation, then clear its word content and update level progress. The player cannot move or munch during that short animation.
 - On a wrong answer: show the selected target-language tile and its English meaning for exactly **one second**, then automatically remove only its word content and deduct one life. Its blank board square remains traversable but cannot be eaten again. The game continues; this feedback does not pause the board and cannot be manually dismissed.
-- On losing the third life: show a topic-loss summary with a return-to-topics action.
+- On losing the third life: show a topic-loss summary with a **Try Again** action that returns to the topic menu.
 - On board completion: begin the next concept in the selected topic after a short transition.
 - On topic completion: show a topic-win summary after every concept in that topic has been completed, then return to the choice menu.
 
@@ -206,7 +206,7 @@ Progress is stored locally on the player's device for version 1. No account, clo
 
 ## 8. Presentation, audio, and accessibility
 
-The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. The shipped asset is `assets/frog-sprites.png`, a 1374 × 1145 px RGBA sprite sheet arranged on an exact 6-column × 5-row grid of 229 × 229 px cells with no gutters. Rows map top-to-bottom to **Eating**, **Jump up**, **Jump down**, **Jump left**, and **Jump right**; frames run left-to-right at X positions 0, 229, 458, 687, 916, and 1145 px. The implementation must advance across the five frame-to-frame displacements with `steps(5, end)`, not `steps(6, end)`, so it only shows whole cells. The sprite window shifts the sheet 7 px left to center the frog and keep adjacent-frame fragments outside the crop. The frog fills 65% of its focused tile, above the tile background and below the word text. Keyboard and on-screen directional input select the matching jump row; moving focus by touch uses jump-up at the destination; Munch uses one eating animation only, then returns to the idle frame after clearing. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
+The player character is a frog. The MVP visual direction is original, nostalgic, blocky Apple II-era computer-game imagery around the board, while word tiles remain clean and highly legible. The shipped asset is `assets/frog-sprites.png`, a 1374 × 1145 px RGBA sprite sheet arranged on an exact 6-column × 5-row grid of 229 × 229 px cells with no gutters. Rows map top-to-bottom to **Eating**, **Jump up**, **Jump down**, **Jump left**, and **Jump right**; frames run left-to-right at X positions 0, 229, 458, 687, 916, and 1145 px. The implementation must advance across the five frame-to-frame displacements with `steps(5, end)`, not `steps(6, end)`, so it only shows whole cells. The sprite window shifts the sheet 12 px left to center the frog and keep adjacent-frame fragments outside the crop. The frog fills 65% of its focused tile, above the tile background and below the word text. Keyboard and on-screen directional input select the matching jump row; moving focus by touch uses jump-up at the destination; Munch uses one 360 ms eating animation only, then returns to the idle frame after clearing. It must not reproduce *Number Munchers* assets, characters, layouts, sounds, or branding.
 
 Initial presentation requirements:
 
@@ -269,7 +269,7 @@ Keep the deployed game aligned with this document as design decisions change. Th
 - a 4-row × 6-column board with a 10/14 correct-to-distractor split, balanced active-language placement, intentionally repeated correct translations, and small repeated distractor pools;
 - three lives, calm mode, no hazards, persistent traversable blank squares, and no runtime audio;
 - keyboard, on-screen, mouse, and touch controls with the specified focus-then-Munch behavior;
-- a 540 ms correct-eat animation before clearing; one-second non-pausing incorrect feedback; pause freezes both pending feedback paths;
+- a 360 ms correct-eat animation before clearing; one-second non-pausing incorrect feedback; pause freezes both pending feedback paths;
 - red-X disabled language flags, native/full-page full-screen fallback, standalone PWA metadata, and iPad Add-to-Home-Screen guidance;
 - the 229 px frog sprite grid, exact row mapping, whole-frame stepping, and left crop offset;
 - browser-local progress, reviewed public vocabulary export only, and a public GitHub Pages deployment.
